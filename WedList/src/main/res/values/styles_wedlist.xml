@@ -29,6 +29,7 @@
         <item name="actionModeBackground">@drawable/cab_background_top_wedlist</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_wedlist</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Wedlist</item>
+        <item name="android:windowBackground">@drawable/background</item>
 
         
     </style>
