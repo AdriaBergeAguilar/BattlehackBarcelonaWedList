@@ -35,7 +35,9 @@ public class GiftCursor extends BaseCursor<Gift> {
         values.put(DataContract.GiftTable.GiftColumns.PICTURE_URL, gift.getPicturePath());
         values.put(DataContract.GiftTable.GiftColumns.PRICE, gift.getPrice());
         values.put(DataContract.GiftTable.GiftColumns.DESCRIPTION, gift.getDescription());
+        values.put(DataContract.GiftTable.GiftColumns.SERVER_ID, gift.getServerId());
         values.put(DataContract.GiftTable.GiftColumns.BOUGHT, gift.isBought() ? "true" : "false");
+        values.put(DataContract.GiftTable.GiftColumns.COMPLEX, gift.isComplex() ? "true" : "false");
 
         return values;
     }
@@ -50,7 +52,9 @@ public class GiftCursor extends BaseCursor<Gift> {
             gift.setName(cursorUtils.getString(DataContract.GiftTable.GiftColumns.NAME));
             gift.setDescription(cursorUtils.getString(DataContract.GiftTable.GiftColumns.DESCRIPTION));
             gift.setPicturePath(cursorUtils.getString(DataContract.GiftTable.GiftColumns.PICTURE_URL));
+            gift.setServerId(cursorUtils.getString(DataContract.GiftTable.GiftColumns.SERVER_ID));
             gift.setBought(Boolean.parseBoolean(cursorUtils.getString(DataContract.GiftTable.GiftColumns.BOUGHT)));
+            gift.setComplex(Boolean.parseBoolean(cursorUtils.getString(DataContract.GiftTable.GiftColumns.COMPLEX)));
             gift.setPrice(Float.parseFloat(cursorUtils.getString(DataContract.GiftTable.GiftColumns.PRICE)));
             List<Person> persons = new ArrayList<Person>();
             gift.setBuyers(persons);

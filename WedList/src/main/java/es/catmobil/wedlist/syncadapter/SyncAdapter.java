@@ -17,6 +17,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.paypal.android.sdk.i;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +100,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             }
 
 
-
             ContentValues[] projectsValues = new ProjectCursor(getContext()).setValuesArray(projects);
             contentResolver.bulkInsert(DataContract.ProjectTable.CONTENT_URI, projectsValues);
         }
@@ -111,7 +111,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         if (projectsCursor != null) {
             ContentResolver contentResolver = getContext().getContentResolver();
             contentResolver.delete(DataContract.GiftTable.CONTENT_URI, null, null);
-            while (projectsCursor.moveToNext()){
+            while (projectsCursor.moveToNext()) {
                 String serverId = projectsCursor.getString(projectsCursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.SERVER_ID));
                 Long id = projectsCursor.getLong(projectsCursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns._ID));
 
@@ -120,7 +120,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 if (serverId != null) {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Gifts");
                     query.whereEqualTo(MyConstants.PARSE_PROJECT_ID, serverId);
-                    query.findInBackground(new GiftsCallback(id));
+                    query.findInBackground(new GiftsCallback(serverId));
                 }
             }
         }
@@ -128,9 +128,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     private class GiftsCallback extends FindCallback<ParseObject> {
 
-        private Long id;
+        private String id;
 
-        public GiftsCallback(Long id) {
+        public GiftsCallback(String id) {
 
             this.id = id;
         }
@@ -143,7 +143,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 // result.clear();
                 final List<Gift> giftList = new ArrayList<Gift>(gifts.size());
                 for (ParseObject po : gifts) {
-                    String serverId = po.getString("objectId");
+                    String serverId = po.getObjectId();
 
                     Gift gift = new Gift();
 
@@ -157,18 +157,16 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                     giftList.add(gift);
                 }
 
-                Log.i("PARSE-TAG", "Gifts at project: " + giftList.size());
-
                 ContentResolver cr = getContext().getContentResolver();
 
                 ContentValues[] values = new GiftCursor(getContext()).setValuesArray(giftList);
 
-                for (ContentValues v:values) {
+                for (ContentValues v : values) {
                     v.put(DataContract.GiftTable.GiftColumns.PROJECT, id);
+                    Log.i("PARSE-TAG", "Gift at project: " + v.toString());
                 }
 
                 cr.bulkInsert(DataContract.GiftTable.CONTENT_URI, values);
-
 
             } else {
                 Log.d("PARSE", "Performing sync Error: " + e.getMessage());

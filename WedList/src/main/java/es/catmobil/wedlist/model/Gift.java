@@ -14,6 +14,7 @@ public class Gift extends  Persistant{
     private float price;
     private String currency;
     private boolean bought;
+    private boolean complex;
     private List<Person> buyers;
 
     public String getName() {
@@ -78,5 +79,28 @@ public class Gift extends  Persistant{
 
     public void setServerId(String serverId) {
         this.serverId = serverId;
+    }
+
+    public boolean isComplex() {
+        return complex;
+    }
+
+    public void setComplex(boolean complex) {
+        this.complex = complex;
+    }
+
+    @Override
+    public String toString() {
+        return "Gift{" +
+                "serverId='" + serverId + '\'' +
+                ", name='" + name + '\'' +
+                ", picturePath='" + picturePath + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", currency='" + currency + '\'' +
+                ", bought=" + bought +
+                ", complex=" + complex +
+                ", buyers=" + buyers +
+                '}';
     }
 }
