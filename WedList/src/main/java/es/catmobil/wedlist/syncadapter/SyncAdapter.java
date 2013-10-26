@@ -120,7 +120,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 if (serverId != null) {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Gifts");
                     query.whereEqualTo(MyConstants.PARSE_PROJECT_ID, serverId);
-                    query.findInBackground(new GiftsCallback(id));
+                    query.findInBackground(new GiftsCallback(serverId));
                 }
             }
         }
@@ -128,9 +128,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     private class GiftsCallback extends FindCallback<ParseObject> {
 
-        private Long id;
+        private String id;
 
-        public GiftsCallback(Long id) {
+        public GiftsCallback(String id) {
 
             this.id = id;
         }
