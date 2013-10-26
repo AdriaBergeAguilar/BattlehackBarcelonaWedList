@@ -58,7 +58,7 @@ public class DataContract {
 
 
 
-            
+
 
             return stringBuffer.toString();
         }
