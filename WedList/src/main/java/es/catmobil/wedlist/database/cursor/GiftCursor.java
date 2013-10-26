@@ -12,6 +12,9 @@ import es.catmobil.wedlist.model.Gift;
  * Created by Bernat on 26/10/13.
  */
 public class GiftCursor extends BaseCursor<Gift> {
+
+
+
     @Override
     public ContentValues setValues(Gift gift) {
         ContentValues values = new ContentValues();
@@ -21,7 +24,6 @@ public class GiftCursor extends BaseCursor<Gift> {
         values.put(DataContract.GiftTable.GiftColumns.PRICE, gift.getPrice());
         values.put(DataContract.GiftTable.GiftColumns.DESCRIPTION, gift.getDescription());
         values.put(DataContract.GiftTable.GiftColumns.BOUGHT, gift.isBought() ? "true" : "false");
-
 
         return values;
     }
