@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="NecessityListWidgets" parent="@style/Theme.AppCompat.Light">
+
+    <item name="android:editTextBackground">@drawable/edit_text_holo_light</item>
+
+    <item name="android:listChoiceIndicatorMultiple">@drawable/btn_check_holo_light</item>
+
+    <item name="android:listChoiceIndicatorSingle">@drawable/btn_radio_holo_light</item>
+
+    <item name="android:buttonStyle">@style/ButtonNecessityListWidgets</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonNecessityListWidgets</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerNecessityListWidgets</item>
+
+    <item name="android:tabWidgetStyle">@style/TabWidgetNecessityListWidgets</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarNecessityListWidgets</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarNecessityListWidgets</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/list_selector_holo_light</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/activated_background_holo_light</item>
+
+  </style>
+
+</resources>
