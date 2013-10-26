@@ -9,6 +9,8 @@ import android.support.v7.app.ActionBarActivity;
 
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.application.AppConfig;
+import es.catmobil.wedlist.ui.fragment.GiftsListFragment;
+import es.catmobil.wedlist.ui.fragment.WedsDetailsFragment;
 import es.catmobil.wedlist.ui.fragment.WedsListFragment;
 
 /**
@@ -51,15 +53,17 @@ public class FirstActivity extends ActionBarActivity implements WedsListFragment
 
     private void setUpTablet(int id){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        //ft.replace(R.id.content1, new WedsListFragment());
-        ft.replace(R.id.content2, null);
+        ft.replace(R.id.content2, WedsDetailsFragment.newInstance(id));
+        ft.replace(R.id.content3, GiftsListFragment.getInstance(id));
         ft.commit();
 
 
     }
 
     private void setUpMobile(int id){
-        startActivity(new Intent(this,null));
+        Intent intent = new Intent(this, ProjectDetailsActivity.class);
+        intent.putExtra(ProjectDetailsActivity.Param_ID,id);
+        startActivity(intent);
     }
 
     @Override
