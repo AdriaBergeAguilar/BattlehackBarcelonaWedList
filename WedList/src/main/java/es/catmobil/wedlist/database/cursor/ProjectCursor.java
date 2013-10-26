@@ -1,10 +1,8 @@
 package es.catmobil.wedlist.database.cursor;
 
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.provider.BaseColumns;
 
 import java.util.ArrayList;
@@ -16,7 +14,6 @@ import es.catmobil.wedlist.database.cursor.base.BaseCursor;
 import es.catmobil.wedlist.database.cursor.base.CursorUtils;
 import es.catmobil.wedlist.model.Gift;
 import es.catmobil.wedlist.model.Project;
-import io.card.payment.o;
 
 /**
  * Created by Bernat on 26/10/13.
@@ -40,7 +37,7 @@ public class ProjectCursor extends BaseCursor<Project> {
         }
         values.put(DataContract.ProjectTable.ProjectColumns.EMAIL, project.getEmail());
         values.put(DataContract.ProjectTable.ProjectColumns.DESCRIPTION, project.getDescription());
-        values.put(DataContract.ProjectTable.ProjectColumns.EXTRAS, project.getPlace());
+        values.put(DataContract.ProjectTable.ProjectColumns.EXTRAS, project.getExtras());
         values.put(DataContract.ProjectTable.ProjectColumns.IMAGE, project.getImage());
 
         if (project.getGifts() != null) {
@@ -63,7 +60,7 @@ public class ProjectCursor extends BaseCursor<Project> {
             project.setName(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.NAME));
             project.setDescription(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.DESCRIPTION));
             project.setEmail(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.EMAIL));
-            project.setPlace(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.EXTRAS));
+            project.setExtras(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.EXTRAS));
             project.setImage(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.IMAGE));
 
             Date date = new Date(cursorUtils.getLong(DataContract.ProjectTable.ProjectColumns.DATE));

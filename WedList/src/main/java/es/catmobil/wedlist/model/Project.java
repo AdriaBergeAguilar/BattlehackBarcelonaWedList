@@ -13,7 +13,7 @@ public class Project extends  Persistant{
     private String description;
     private Person user;
     private String email;
-    private String place;
+    private String extras;
     private Date date;
     private String image;
 
@@ -53,12 +53,12 @@ public class Project extends  Persistant{
         this.email = email;
     }
 
-    public String getPlace() {
-        return place;
+    public String getExtras() {
+        return extras;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setExtras(String extras) {
+        this.extras = extras;
     }
 
     public List<Gift> getGifts() {
