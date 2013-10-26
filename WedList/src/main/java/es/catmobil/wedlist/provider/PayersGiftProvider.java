@@ -26,7 +26,7 @@ public class PayersGiftProvider implements MinionContentProvider {
         String[] columns = new String[]{
                 DataContract.PersonTable.PersonColumns._ID,
                 DataContract.PersonTable.PersonColumns.NAME,
-                DataContract.PersonTable.PersonColumns.PROFILE_URL,
+                DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL,
                 DataContract.PersonTable.PersonColumns.PROFILE_GPLUS,
                 DataContract.ComplexGiftTable.ComplexGiftColumns.AMOUNT
         };
@@ -46,7 +46,7 @@ public class PayersGiftProvider implements MinionContentProvider {
                 if (p != null && p.moveToFirst()) {
                     newRow.add(p.getLong(p.getColumnIndex(DataContract.PersonTable.PersonColumns._ID)));
                     newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.NAME)));
-                    newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_URL)));
+                    newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL)));
                     newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_GPLUS)));
                 }
                 newRow.add(personsID.getInt(personsID.getColumnIndex(DataContract.ComplexGiftTable.ComplexGiftColumns.AMOUNT)));
