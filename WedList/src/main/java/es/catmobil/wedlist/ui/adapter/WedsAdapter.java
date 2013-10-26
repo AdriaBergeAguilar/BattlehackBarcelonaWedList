@@ -33,15 +33,14 @@ public class WedsAdapter extends CursorAdapter{
         String name = "";
         String date = "";
         String count = "";
+        String img = "";
 
         if(null!=arg2){
-            //fixme cambiar
-            name = arg2.getString(arg2.getColumnIndex(DataContract.WeedingTable.WeddingColumns.NAME_1));
-            date = arg2.getString(arg2.getColumnIndex(DataContract.WeedingTable.WeddingColumns.DATE));
-            count = arg2.getString(arg2.getColumnIndex(DataContract.WeedingTable.WeddingColumns.NAME_2));
-            count = arg2.getString(arg2.getColumnIndex(DataContract.WeedingTable.WeddingColumns.NAME_2));
+            name = arg2.getString(arg2.getColumnIndex(DataContract.ProjectTable.ProjectColumns.NAME));
+            date = arg2.getString(arg2.getColumnIndex(DataContract.ProjectTable.ProjectColumns.DATE));
+            count = arg2.getString(arg2.getColumnIndex(DataContract.ComplexGiftTable.ComplexGiftColumns.AMOUNT));
+            img = arg2.getString(arg2.getColumnIndex(DataContract.ProjectTable.ProjectColumns.IMAGE));
         }
-        ImageView img = (ImageView) arg0.findViewById(R.id.item_weds_image);
         TextView txtcount = (TextView) arg0.findViewById(R.id.item_weds_count);
         TextView txtname = (TextView) arg0.findViewById(R.id.item_weds_name);
         TextView txtdate = (TextView) arg0.findViewById(R.id.item_weds_date);
@@ -50,8 +49,7 @@ public class WedsAdapter extends CursorAdapter{
         txtdate.setText(date);
         txtcount.setText(count);
 
-        aq.id(R.id.item_gift_image_user).image(R.drawable.ic_person_default);
-        img.setImageDrawable(arg1.getResources().getDrawable(R.drawable.ic_launcher));
+        aq.id(R.id.item_weds_image).image(img);
     }
 
     @Override
