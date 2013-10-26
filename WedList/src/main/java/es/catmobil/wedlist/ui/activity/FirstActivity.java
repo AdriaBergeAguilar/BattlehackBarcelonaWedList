@@ -1,4 +1,4 @@
-package es.catmobil.tornofici.ui.activity;
+package es.catmobil.wedlist.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,8 +8,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 
 import es.catmobil.tornofici.R;
-import es.catmobil.tornofici.ui.fragment.CasesFragment;
-import es.catmobil.tornofici.ui.fragment.NavigationDrawerFragment;
+import es.catmobil.wedlist.ui.fragment.CasesFragment;
+import es.catmobil.wedlist.ui.fragment.NavigationDrawerFragment;
 
 /**
  * Created by Bernat on 22/10/13.

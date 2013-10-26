@@ -1,4 +1,4 @@
-package es.catmobil.tornofici.ui.fragment;
+package es.catmobil.wedlist.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

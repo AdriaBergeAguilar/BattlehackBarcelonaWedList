@@ -1,4 +1,4 @@
-package es.catmobil.tornofici.ui.fragment;
+package es.catmobil.wedlist.ui.fragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
