@@ -1,20 +1,27 @@
 package es.catmobil.wedlist.model;
 
-import com.parse.ParseClassName;
-import com.parse.ParseObject;
+import android.location.Location;
 
+import java.util.Date;
 import java.util.List;
 
 /**
- * Created by mferran on 26/10/13.
+ * Created by Bernat on 26/10/13.
  */
-@ParseClassName("Weding")
-public class WedingParse extends ParseObject {
-    public WedingParse (){
+public class Project extends  Persistant{
+    private String name;
+    private String description;
+    private Person groomm;
+    private Person bride;
+    private String email;
+    private String place;
+    private Date date;
+    private Location location;
+    private List<Gift> gifts;
 
-    }
+
     public String getName() {
-        return getString("name");
+        return name;
     }
 
     public void setName(String name) {
@@ -22,7 +29,7 @@ public class WedingParse extends ParseObject {
     }
 
     public String getDescription() {
-        return  getString("description");
+        return description;
     }
 
     public void setDescription(String description) {
@@ -30,7 +37,7 @@ public class WedingParse extends ParseObject {
     }
 
     public Person getGroomm() {
-        return  getString("groomm;
+        return groomm;
     }
 
     public void setGroomm(Person groomm) {
