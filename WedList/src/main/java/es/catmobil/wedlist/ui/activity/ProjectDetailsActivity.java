@@ -1,5 +1,6 @@
 package es.catmobil.wedlist.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,7 +14,7 @@ import es.catmobil.wedlist.ui.fragment.WedsDetailsFragment;
 /**
  * Created by adria on 26/10/13.
  */
-public class ProjectDetailsActivity extends ActionBarActivity{
+public class ProjectDetailsActivity extends ActionBarActivity implements GiftsListFragment.ComunicationActivityFragmentGiftsList {
     public static final String Param_ID = "param_id";
     private int id;
     @Override
@@ -58,6 +59,13 @@ public class ProjectDetailsActivity extends ActionBarActivity{
 
         getSupportActionBar().addTab(tab1);
         getSupportActionBar().addTab(tab2);
+    }
+
+    @Override
+    public void clickItemWithId(int id) {
+        Intent intent = new Intent(this,null);
+        intent.putExtra("",id);
+        startActivity(intent);
     }
 
     private class listenerTabs implements ActionBar.TabListener{
