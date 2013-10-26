@@ -46,7 +46,7 @@ public class FirstActivity extends ActionBarActivity implements WedsListFragment
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content1, new WedsListFragment());
         ft.commit();
-        
+
     }
 
     private void setUpTablet(int id){

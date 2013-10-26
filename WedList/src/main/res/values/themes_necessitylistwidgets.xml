@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="NecessityListWidgets" parent="@style/Theme.AppCompat.Light">
+
+    <item name="android:editTextStyle">@style/EditTextNecessityListWidgets</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxNecessityListWidgets</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonNecessityListWidgets</item>
+
+    <item name="android:buttonStyle">@style/ButtonNecessityListWidgets</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonNecessityListWidgets</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerNecessityListWidgets</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerNecessityListWidgets.DropDown</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemNecessityListWidgets</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarNecessityListWidgets</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarNecessityListWidgets</item>
+
+    <item name="android:listViewStyle">@style/ListViewNecessityListWidgets</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewNecessityListWidgets.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemNecessityListWidgets</item>
+
+  </style>
+
+</resources>
