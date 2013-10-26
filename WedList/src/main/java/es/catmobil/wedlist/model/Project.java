@@ -75,4 +75,12 @@ public class Project extends  Persistant{
     public void setGifts(List<Gift> gifts) {
         this.gifts = gifts;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

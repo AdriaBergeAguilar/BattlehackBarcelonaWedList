@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import es.catmobil.wedlist.BuildConfig;
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.ui.fragment.CasesFragment;
+import es.catmobil.wedlist.ui.fragment.WedsListFragment;
 
 /**
  * Created by Bernat on 22/10/13.
@@ -42,7 +43,7 @@ public class FirstActivity extends ActionBarActivity {
 
     private void setUpFragments() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content1, new CasesFragment());
+        ft.replace(R.id.content1, new WedsListFragment());
         ft.commit();
     }
 }
