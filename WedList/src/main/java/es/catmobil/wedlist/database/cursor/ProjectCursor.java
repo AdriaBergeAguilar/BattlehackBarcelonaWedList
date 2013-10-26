@@ -41,7 +41,7 @@ public class ProjectCursor extends BaseCursor<Project> {
         values.put(DataContract.ProjectTable.ProjectColumns.EMAIL, project.getEmail());
         values.put(DataContract.ProjectTable.ProjectColumns.DESCRIPTION, project.getDescription());
         values.put(DataContract.ProjectTable.ProjectColumns.EXTRAS, project.getPlace());
-        values.put(DataContract.ProjectTable.ProjectColumns.IMAGE, project.getPlace());
+        values.put(DataContract.ProjectTable.ProjectColumns.IMAGE, project.getImage());
 
         if (project.getGifts() != null) {
             ContentValues[] giftValues = new GiftCursor(context).setValuesArray(project.getGifts());

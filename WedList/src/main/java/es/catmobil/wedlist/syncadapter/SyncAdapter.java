@@ -68,9 +68,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                                     } else {
                                         Project project = new Project();
                                         project.setName(object.getString("name"));
+                                        project.setImage(object.getString("image"));
 
                                         projects.add(project);
-                                        Log.v("PARSE", "project :" + project.getName());
+                                        Log.v("PARSE-TAG", "project :" + project.getName());
+                                        Log.v("PARSE-TAG", "project :" + project.getImage());
                                     }
 
                                     ContentResolver contentResolver = getContext().getContentResolver();
