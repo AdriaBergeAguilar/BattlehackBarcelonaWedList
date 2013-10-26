@@ -3,30 +3,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp">
-
-    <ImageView
-        android:layout_width="wrap_content"
+    android:layout_margin="20dp"
+    android:showDividers="middle"
+    android:divider="@android:color/transparent"
+    android:dividerPadding="12dip">
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/detail_gift_image"
-        android:src="@drawable/ic_gift_default_min"
-        android:layout_gravity="center_horizontal" />
+        android:layout_weight="5">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:id="@+id/detail_gift_image"
+            android:src="@drawable/ic_gift_default"
+            android:layout_gravity="center_horizontal"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person_default"
+            android:id="@+id/imageView"
+            android:layout_gravity="right|top" />
+    </FrameLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/detail_gift_description"
-        android:layout_gravity="center_horizontal" />
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+        android:layout_weight="2">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Price:"
             android:id="@+id/textView2"
@@ -35,7 +55,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/detail_gift_price"
@@ -44,9 +64,14 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="New Button"
         android:layout_gravity="center"
-        android:id="@+id/detail_gift_pay" />
+        android:id="@+id/detail_gift_pay"
+        android:layout_weight="1"
+        android:layout_marginLeft="-3dp" />
+
+
 </LinearLayout>
