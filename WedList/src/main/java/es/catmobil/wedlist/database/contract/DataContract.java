@@ -42,7 +42,7 @@ public class DataContract {
 
             StringBuffer stringBuffer = new StringBuffer("CREATE TABLE ");
             stringBuffer.append(TABLE);
-            stringBuffer.append(" (" + ProjectColumns._ID + " integer primarykey autoincrement,");
+            stringBuffer.append(" (" + ProjectColumns._ID + " integer primary key autoincrement,");
             stringBuffer.append(" " + ProjectColumns.DATE + " TEXT,");
             stringBuffer.append(" " + ProjectColumns.TITLE + " TEXT,");
             stringBuffer.append(" " + ProjectColumns.NAME + " TEXT,");
@@ -54,11 +54,6 @@ public class DataContract {
             stringBuffer.append(" " + ProjectColumns.EXTRAS + " TEXT,");
             stringBuffer.append(" " + ProjectColumns.REMMAINING + " TEXT");
             stringBuffer.append(");");
-
-
-
-
-
 
             return stringBuffer.toString();
         }
@@ -92,7 +87,7 @@ public class DataContract {
 
             StringBuffer stringBuffer = new StringBuffer("CREATE TABLE ");
             stringBuffer.append(TABLE);
-            stringBuffer.append(" (" + GiftColumns._ID + " integer primarykey autoincrement,");
+            stringBuffer.append(" (" + GiftColumns._ID + " integer primary key autoincrement,");
             stringBuffer.append(" " + GiftColumns.NAME + " TEXT,");
             stringBuffer.append(" " + GiftColumns.PICTURE_URL + " TEXT,");
             stringBuffer.append(" " + GiftColumns.PRICE + " TEXT,");
@@ -128,7 +123,7 @@ public class DataContract {
 
             StringBuffer stringBuffer = new StringBuffer("CREATE TABLE ");
             stringBuffer.append(TABLE);
-            stringBuffer.append(" (" + PersonColumns._ID + " integer primarykey autoincrement,");
+            stringBuffer.append(" (" + PersonColumns._ID + " integer primary key autoincrement,");
             stringBuffer.append(" " + PersonColumns.NAME + " TEXT,");
             stringBuffer.append(" " + PersonColumns.PROFILE_IMAGE_URL + " TEXT,");
             stringBuffer.append(" " + PersonColumns.PROFILE_GPLUS + " TEXT");
@@ -157,7 +152,7 @@ public class DataContract {
 
             StringBuffer stringBuffer = new StringBuffer("CREATE TABLE ");
             stringBuffer.append(TABLE);
-            stringBuffer.append(" (" + ComplexGiftColumns._ID + " integer primarykey autoincrement,");
+            stringBuffer.append(" (" + ComplexGiftColumns._ID + " integer primary key autoincrement,");
             stringBuffer.append(" " + ComplexGiftColumns.GIFT + " TEXT,");
             stringBuffer.append(" " + ComplexGiftColumns.PAYER + " TEXT,");
             stringBuffer.append(" " + ComplexGiftColumns.AMOUNT + " TEXT,");
