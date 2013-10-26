@@ -20,19 +20,19 @@ import es.catmobil.wedlist.ui.adapter.WedsAdapter;
 /**
  * Created by adria on 26/10/13.
  */
-public class WedsListFragment extends Fragment {
-    private int ID_LOADER = 125;
+public class GiftsListFragment extends Fragment {
+    private int ID_LOADER = 126;
     private WedsAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_list_weds,null);
+        return inflater.inflate(R.layout.fragment_list_gifts,null);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Activity ac = getActivity();
-        ListView list = (ListView)ac.findViewById(R.id.list_weds);
+        ListView list = (ListView)ac.findViewById(R.id.list_gifts);
         adapter = new WedsAdapter(ac,null);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new ListViewListener());
@@ -40,14 +40,14 @@ public class WedsListFragment extends Fragment {
         newWed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //fixme k ago?
+                //fixme ir  a la pantalla d afegir
             }
         });
     }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        activity.setTitle(R.string.ListOfWeddings);
+        activity.setTitle(R.string.ListOfGifts);
         this.getLoaderManager().initLoader(ID_LOADER,null, new DatabaseCursorLoaderCallback());
     }
 
@@ -57,7 +57,7 @@ public class WedsListFragment extends Fragment {
         public android.support.v4.content.Loader<Cursor> onCreateLoader(
                 int arg0, Bundle arg1) {
             //fixme poner la uri
-            return new CursorLoader(WedsListFragment.this.getActivity(), Uri.parse("aki va la uri"),
+            return new CursorLoader(GiftsListFragment.this.getActivity(), Uri.parse("aki va la uri"),
                     new String[]{},
                     null, null, null);
         }
@@ -83,7 +83,7 @@ public class WedsListFragment extends Fragment {
         public void onItemClick(AdapterView<?> arg0, View arg1, int position,long arg3) {
             Cursor cursor = adapter.getCursor();
             cursor.moveToPosition(position);
-            //fixme logica
+            //fixme ir  a la pantalla de item
         }
 
     }

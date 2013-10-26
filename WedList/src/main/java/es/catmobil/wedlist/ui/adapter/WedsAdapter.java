@@ -49,7 +49,13 @@ public class WedsAdapter extends CursorAdapter{
 
     @Override
     public View newView(Context arg0, Cursor arg1, ViewGroup arg2) {
-        final View customListView=vi.inflate(R.layout.row_weds,null);
+        int pos = arg1.getPosition();
+        View customListView;
+        if(pos % 2 == 0){
+            customListView = vi.inflate(R.layout.row_weds_left,null);
+        }else{
+            customListView = vi.inflate(R.layout.row_weds_rigth,null);
+        }
         return customListView;
     }
 }
