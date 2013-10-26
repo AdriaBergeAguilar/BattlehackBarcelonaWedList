@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.androidquery.AQuery;
+
 import es.catmobil.wedlist.R;
+import es.catmobil.wedlist.database.contract.DataContract;
 
 /**
  * Created by adria on 26/10/13.
@@ -17,10 +20,12 @@ import es.catmobil.wedlist.R;
 public class WedsAdapter extends CursorAdapter{
 
     private LayoutInflater vi;
+    private AQuery aq;
 
     public WedsAdapter(Context context,Cursor c) {
         super(context, c, true);
         vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        aq = new AQuery(context);
     }
 
     @Override
@@ -30,10 +35,11 @@ public class WedsAdapter extends CursorAdapter{
         String count = "";
 
         if(null!=arg2){
-            name = arg2.getString(arg2.getColumnIndex(""));
-            date = arg2.getString(arg2.getColumnIndex(""));
-            count = arg2.getString(arg2.getColumnIndex(""));
-
+            //fixme cambiar
+            name = arg2.getString(arg2.getColumnIndex(DataContract.WeedingTable.WeddingColumns.NAME_1));
+            date = arg2.getString(arg2.getColumnIndex(DataContract.WeedingTable.WeddingColumns.DATE));
+            count = arg2.getString(arg2.getColumnIndex(DataContract.WeedingTable.WeddingColumns.NAME_2));
+            count = arg2.getString(arg2.getColumnIndex(DataContract.WeedingTable.WeddingColumns.NAME_2));
         }
         ImageView img = (ImageView) arg0.findViewById(R.id.item_weds_image);
         TextView txtcount = (TextView) arg0.findViewById(R.id.item_weds_count);
@@ -44,6 +50,7 @@ public class WedsAdapter extends CursorAdapter{
         txtdate.setText(date);
         txtcount.setText(count);
 
+        aq.id(R.id.item_gift_image_user).image(R.drawable.ic_person_default);
         img.setImageDrawable(arg1.getResources().getDrawable(R.drawable.ic_launcher));
     }
 
