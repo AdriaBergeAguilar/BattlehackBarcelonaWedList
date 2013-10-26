@@ -18,7 +18,7 @@ public class PayersGiftProvider implements MinionContentProvider {
 
     @Override
     public String getBasePath() {
-        return DataContract.ComplexGiftTable.PERSONS_BY_GIFT;
+        return DataContract.PersonsInGiftTable.PERSONS_BY_GIFT;
     }
 
     @Override
@@ -28,19 +28,19 @@ public class PayersGiftProvider implements MinionContentProvider {
                 DataContract.PersonTable.PersonColumns.NAME,
                 DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL,
                 DataContract.PersonTable.PersonColumns.PROFILE_GPLUS,
-                DataContract.ComplexGiftTable.ComplexGiftColumns.AMOUNT
+                DataContract.PersonsInGiftTable.ComplexGiftColumns.AMOUNT
         };
 
         MatrixCursor c = new MatrixCursor(columns);
 
-        Cursor personsID = db.query(DataContract.ComplexGiftTable.TABLE, null, DataContract.ComplexGiftTable.ComplexGiftColumns.GIFT + "=" + ContentUris.parseId(uri), null, null, null, null);
+        Cursor personsID = db.query(DataContract.PersonsInGiftTable.TABLE, null, DataContract.PersonsInGiftTable.ComplexGiftColumns.GIFT + "=" + ContentUris.parseId(uri), null, null, null, null);
 
         if (personsID != null) {
             int i = 0;
             while (personsID.moveToNext()) {
                 MatrixCursor.RowBuilder newRow = c.newRow();
 
-                String where = BaseColumns._ID + "=" + c.getLong(c.getColumnIndex(DataContract.ComplexGiftTable.ComplexGiftColumns.PAYER));
+                String where = BaseColumns._ID + "=" + c.getLong(c.getColumnIndex(DataContract.PersonsInGiftTable.ComplexGiftColumns.PAYER));
                 Cursor p = db.query(DataContract.PersonTable.TABLE, null, where, null, null, null, null);
 
                 if (p != null && p.moveToFirst()) {
@@ -49,7 +49,7 @@ public class PayersGiftProvider implements MinionContentProvider {
                     newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL)));
                     newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_GPLUS)));
                 }
-                newRow.add(personsID.getInt(personsID.getColumnIndex(DataContract.ComplexGiftTable.ComplexGiftColumns.AMOUNT)));
+                newRow.add(personsID.getInt(personsID.getColumnIndex(DataContract.PersonsInGiftTable.ComplexGiftColumns.AMOUNT)));
             }
         }
 
@@ -73,6 +73,6 @@ public class PayersGiftProvider implements MinionContentProvider {
 
     @Override
     public String getType() {
-        return DataContract.ComplexGiftTable.BASE_TYPE;
+        return DataContract.PersonsInGiftTable.BASE_TYPE;
     }
 }

@@ -33,17 +33,21 @@ public class ProjectCursor extends BaseCursor<Project> {
     public ContentValues setValues(Project project) {
         ContentValues values = new ContentValues();
 
+        values.put(DataContract.ProjectTable.ProjectColumns.SERVER_ID, project.getServerId());
         values.put(DataContract.ProjectTable.ProjectColumns.NAME, project.getName());
-        values.put(DataContract.ProjectTable.ProjectColumns.DATE, project.getDate().getTime());
+        if (project.getDate() != null) {
+            values.put(DataContract.ProjectTable.ProjectColumns.DATE, project.getDate().getTime());
+        }
         values.put(DataContract.ProjectTable.ProjectColumns.EMAIL, project.getEmail());
         values.put(DataContract.ProjectTable.ProjectColumns.DESCRIPTION, project.getDescription());
         values.put(DataContract.ProjectTable.ProjectColumns.EXTRAS, project.getPlace());
+        values.put(DataContract.ProjectTable.ProjectColumns.IMAGE, project.getPlace());
 
+        if (project.getGifts() != null) {
+            ContentValues[] giftValues = new GiftCursor(context).setValuesArray(project.getGifts());
 
-
-        ContentValues[] giftValues = new GiftCursor(context).setValuesArray(project.getGifts());
-
-        context.getContentResolver().bulkInsert(DataContract.GiftTable.CONTENT_URI, giftValues);
+            context.getContentResolver().bulkInsert(DataContract.GiftTable.CONTENT_URI, giftValues);
+        }
 
         return values;
     }
@@ -55,21 +59,26 @@ public class ProjectCursor extends BaseCursor<Project> {
         if (cursor != null) {
             CursorUtils cursorUtils = new CursorUtils(cursor);
 
+            project.setServerId(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.SERVER_ID));
             project.setName(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.NAME));
             project.setDescription(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.DESCRIPTION));
             project.setEmail(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.EMAIL));
             project.setPlace(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.EXTRAS));
+            project.setImage(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.IMAGE));
 
             Date date = new Date(cursorUtils.getLong(DataContract.ProjectTable.ProjectColumns.DATE));
 
-            Uri giftUri = ContentUris.withAppendedId(DataContract.GiftTable.CONTENT_URI_BY_PROJECT, cursorUtils.getLong(BaseColumns._ID));
-            Cursor giftCursor = context.getContentResolver().query(giftUri, null, null, null, null);
+            project.setGifts(new ArrayList<Gift>());
+
+            String where = DataContract.GiftTable.GiftColumns.PROJECT + "=" + cursorUtils.getLong(BaseColumns._ID);
+
+            Cursor giftCursor = context.getContentResolver().query(DataContract.GiftTable.CONTENT_URI, null, where, null, null);
 
             if (giftCursor != null) {
                 List<Gift> gifts = new ArrayList<Gift>();
                 GiftCursor giftParser = new GiftCursor(context);
-                while (cursor.moveToNext()) {
-                    Gift gift = giftParser.readValues(cursor);
+                while (giftCursor.moveToNext()) {
+                    Gift gift = giftParser.readValues(giftCursor);
                     gifts.add(gift);
                 }
 
