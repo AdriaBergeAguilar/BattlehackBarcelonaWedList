@@ -4,28 +4,27 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 
 import es.catmobil.wedlist.BuildConfig;
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.ui.fragment.CasesFragment;
-import es.catmobil.wedlist.ui.fragment.NavigationDrawerFragment;
 
 /**
  * Created by Bernat on 22/10/13.
  */
-public class FirstActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+public class FirstActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         AccountManager accountManager = AccountManager.get(this);
 
@@ -33,51 +32,17 @@ public class FirstActivity extends ActionBarActivity implements NavigationDrawer
             Account[] accountsByType = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
 
             if (accountsByType.length > 0) {
-                // TODO Do something nice with account
+                setUpFragments();
             } else {
                 Intent loginIntent = new Intent(this, LoginActivity.class);
                 startActivity(loginIntent);
             }
         }
-
-        setUpNavigation();
-        setUpFragments(0);
     }
 
-    private void setUpNavigation() {
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-
-        // Set up the drawer.
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, drawerLayout);
-    }
-
-    private void setUpFragments(int pos) {
+    private void setUpFragments() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        switch (pos) {
-            case 0:
-                ft.replace(R.id.content1, new CasesFragment());
-                break;
-            case 1:
-                ft.replace(R.id.content1, new ListFragment());
-                break;
-            default:
-                ft.replace(R.id.content1, new Fragment());
-                break;
-        }
+        ft.replace(R.id.content1, new CasesFragment());
         ft.commit();
-    }
-
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        setUpFragments(position);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mNavigationDrawerFragment.syncState();
     }
 }
