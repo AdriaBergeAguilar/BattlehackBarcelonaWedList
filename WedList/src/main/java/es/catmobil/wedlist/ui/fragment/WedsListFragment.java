@@ -2,8 +2,10 @@ package es.catmobil.wedlist.ui.fragment;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -13,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import es.catmobil.wedlist.R;
+import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.ui.adapter.WedsAdapter;
 
 /**
@@ -63,9 +67,23 @@ public class WedsListFragment extends Fragment {
         }
 
         @Override
-        public void onLoadFinished(
-                android.support.v4.content.Loader<Cursor> arg0, Cursor arg1) {
-            adapter.swapCursor(arg1);
+        public void onLoadFinished(android.support.v4.content.Loader<Cursor> arg0, Cursor arg1) {
+            String[] col = new String[]{BaseColumns._ID
+                ,DataContract.ProjectTable.ProjectColumns.NAME
+                ,DataContract.ProjectTable.ProjectColumns.DATE
+                ,DataContract.ProjectTable.ProjectColumns.IMAGE
+                ,DataContract.ComplexGiftTable.ComplexGiftColumns.AMOUNT
+            };
+            MatrixCursor c = new MatrixCursor(col);
+            MatrixCursor.RowBuilder newRow = c.newRow();
+            newRow.add(1);
+            newRow.add("Llibres");
+            newRow.add("26/4/1991");
+            newRow.add("http://wvuimc.files.wordpress.com/2011/01/android-iphone.jpg");
+            newRow.add(300);
+
+
+            adapter.swapCursor(c);
         }
 
         @Override
@@ -83,7 +101,8 @@ public class WedsListFragment extends Fragment {
         public void onItemClick(AdapterView<?> arg0, View arg1, int position,long arg3) {
             Cursor cursor = adapter.getCursor();
             cursor.moveToPosition(position);
-            //fixme logica
+            int id = cursor.getInt(cursor.getColumnIndex(BaseColumns._ID));
+            Toast.makeText(WedsListFragment.this.getActivity(),"ID = "+id,Toast.LENGTH_LONG).show();
         }
 
     }
