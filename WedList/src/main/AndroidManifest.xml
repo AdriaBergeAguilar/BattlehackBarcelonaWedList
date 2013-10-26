@@ -12,16 +12,22 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
     <!-- for most things, including card.io & paypal -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
 
     <application
         android:name=".application.WedListApplication"
@@ -45,7 +51,8 @@
             android:exported="true" />
 
         <!-- PAYPAL -->
-        <service android:name="com.paypal.android.sdk.payments.PayPalService"
+        <service
+            android:name="com.paypal.android.sdk.payments.PayPalService"
             android:exported="false" />
 
         <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" />
@@ -59,7 +66,26 @@
         <activity android:name="io.card.payment.DataEntryActivity" />
 
 
+        <!-- SYNC ADAPTER -->
 
+        <provider
+            android:authorities="es.catmobil.wedlist.provider"
+            android:name=".provider.WedListProvider" />
+
+        <!-- SYNC ADAPTER -->
+
+        <service
+            android:name="es.catmobil.wedlist.syncadapter.SyncService"
+            android:exported="true"
+            android:process=":sync"
+            android:label="Loaders demo sync">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                android:resource="@xml/syncadapter"
+                android:name="android.content.SyncAdapter" />
+        </service>
 
         <!-- AUTHENTICATOR -->
         <service

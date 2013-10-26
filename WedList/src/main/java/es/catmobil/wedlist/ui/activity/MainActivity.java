@@ -18,20 +18,12 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
 import java.math.BigDecimal;
 
 import es.catmobil.wedlist.BuildConfig;
+import es.catmobil.wedlist.PayPal;
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.ui.fragment.BaseFragment;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
-    // set to PaymentActivity.ENVIRONMENT_PRODUCTION to move real money.
-    // set to PaymentActivity.ENVIRONMENT_SANDBOX to use your test credentials from https://developer.paypal.com
-    // set to PaymentActivity.ENVIRONMENT_NO_NETWORK to kick the tires without communicating to PayPal's servers.
-    private static final String CONFIG_ENVIRONMENT = PaymentActivity.ENVIRONMENT_SANDBOX;
-
-    // note that these credentials will differ between live & sandbox environments.
-    private static final String CONFIG_CLIENT_ID = "bernatbor15-facilitator@gmail.com";
-    // when testing in sandbox, this is likely the -facilitator email address.
-    private static final String CONFIG_RECEIVER_EMAIL = BuildConfig.ADRI_SANDBOX_ACCOUNT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +32,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         setContentView(R.layout.activity_main);
 
 
-        startServicePaypal();
-        startActivityPaypal();
+        PayPal.startServicePaypal(this);
+        PayPal.startActivityPaypal(this);
 
 
         setUpActionBar();
@@ -53,35 +45,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         } else {
             setUpMobile();
         }
-    }
-
-
-    private void startServicePaypal() {
-        Intent intent = new Intent(this, PayPalService.class);
-
-        intent.putExtra(PaymentActivity.EXTRA_PAYPAL_ENVIRONMENT, CONFIG_ENVIRONMENT);
-        intent.putExtra(PaymentActivity.EXTRA_CLIENT_ID, CONFIG_CLIENT_ID);
-        intent.putExtra(PaymentActivity.EXTRA_RECEIVER_EMAIL, CONFIG_RECEIVER_EMAIL);
-
-        startService(intent);
-    }
-
-    private void startActivityPaypal() {
-        PayPalPayment thingToBuy = new PayPalPayment(new BigDecimal("1.75"), "USD", "hipster jeans");
-
-        Intent intent = new Intent(this, PaymentActivity.class);
-
-        intent.putExtra(PaymentActivity.EXTRA_PAYPAL_ENVIRONMENT, CONFIG_ENVIRONMENT);
-        intent.putExtra(PaymentActivity.EXTRA_CLIENT_ID, CONFIG_CLIENT_ID);
-        intent.putExtra(PaymentActivity.EXTRA_RECEIVER_EMAIL, CONFIG_RECEIVER_EMAIL);
-
-        // It's important to repeat the clientId here so that the SDK has it if Android restarts your
-        // app midway through the payment UI flow.
-        intent.putExtra(PaymentActivity.EXTRA_CLIENT_ID, CONFIG_CLIENT_ID);
-        intent.putExtra(PaymentActivity.EXTRA_PAYER_ID, CONFIG_RECEIVER_EMAIL);
-        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, thingToBuy);
-
-        startActivityForResult(intent, 6660);
     }
 
     @Override

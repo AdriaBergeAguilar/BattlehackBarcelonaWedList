@@ -25,7 +25,13 @@ android {
         debug {
             buildConfig "public static final String ACCOUNT_TYPE = \"es.catmobil.wedlist\";" +
                     "\n" +
-                    "   public static final String ADRI_SANDBOX_ACCOUNT = \"adriaberge-facilitator@gmail.com\";"
+                    "   public static final String SANDBOX_ACCOUNT = \"adriabergeaguilar-facilitator@gmail.com\";" +
+                    "\n" +
+                    "   public static final String AUTHORITY = \"es.catmobil.wedlist.provider\";" +
+                    "\n" +
+                    "   public static final long SYNC_FREQ = 100 * 1000;" +
+                    "\n" +
+                    "   public static final String CLIENT_ID = \"AfH0VxA9zBkYHHnAg0RzZJCTEYXnQS8pn-j27MDRCGAzSp0omY9MKmnhw8PB\";"
         }
     }
 }
@@ -36,5 +42,7 @@ dependencies {
 
     compile files("libs/Parse-1.3.5.jar");
     compile files("libs/PayPalAndroidSDK.jar");
+    // fileTree(dir: '../externallibs', include: '*.jar')
+    // fileTree(dir: 'libs', include: '*.jar')
 }
 
