@@ -37,20 +37,10 @@ public class AddPayGiftFragment extends Fragment {
         EditText price = (EditText)ac.findViewById(R.id.add_price);
 
         EditText image = (EditText)ac.findViewById(R.id.add_image);
-        image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //fixme k ago?
-            }
-        });
+        image.setOnClickListener(new OnClickButtons());
 
         Button btnpay = (Button)ac.findViewById(R.id.btn_pay);
-        btnpay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //fixme k ago?
-            }
-        });
+        btnpay.setOnClickListener(new OnClickButtons());
     }
     @Override
     public void onAttach(Activity activity) {
@@ -59,7 +49,23 @@ public class AddPayGiftFragment extends Fragment {
 
     }
 
+    private class OnClickButtons implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Activity ac = getActivity();
+            EditText nom = (EditText)ac.findViewById(R.id.add_name);
+            EditText description = (EditText)ac.findViewById(R.id.add_description);
+            EditText price = (EditText)ac.findViewById(R.id.add_price);
+            EditText image = (EditText)ac.findViewById(R.id.add_image);
 
+            switch (v.getId()){
+                case R.id.btn_pay:
+                    break;
+                case R.id.add_image:
+                    break;
+            }
+        }
+    }
 
 
 }

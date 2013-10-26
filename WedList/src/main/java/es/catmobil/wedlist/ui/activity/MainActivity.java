@@ -24,17 +24,16 @@ import es.catmobil.wedlist.ui.fragment.BaseFragment;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ParseAnalytics.trackAppOpened(getIntent());
         setContentView(R.layout.activity_main);
 
-
+/*
         PayPal.startServicePaypal(this);
         PayPal.startActivityPaypal(this);
-
+*/
 
         setUpActionBar();
 

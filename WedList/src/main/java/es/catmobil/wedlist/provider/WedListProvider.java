@@ -1,41 +1,50 @@
 package es.catmobil.wedlist.provider;
 
-import android.content.ContentProvider;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.net.Uri;
+import android.database.sqlite.SQLiteDatabase;
+
+import es.catmobil.wedlist.BuildConfig;
+import es.catmobil.wedlist.database.DatabaseHelper;
+import es.catmobil.wedlist.database.contract.DataContract;
+import es.catmobil.wedlist.provider.base.DespicableContentProvider;
+import es.catmobil.wedlist.provider.base.SimpleItemMinionProvider;
+import es.catmobil.wedlist.provider.base.SimpleMinionProvider;
 
 /**
  * Created by Bernat on 26/10/13.
  */
-public class WedListProvider extends ContentProvider {
+public class WedListProvider extends DespicableContentProvider {
+
+    private SQLiteDatabase db;
+
     @Override
-    public boolean onCreate() {
-        return false;
+    public void recruitMinions() {
+
+        // WEDDINGS
+        addMinion(new SimpleMinionProvider(DataContract.ProjectTable.TABLE, DataContract.ProjectTable.BASE_PATH, DataContract.ProjectTable.BASE_TYPE));
+        addMinion(new SimpleItemMinionProvider(DataContract.ProjectTable.TABLE, DataContract.ProjectTable.BASE_ITEM_PATH, DataContract.ProjectTable.BASE_ITEM_TYPE));
+
+        // GIFTS
+        addMinion(new SimpleMinionProvider(DataContract.GiftTable.TABLE, DataContract.GiftTable.BASE_PATH, DataContract.GiftTable.BASE_TYPE));
+        addMinion(new SimpleItemMinionProvider(DataContract.GiftTable.TABLE, DataContract.GiftTable.BASE_ITEM_PATH, DataContract.GiftTable.BASE_ITEM_TYPE));
+
+        // PERSONS
+        addMinion(new SimpleMinionProvider(DataContract.PersonTable.TABLE, DataContract.PersonTable.BASE_PATH, DataContract.PersonTable.BASE_TYPE));
+        addMinion(new SimpleItemMinionProvider(DataContract.PersonTable.TABLE, DataContract.PersonTable.BASE_ITEM_PATH, DataContract.PersonTable.BASE_ITEM_TYPE));
+
+        // PERSONS IN GIFT
+        addMinion(new PayersGiftProvider());
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        return null;
+    public String getAuthority() {
+        return BuildConfig.AUTHORITY;
     }
 
     @Override
-    public String getType(Uri uri) {
-        return null;
-    }
-
-    @Override
-    public Uri insert(Uri uri, ContentValues values) {
-        return null;
-    }
-
-    @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
-    }
-
-    @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
+    public SQLiteDatabase getDb() {
+        if (db == null) {
+            db = new DatabaseHelper(getContext()).getWritableDatabase();
+        }
+        return db;
     }
 }
