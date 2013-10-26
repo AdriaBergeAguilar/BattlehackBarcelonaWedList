@@ -51,7 +51,7 @@ public class FirstActivity extends ActionBarActivity implements WedsListFragment
 
     }
 
-    private void setUpTablet(int id){
+    private void setUpTablet(String id){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content2, WedsDetailsFragment.newInstance(id));
         ft.replace(R.id.content3, GiftsListFragment.getInstance(id));
@@ -60,14 +60,14 @@ public class FirstActivity extends ActionBarActivity implements WedsListFragment
 
     }
 
-    private void setUpMobile(int id){
+    private void setUpMobile(String id){
         Intent intent = new Intent(this, ProjectDetailsActivity.class);
         intent.putExtra(ProjectDetailsActivity.Param_ID,id);
         startActivity(intent);
     }
 
     @Override
-    public void clickItemWithId(int id) {
+    public void clickItemWithId(String id) {
         if (isTablet()) {
             setUpTablet(id);
         } else {

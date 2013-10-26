@@ -28,10 +28,10 @@ public class GiftsListFragment extends Fragment {
     private static final String param = "ID_PROJECT";
 
 
-    public static GiftsListFragment getInstance(int id_project){
+    public static GiftsListFragment getInstance(String id_project){
         GiftsListFragment fragment = new GiftsListFragment();
         Bundle arguments = new Bundle();
-        arguments.putInt(param,id_project);
+        arguments.putString(param,id_project);
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -73,7 +73,7 @@ public class GiftsListFragment extends Fragment {
         public android.support.v4.content.Loader<Cursor> onCreateLoader(
                 int arg0, Bundle arg1) {
             //fixme poner la uri
-            int id = getArguments().getInt(param);
+            String id = getArguments().getString(param);
             String where = DataContract.GiftTable.GiftColumns.PROJECT+" = "+id;
             return new CursorLoader(GiftsListFragment.this.getActivity(), DataContract.GiftTable.CONTENT_URI,
                     null, where, null, null);
@@ -82,7 +82,28 @@ public class GiftsListFragment extends Fragment {
         @Override
         public void onLoadFinished(
                 android.support.v4.content.Loader<Cursor> arg0, Cursor arg1) {
-            adapter.swapCursor(arg1);
+            String[] col = new String[]{BaseColumns._ID
+                    ,DataContract.GiftTable.GiftColumns.NAME
+                    ,DataContract.GiftTable.GiftColumns.PRICE
+                    ,DataContract.GiftTable.GiftColumns.PICTURE_URL
+                    ,DataContract.GiftTable.GiftColumns.DESCRIPTION
+                    ,DataContract.GiftTable.GiftColumns.BOUGHT
+            };
+
+
+
+            MatrixCursor c = new MatrixCursor(col);
+            MatrixCursor.RowBuilder newRow = c.newRow();
+            newRow.add(1);
+            newRow.add("berni joder");
+            newRow.add(150);
+            newRow.add("http://battlehack.org/images/posts/axe.jpg");
+            newRow.add("pfdkmerfpikn repodkmre erpiomevr poerm poermv poerm poerwmj peormdv poerdmv ");
+            newRow.add("true");
+
+
+
+            adapter.swapCursor(c);
         }
 
         @Override

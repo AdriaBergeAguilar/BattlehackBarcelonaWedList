@@ -16,12 +16,12 @@ import es.catmobil.wedlist.ui.fragment.WedsDetailsFragment;
  */
 public class ProjectDetailsActivity extends ActionBarActivity implements GiftsListFragment.ComunicationActivityFragmentGiftsList {
     public static final String Param_ID = "param_id";
-    private int id;
+    private String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_details);
-        id = getIntent().getIntExtra(Param_ID,-1);
+        id = getIntent().getStringExtra(Param_ID);
     }
 
     @Override
