@@ -4,14 +4,14 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import es.catmobil.wedlist.BuildConfig;
+import es.catmobil.wedlist.application.AppConfig;
 
 /**
  * Created by Bernat on 26/10/13.
  */
 public class DataContract {
 
-    private static final Uri uri = Uri.parse("content://" + BuildConfig.AUTHORITY);
+    private static final Uri uri = Uri.parse("content://" + AppConfig.AUTHORITY);
 
     public static class ProjectTable {
 

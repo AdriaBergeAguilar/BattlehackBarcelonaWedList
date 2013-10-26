@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 
-import es.catmobil.wedlist.BuildConfig;
 import es.catmobil.wedlist.R;
-import es.catmobil.wedlist.ui.fragment.CasesFragment;
+import es.catmobil.wedlist.application.AppConfig;
 import es.catmobil.wedlist.ui.fragment.WedsListFragment;
 
 /**
@@ -30,7 +29,7 @@ public class FirstActivity extends ActionBarActivity implements WedsListFragment
         AccountManager accountManager = AccountManager.get(this);
 
         if (accountManager != null) {
-            Account[] accountsByType = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
+            Account[] accountsByType = accountManager.getAccountsByType(AppConfig.ACCOUNT_TYPE);
 
             if (accountsByType.length > 0) {
                 setUpFragments();

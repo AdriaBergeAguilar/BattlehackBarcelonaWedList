@@ -10,6 +10,8 @@ import com.paypal.android.sdk.payments.PaymentActivity;
 
 import java.math.BigDecimal;
 
+import es.catmobil.wedlist.application.AppConfig;
+
 /**
  * Created by Bernat on 26/10/13.
  */
@@ -21,9 +23,9 @@ public class PayPal {
     private static final String CONFIG_ENVIRONMENT = PaymentActivity.ENVIRONMENT_SANDBOX;
 
     // note that these credentials will differ between live & sandbox environments.
-    private static final String CONFIG_CLIENT_ID = BuildConfig.CLIENT_ID;
+    private static final String CONFIG_CLIENT_ID = AppConfig.CLIENT_ID;
     // when testing in sandbox, this is likely the -facilitator email address.
-    private static final String CONFIG_RECEIVER_EMAIL = BuildConfig.SANDBOX_ACCOUNT;
+    private static final String CONFIG_RECEIVER_EMAIL = AppConfig.SANDBOX_ACCOUNT;
 
     public static void startServicePaypal(Context context) {
         Intent intent = new Intent(context, PayPalService.class);
