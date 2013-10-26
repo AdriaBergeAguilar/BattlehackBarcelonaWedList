@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<sync-adapter xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accountType="es.catmobil.wedlist"
+    android:contentAuthority="es.catmobil.wedlist.provider"
+    android:supportsUploading="true"
+    android:userVisible="true"
+    android:label="WedList Sync"
+    android:allowParallelSyncs="false"
+    android:isAlwaysSyncable="true"/>
