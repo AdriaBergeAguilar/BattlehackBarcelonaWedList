@@ -7,9 +7,6 @@ import android.content.Context;
 import android.content.SyncResult;
 import android.os.Bundle;
 
-/**
- * Created by Bernat on 26/10/13.
- */
 public class SyncAdapter extends AbstractThreadedSyncAdapter{
 
     public SyncAdapter(Context context) {
