@@ -19,7 +19,7 @@
 
 <resources>
 
-    <style name="Theme.Wedlist" parent="@style/Theme.AppCompat.Light">
+    <style name="Theme.Wedlist" parent="@style/NecessityListWidgets">
         <item name="actionBarItemBackground">@drawable/selectable_background_wedlist</item>
         <item name="popupMenuStyle">@style/PopupMenu.Wedlist</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Wedlist</item>

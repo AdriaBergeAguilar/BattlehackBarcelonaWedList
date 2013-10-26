@@ -57,7 +57,7 @@ public class GiftsAdapter extends CursorAdapter {
              aq.id(R.id.item_gift_image_user).image(R.drawable.ic_launcher);
         }else if(cursor.moveToFirst() && cursor.getCount() == 1){
             String image = cursor.getString(cursor.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL));//PROFILE_URL
-            aq.id(R.id.item_gift_image_user).image(image);
+            aq.id(R.id.item_gift_image_user).image(image,true,true);
         }else{
             aq.id(R.id.item_gift_image_user).image(R.drawable.ic_person_default);
         }

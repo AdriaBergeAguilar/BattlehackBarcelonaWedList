@@ -14,7 +14,7 @@ import es.catmobil.wedlist.ui.fragment.WedsListFragment;
 /**
  * Created by Bernat on 22/10/13.
  */
-public class FirstActivity extends ActionBarActivity {
+public class FirstActivity extends ActionBarActivity implements WedsListFragment.ComunicationActivityFragmentProjectList{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +39,33 @@ public class FirstActivity extends ActionBarActivity {
             }
         }
     }
-
+    private boolean isTablet(){
+        return findViewById(R.id.content2) != null;
+    }
     private void setUpFragments() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content1, new WedsListFragment());
         ft.commit();
+
+    }
+
+    private void setUpTablet(int id){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        //ft.replace(R.id.content1, new WedsListFragment());
+        ft.replace(R.id.content2, null);
+        ft.commit();
+    }
+
+    private void setUpMobile(int id){
+        startActivity(new Intent(this,null));
+    }
+
+    @Override
+    public void clickItemWithId(int id) {
+        if (isTablet()) {
+            setUpTablet(id);
+        } else {
+            setUpMobile(id);
+        }
     }
 }

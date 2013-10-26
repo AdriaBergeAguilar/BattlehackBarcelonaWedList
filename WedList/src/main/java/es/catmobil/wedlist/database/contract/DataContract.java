@@ -27,7 +27,7 @@ public class DataContract {
 
         public static class ProjectColumns implements BaseColumns {
             public static final String TITLE = "TITLE";
-            public static final String DATE = "DATE";
+            public static final String DATE = "DATE_LIMIT";
             public static final String NAME = "NAME";
             public static final String DESCRIPTION = "DESCRIPTION";
             public static final String IMAGE = "IMAGE";
@@ -54,6 +54,10 @@ public class DataContract {
             stringBuffer.append(" " + ProjectColumns.EXTRAS + " TEXT,");
             stringBuffer.append(" " + ProjectColumns.REMMAINING + " TEXT");
             stringBuffer.append(");");
+
+
+
+
 
 
             return stringBuffer.toString();
@@ -146,7 +150,7 @@ public class DataContract {
             public static final String GIFT = "GIFT";
             public static final String PAYER = "PAYER";
             public static final String AMOUNT = "AMOUNT";
-            public static final String DATE = "DATE";
+            public static final String DATE = "DATE_LIMIT";
         }
 
         public static String createTable() {
