@@ -26,11 +26,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion == 0 && newVersion == 1) {
-            createTableWeedings(db);
+            createTableProject(db);
         }
     }
 
-    private void createTableWeedings(SQLiteDatabase db) {
+    private void createTableProject(SQLiteDatabase db) {
         db.execSQL(DataContract.ProjectTable.createTable());
         db.execSQL(DataContract.GiftTable.createTable());
         db.execSQL(DataContract.PersonTable.createTable());
