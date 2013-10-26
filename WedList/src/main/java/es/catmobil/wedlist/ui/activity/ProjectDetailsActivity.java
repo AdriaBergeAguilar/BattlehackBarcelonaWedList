@@ -49,7 +49,7 @@ public class ProjectDetailsActivity extends ActionBarActivity{
     }
 
     private void setUpMobile(){
-        startActivity(new Intent(this,null));
+        //startActivity(new Intent(this,null));
     }
 
 

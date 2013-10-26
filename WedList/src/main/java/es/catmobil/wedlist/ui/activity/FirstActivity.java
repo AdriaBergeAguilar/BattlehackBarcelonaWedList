@@ -39,34 +39,32 @@ public class FirstActivity extends ActionBarActivity implements WedsListFragment
             }
         }
     }
-
-    private void setUpFragments() {
-
-        boolean tabletMode = findViewById(R.id.content2) != null;
-
-        if (tabletMode) {
-            setUpTablet();
-        } else {
-            setUpMobile();
-        }
-
-
-
+    private boolean isTablet(){
+        return findViewById(R.id.content2) != null;
     }
-
-    private void setUpTablet(){
+    private void setUpFragments() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content1, new WedsListFragment());
-        ft.replace(R.id.content2, new WedsListFragment());
         ft.commit();
     }
 
-    private void setUpMobile(){
+    private void setUpTablet(int id){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        //ft.replace(R.id.content1, new WedsListFragment());
+        ft.replace(R.id.content2, null);
+        ft.commit();
+    }
+
+    private void setUpMobile(int id){
         startActivity(new Intent(this,null));
     }
 
     @Override
     public void clickItemWithId(int id) {
-
+        if (isTablet()) {
+            setUpTablet(id);
+        } else {
+            setUpMobile(id);
+        }
     }
 }
