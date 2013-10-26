@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-import es.catmobil.tornofici.R;
+import es.catmobil.wedlist.R;
 
 /**
  * Created by Bernat on 22/10/13.

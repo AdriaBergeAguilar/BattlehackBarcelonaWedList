@@ -7,7 +7,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 
-import es.catmobil.tornofici.R;
+import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.ui.fragment.CasesFragment;
 import es.catmobil.wedlist.ui.fragment.NavigationDrawerFragment;
 

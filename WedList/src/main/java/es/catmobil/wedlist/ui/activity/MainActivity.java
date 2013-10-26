@@ -7,8 +7,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import es.catmobil.tornofici.R;
-import es.catmobil.tornofici.ui.fragment.BaseFragment;
+import es.catmobil.wedlist.R;
+import es.catmobil.wedlist.ui.fragment.BaseFragment;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 

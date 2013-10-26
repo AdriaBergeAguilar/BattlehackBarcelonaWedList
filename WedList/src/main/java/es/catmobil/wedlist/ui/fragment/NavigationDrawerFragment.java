@@ -21,7 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import es.catmobil.tornofici.R;
+import es.catmobil.wedlist.R;
 
 /**
  * Created by Bernat on 22/10/13.
