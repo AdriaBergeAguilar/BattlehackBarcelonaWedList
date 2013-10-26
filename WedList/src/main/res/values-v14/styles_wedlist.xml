@@ -19,7 +19,7 @@
 
 <resources>
 
-    <style name="Theme.Wedlist" parent="@style/Theme.AppCompat.Light">
+    <style name="Theme.Wedlist" parent="@style/NecessityListWidgets">
         <item name="android:actionBarItemBackground">@drawable/selectable_background_wedlist</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Wedlist</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Wedlist</item>
