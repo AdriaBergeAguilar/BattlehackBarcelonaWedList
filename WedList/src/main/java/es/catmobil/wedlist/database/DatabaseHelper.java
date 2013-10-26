@@ -34,6 +34,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DataContract.ProjectTable.createTable());
         db.execSQL(DataContract.GiftTable.createTable());
         db.execSQL(DataContract.PersonTable.createTable());
-        db.execSQL(DataContract.ComplexGiftTable.createTable());
+        db.execSQL(DataContract.PersonsInGiftTable.createTable());
     }
 }

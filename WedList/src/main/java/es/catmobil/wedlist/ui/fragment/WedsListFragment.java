@@ -67,11 +67,12 @@ public class WedsListFragment extends Fragment {
 
         @Override
         public void onLoadFinished(android.support.v4.content.Loader<Cursor> arg0, Cursor arg1) {
+            /*
             String[] col = new String[]{BaseColumns._ID
                 ,DataContract.ProjectTable.ProjectColumns.NAME
                 ,DataContract.ProjectTable.ProjectColumns.DATE
                 ,DataContract.ProjectTable.ProjectColumns.IMAGE
-                ,DataContract.ComplexGiftTable.ComplexGiftColumns.AMOUNT
+                ,DataContract.PersonsInGiftTable.ComplexGiftColumns.AMOUNT
             };
             MatrixCursor c = new MatrixCursor(col);
             MatrixCursor.RowBuilder newRow = c.newRow();
@@ -80,9 +81,9 @@ public class WedsListFragment extends Fragment {
             newRow.add("26/4/1991");
             newRow.add("http://img.talkandroid.com/uploads/2011/05/Apple-Bite-300x300.png");
             newRow.add(300);
+            */
 
-
-            adapter.swapCursor(c);
+            adapter.swapCursor(arg1);
         }
 
         @Override

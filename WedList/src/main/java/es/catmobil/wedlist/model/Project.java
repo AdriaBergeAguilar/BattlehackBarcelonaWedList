@@ -1,7 +1,5 @@
 package es.catmobil.wedlist.model;
 
-import android.location.Location;
-
 import java.util.Date;
 import java.util.List;
 
@@ -9,12 +7,15 @@ import java.util.List;
  * Created by Bernat on 26/10/13.
  */
 public class Project extends  Persistant{
+
+    private String serverId;
     private String name;
     private String description;
     private Person user;
     private String email;
     private String place;
     private Date date;
+    private String image;
 
     private List<Gift> gifts;
 
@@ -74,5 +75,21 @@ public class Project extends  Persistant{
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(String serverId) {
+        this.serverId = serverId;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

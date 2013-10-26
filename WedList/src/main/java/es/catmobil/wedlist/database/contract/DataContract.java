@@ -36,6 +36,7 @@ public class DataContract {
             public static final String REMMAINING = "REMMAINING";
             public static final String EMAIL = "EMAIL";
             public static final String EXTRAS = "EXTRAS";
+            public static final String SERVER_ID = "SERVER_ID";
         }
 
         public static String createTable() {
@@ -43,6 +44,7 @@ public class DataContract {
             StringBuffer stringBuffer = new StringBuffer("CREATE TABLE ");
             stringBuffer.append(TABLE);
             stringBuffer.append(" (" + ProjectColumns._ID + " integer primary key autoincrement,");
+            stringBuffer.append(" " + ProjectColumns.SERVER_ID + " TEXT,");
             stringBuffer.append(" " + ProjectColumns.DATE + " TEXT,");
             stringBuffer.append(" " + ProjectColumns.TITLE + " TEXT,");
             stringBuffer.append(" " + ProjectColumns.NAME + " TEXT,");
@@ -71,7 +73,6 @@ public class DataContract {
         public static final Uri CONTENT_ITEM_URI = Uri.withAppendedPath(uri, BASE_ITEM_PATH);
 
         public static final String BASE_PROJECT_PATH = BASE_PATH + "/" + ProjectTable.BASE_PATH + "/#";
-        public static final Uri CONTENT_URI_BY_PROJECT = Uri.withAppendedPath(uri, BASE_PROJECT_PATH);
 
         public static class GiftColumns implements BaseColumns {
             public static final String NAME = "NAME";
@@ -133,7 +134,7 @@ public class DataContract {
         }
     }
 
-    public static class ComplexGiftTable {
+    public static class PersonsInGiftTable {
 
         public static final String TABLE = "complexGift";
 

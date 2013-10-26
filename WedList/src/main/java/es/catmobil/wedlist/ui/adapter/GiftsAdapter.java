@@ -9,7 +9,6 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -50,7 +49,7 @@ public class GiftsAdapter extends CursorAdapter {
         txtprice.setText(price);
 
         aq.id(R.id.item_gift_image_gift).image(imageGift);
-        Uri sinleUri = ContentUris.withAppendedId(DataContract.ComplexGiftTable.CONTENT_URI,arg2.getLong(arg2.getColumnIndex(BaseColumns._ID)));
+        Uri sinleUri = ContentUris.withAppendedId(DataContract.PersonsInGiftTable.CONTENT_URI,arg2.getLong(arg2.getColumnIndex(BaseColumns._ID)));
         Cursor cursor = arg1.getContentResolver().query(sinleUri,null,null,null,null);
 
         if(cursor.moveToFirst() && cursor.getCount() > 1){
