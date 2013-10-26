@@ -28,7 +28,7 @@ public class GiftsListFragment extends Fragment {
 
     public static GiftsListFragment getInstance(int id_project){
         GiftsListFragment fragment = new GiftsListFragment();
-        Bundle arguments = fragment.getArguments();
+        Bundle arguments = new Bundle();
         arguments.putInt(param,id_project);
         fragment.setArguments(arguments);
         return fragment;

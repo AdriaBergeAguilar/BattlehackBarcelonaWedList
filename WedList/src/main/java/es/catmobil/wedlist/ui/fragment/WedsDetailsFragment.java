@@ -33,7 +33,7 @@ public class WedsDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.frgment_base, null);
+        View view = inflater.inflate(R.layout.fragment_weds_details, null);
         return view;
     }
 
@@ -42,10 +42,10 @@ public class WedsDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle args = getArguments();
 
-        TextView text = (TextView)getActivity().findViewById(R.id.wed_detail_descripsion);
+        TextView text = (TextView)view.findViewById(R.id.wed_detail_descripsion);
 
         if (args != null && args.containsKey(param)) {
-            Uri uri = ContentUris.withAppendedId(DataContract.ProjectTable.CONTENT_ITEM_URI,args.getInt(param));
+            Uri uri = ContentUris.withAppendedId(DataContract.ProjectTable.CONTENT_URI,args.getInt(param));
             Cursor cursor = getActivity().getContentResolver().query(uri,null,null,null,null);
             cursor.moveToFirst();
             String name = cursor.getString(cursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.DESCRIPTION));
