@@ -1,5 +1,7 @@
 package es.catmobil.wedlist.model;
 
+import java.util.List;
+
 /**
  * Created by Bernat on 26/10/13.
  */
@@ -9,7 +11,8 @@ public class Gift extends  Persistant{
     private String description;
     private float price;
     private String currency;
-
+    private boolean bought;
+    private List<Person> buyers;
 
     public String getName() {
         return name;
@@ -49,5 +52,21 @@ public class Gift extends  Persistant{
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public boolean isBought() {
+        return bought;
+    }
+
+    public void setBought(boolean bought) {
+        this.bought = bought;
+    }
+
+    public List<Person> getBuyers() {
+        return buyers;
+    }
+
+    public void setBuyers(List<Person> buyers) {
+        this.buyers = buyers;
     }
 }

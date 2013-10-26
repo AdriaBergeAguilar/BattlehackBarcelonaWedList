@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Bernat on 26/10/13.
  */
-public class Wedding extends  Persistant{
+public class Project extends  Persistant{
     private String name;
     private String description;
     private Person groomm;

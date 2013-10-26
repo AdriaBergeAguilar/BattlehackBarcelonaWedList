@@ -20,8 +20,8 @@ public class WedListProvider extends DespicableContentProvider {
     public void recruitMinions() {
 
         // WEDDINGS
-        addMinion(new SimpleMinionProvider(DataContract.WeedingTable.TABLE, DataContract.WeedingTable.BASE_PATH, DataContract.WeedingTable.BASE_TYPE));
-        addMinion(new SimpleItemMinionProvider(DataContract.WeedingTable.TABLE, DataContract.WeedingTable.BASE_ITEM_PATH, DataContract.WeedingTable.BASE_ITEM_TYPE));
+        addMinion(new SimpleMinionProvider(DataContract.ProjectTable.TABLE, DataContract.ProjectTable.BASE_PATH, DataContract.ProjectTable.BASE_TYPE));
+        addMinion(new SimpleItemMinionProvider(DataContract.ProjectTable.TABLE, DataContract.ProjectTable.BASE_ITEM_PATH, DataContract.ProjectTable.BASE_ITEM_TYPE));
 
         // GIFTS
         addMinion(new SimpleMinionProvider(DataContract.GiftTable.TABLE, DataContract.GiftTable.BASE_PATH, DataContract.GiftTable.BASE_TYPE));
