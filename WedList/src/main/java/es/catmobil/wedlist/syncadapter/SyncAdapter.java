@@ -35,7 +35,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter{
             ParseQuery<ParseObject> query = ParseQuery.getQuery(DataContract.ProjectTable.TABLE);
 
             // Restrict to cases where the author is the current user.
-            query.whereEqualTo(MyConstants.PARSE_USER, "user1");
+            query.whereEqualTo(MyConstants.PARSE_USER, "user1@gmail.com");
 
             // Run the query
 
