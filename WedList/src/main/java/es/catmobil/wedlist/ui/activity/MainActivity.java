@@ -24,7 +24,6 @@ import es.catmobil.wedlist.ui.fragment.BaseFragment;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

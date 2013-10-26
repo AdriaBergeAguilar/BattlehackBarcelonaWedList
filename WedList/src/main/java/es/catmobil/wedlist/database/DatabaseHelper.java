@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void createTableWeedings(SQLiteDatabase db) {
-        db.execSQL(DataContract.WeedingTable.createTable());
+        db.execSQL(DataContract.ProjectTable.createTable());
         db.execSQL(DataContract.GiftTable.createTable());
         db.execSQL(DataContract.PersonTable.createTable());
         db.execSQL(DataContract.ComplexGiftTable.createTable());

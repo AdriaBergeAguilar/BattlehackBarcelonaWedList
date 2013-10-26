@@ -13,9 +13,9 @@ public class DataContract {
 
     private static final Uri uri = Uri.parse("content://" + BuildConfig.AUTHORITY);
 
-    public static class WeedingTable {
+    public static class ProjectTable {
 
-        public static final String TABLE = "weedings";
+        public static final String TABLE = "projects";
 
         public static final String BASE_PATH = TABLE;
         public static final String BASE_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + "vnd." + BASE_PATH;
@@ -25,29 +25,30 @@ public class DataContract {
         public static final String BASE_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + "vnd." + BASE_PATH;
         public static final Uri CONTENT_ITEM_URI = Uri.withAppendedPath(uri, BASE_ITEM_PATH);
 
-        public static class WeddingColumns implements BaseColumns {
+        public static class ProjectColumns implements BaseColumns {
+            public static final String TITLE = "TITLE";
             public static final String DATE = "DATE";
-            public static final String NAME_1 = "NAME_1";
-            public static final String NAME_2 = "NAME_2";
-            public static final String SUR_NAME_1 = "SUR_NAME_1";
-            public static final String SUR_NAME_2 = "SUR_NAME_2";
+            public static final String NAME = "NAME";
+            public static final String DESCRIPTION = "DESCRIPTION";
+            public static final String IMAGE = "IMAGE";
             public static final String THANKS_TXT = "THANKS_TXT";
-            public static final String PAYPAL_ACCOUNT = "THANKS_TXT";
+            public static final String PAYPAL_ACCOUNT = "PAYPAL_ACCOUNT";
+            public static final String REMMAINING = "REMMAINING";
         }
 
         public static String createTable() {
 
             StringBuffer stringBuffer = new StringBuffer("CREATE TABLE ");
             stringBuffer.append(TABLE);
-            stringBuffer.append(" (" + WeddingColumns._ID + " integer primarykey autoincrement");
-            stringBuffer.append(" " + WeddingColumns.DATE + " TEXT");
-            stringBuffer.append(" " + WeddingColumns.NAME_1 + " TEXT");
-            stringBuffer.append(" " + WeddingColumns.NAME_2 + " TEXT");
-            stringBuffer.append(" " + WeddingColumns.SUR_NAME_1 + " TEXT");
-            stringBuffer.append(" " + WeddingColumns.SUR_NAME_1 + " TEXT");
-            stringBuffer.append(" " + WeddingColumns.SUR_NAME_2 + " TEXT");
-            stringBuffer.append(" " + WeddingColumns.THANKS_TXT + " TEXT");
-            stringBuffer.append(" " + WeddingColumns.PAYPAL_ACCOUNT + " TEXT");
+            stringBuffer.append(" (" + ProjectColumns._ID + " integer primarykey autoincrement");
+            stringBuffer.append(" " + ProjectColumns.DATE + " TEXT");
+            stringBuffer.append(" " + ProjectColumns.TITLE + " TEXT");
+            stringBuffer.append(" " + ProjectColumns.NAME + " TEXT");
+            stringBuffer.append(" " + ProjectColumns.DESCRIPTION + " TEXT");
+            stringBuffer.append(" " + ProjectColumns.IMAGE + " TEXT");
+            stringBuffer.append(" " + ProjectColumns.THANKS_TXT + " TEXT");
+            stringBuffer.append(" " + ProjectColumns.PAYPAL_ACCOUNT + " TEXT");
+            stringBuffer.append(" " + ProjectColumns.REMMAINING + " TEXT");
             stringBuffer.append(");");
 
 
