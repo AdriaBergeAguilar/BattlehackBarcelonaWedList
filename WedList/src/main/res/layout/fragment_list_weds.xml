@@ -14,7 +14,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="new Wed"
         android:id="@+id/new_wed"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"

@@ -15,6 +15,10 @@ import com.androidquery.AQuery;
 
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.database.contract.DataContract;
+import es.catmobil.wedlist.database.cursor.GiftCursor;
+import es.catmobil.wedlist.database.cursor.ProjectCursor;
+import es.catmobil.wedlist.model.Gift;
+import es.catmobil.wedlist.model.Project;
 
 /**
  * Created by adria on 26/10/13.
@@ -33,30 +37,23 @@ public class GiftsAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View arg0, Context arg1, Cursor arg2) {
-        String name = "";
-        String price = "";
-        String imageGift = "";
-        if(null!=arg2){
-            name = arg2.getString(arg2.getColumnIndex(DataContract.GiftTable.GiftColumns.NAME));
-            price = arg2.getString(arg2.getColumnIndex(DataContract.GiftTable.GiftColumns.PRICE));
-            imageGift = arg2.getString(arg2.getColumnIndex(DataContract.GiftTable.GiftColumns.PICTURE_URL));
 
-        }
+        Gift gift = new GiftCursor(arg1).readValues(arg2);
+
         TextView txtname = (TextView) arg0.findViewById(R.id.item_gift_name);
         TextView txtprice = (TextView) arg0.findViewById(R.id.item_gift_price);
 
-        txtname.setText(name);
-        txtprice.setText(price);
+        txtname.setText(gift.getName());
+        txtprice.setText(gift.getPrice()+"");
 
-        aq.id(R.id.item_gift_image_gift).image(imageGift);
-        Uri sinleUri = ContentUris.withAppendedId(DataContract.PersonsInGiftTable.CONTENT_URI,arg2.getLong(arg2.getColumnIndex(BaseColumns._ID)));
-        Cursor cursor = arg1.getContentResolver().query(sinleUri,null,null,null,null);
+        aq.id(R.id.item_gift_image_gift).image(gift.getPicturePath(),true,true);
 
-        if(cursor.moveToFirst() && cursor.getCount() > 1){
+
+
+        if(gift.getBuyers().size() > 1){
              aq.id(R.id.item_gift_image_user).image(R.drawable.ic_launcher);
-        }else if(cursor.moveToFirst() && cursor.getCount() == 1){
-            String image = cursor.getString(cursor.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL));//PROFILE_URL
-            aq.id(R.id.item_gift_image_user).image(image,true,true);
+        }else if(gift.getBuyers().size() == 1){
+            aq.id(R.id.item_gift_image_user).image(gift.getBuyers().get(0).getImage(),true,true);
         }else{
             aq.id(R.id.item_gift_image_user).image(R.drawable.ic_person_default);
         }

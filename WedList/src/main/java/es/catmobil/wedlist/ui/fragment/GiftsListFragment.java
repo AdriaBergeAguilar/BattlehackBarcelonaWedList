@@ -2,8 +2,10 @@ package es.catmobil.wedlist.ui.fragment;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -78,7 +80,28 @@ public class GiftsListFragment extends Fragment {
         @Override
         public void onLoadFinished(
                 android.support.v4.content.Loader<Cursor> arg0, Cursor arg1) {
-            adapter.swapCursor(arg1);
+            String[] col = new String[]{BaseColumns._ID
+                    ,DataContract.GiftTable.GiftColumns.NAME
+                    ,DataContract.GiftTable.GiftColumns.PRICE
+                    ,DataContract.GiftTable.GiftColumns.PICTURE_URL
+                    ,DataContract.GiftTable.GiftColumns.DESCRIPTION
+                    ,DataContract.GiftTable.GiftColumns.BOUGHT
+            };
+
+
+
+            MatrixCursor c = new MatrixCursor(col);
+            MatrixCursor.RowBuilder newRow = c.newRow();
+            newRow.add(1);
+            newRow.add("berni joder");
+            newRow.add(150);
+            newRow.add("http://battlehack.org/images/posts/axe.jpg");
+            newRow.add("pfdkmerfpikn repodkmre erpiomevr poerm poermv poerm poerwmj peormdv poerdmv ");
+            newRow.add("true");
+
+
+
+            adapter.swapCursor(c);
         }
 
         @Override
