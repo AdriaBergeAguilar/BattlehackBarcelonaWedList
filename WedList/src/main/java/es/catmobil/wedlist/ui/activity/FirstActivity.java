@@ -54,6 +54,8 @@ public class FirstActivity extends ActionBarActivity implements WedsListFragment
         //ft.replace(R.id.content1, new WedsListFragment());
         ft.replace(R.id.content2, null);
         ft.commit();
+
+
     }
 
     private void setUpMobile(int id){
