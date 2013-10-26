@@ -2,7 +2,7 @@ package es.catmobil.wedlist.provider;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import es.catmobil.wedlist.BuildConfig;
+import es.catmobil.wedlist.application.AppConfig;
 import es.catmobil.wedlist.database.DatabaseHelper;
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.provider.base.DespicableContentProvider;
@@ -37,7 +37,7 @@ public class WedListProvider extends DespicableContentProvider {
 
     @Override
     public String getAuthority() {
-        return BuildConfig.AUTHORITY;
+        return AppConfig.AUTHORITY;
     }
 
     @Override

@@ -16,6 +16,7 @@ import es.catmobil.wedlist.database.cursor.base.BaseCursor;
 import es.catmobil.wedlist.database.cursor.base.CursorUtils;
 import es.catmobil.wedlist.model.Gift;
 import es.catmobil.wedlist.model.Project;
+import io.card.payment.o;
 
 /**
  * Created by Bernat on 26/10/13.
@@ -40,7 +41,7 @@ public class ProjectCursor extends BaseCursor<Project> {
 
 
 
-        ContentValues[] giftValues = new GiftCursor().setValuesArray(project.getGifts());
+        ContentValues[] giftValues = new GiftCursor(context).setValuesArray(project.getGifts());
 
         context.getContentResolver().bulkInsert(DataContract.GiftTable.CONTENT_URI, giftValues);
 
@@ -56,7 +57,7 @@ public class ProjectCursor extends BaseCursor<Project> {
 
             project.setName(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.NAME));
             project.setDescription(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.DESCRIPTION));
-            project.setEmail(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.NAME));
+            project.setEmail(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.EMAIL));
             project.setPlace(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.EXTRAS));
 
             Date date = new Date(cursorUtils.getLong(DataContract.ProjectTable.ProjectColumns.DATE));
@@ -66,7 +67,7 @@ public class ProjectCursor extends BaseCursor<Project> {
 
             if (giftCursor != null) {
                 List<Gift> gifts = new ArrayList<Gift>();
-                GiftCursor giftParser = new GiftCursor();
+                GiftCursor giftParser = new GiftCursor(context);
                 while (cursor.moveToNext()) {
                     Gift gift = giftParser.readValues(cursor);
                     gifts.add(gift);

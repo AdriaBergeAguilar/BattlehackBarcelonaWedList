@@ -1,7 +1,11 @@
 package es.catmobil.wedlist.database.cursor;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
+import android.provider.BaseColumns;
 
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.database.cursor.base.BaseCursor;
@@ -13,7 +17,11 @@ import es.catmobil.wedlist.model.Gift;
  */
 public class GiftCursor extends BaseCursor<Gift> {
 
+    private Context context;
 
+    public GiftCursor(Context context) {
+        this.context = context;
+    }
 
     @Override
     public ContentValues setValues(Gift gift) {
@@ -40,6 +48,10 @@ public class GiftCursor extends BaseCursor<Gift> {
             gift.setPrice(Float.parseFloat(cursorUtils.getString(DataContract.GiftTable.GiftColumns.PRICE)));
             gift.setPicturePath(cursorUtils.getString(DataContract.GiftTable.GiftColumns.PICTURE_URL));
             gift.setBought(Boolean.parseBoolean(cursorUtils.getString(DataContract.GiftTable.GiftColumns.DESCRIPTION)));
+
+            Uri uri = ContentUris.withAppendedId(DataContract.ComplexGiftTable.CONTENT_URI, cursor.getLong(cursor.getColumnIndex(BaseColumns._ID)));
+
+            context.getContentResolver().query(uri, null, null, null, null);
         }
 
         return gift;

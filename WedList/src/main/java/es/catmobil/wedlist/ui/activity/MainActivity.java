@@ -10,15 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parse.ParseAnalytics;
-import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 
-import java.math.BigDecimal;
-
-import es.catmobil.wedlist.BuildConfig;
-import es.catmobil.wedlist.PayPal;
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.ui.fragment.BaseFragment;
 
