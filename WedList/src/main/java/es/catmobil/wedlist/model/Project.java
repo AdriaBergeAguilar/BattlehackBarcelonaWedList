@@ -92,4 +92,19 @@ public class Project extends  Persistant{
     public void setImage(String image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "serverId='" + serverId + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                ", email='" + email + '\'' +
+                ", extras='" + extras + '\'' +
+                ", date=" + date +
+                ", image='" + image + '\'' +
+                ", gifts=" + gifts +
+                '}';
+    }
 }

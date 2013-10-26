@@ -5,4 +5,5 @@ package es.catmobil.wedlist.application;
  */
 public class MyConstants {
     public static final String PARSE_USER="user";
+    public static final String PARSE_PROJECT_ID="project_Id";
 }

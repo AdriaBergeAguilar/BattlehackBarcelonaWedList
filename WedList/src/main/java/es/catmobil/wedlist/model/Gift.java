@@ -6,6 +6,8 @@ import java.util.List;
  * Created by Bernat on 26/10/13.
  */
 public class Gift extends  Persistant{
+
+    private String serverId;
     private String name;
     private String picturePath;
     private String description;
@@ -68,5 +70,13 @@ public class Gift extends  Persistant{
 
     public void setBuyers(List<Person> buyers) {
         this.buyers = buyers;
+    }
+
+    public String getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(String serverId) {
+        this.serverId = serverId;
     }
 }
