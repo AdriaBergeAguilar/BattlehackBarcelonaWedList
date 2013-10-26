@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import es.catmobil.wedlist.R;
+import es.catmobil.wedlist.ui.adapter.GiftsAdapter;
 import es.catmobil.wedlist.ui.adapter.WedsAdapter;
 
 /**
@@ -22,7 +23,7 @@ import es.catmobil.wedlist.ui.adapter.WedsAdapter;
  */
 public class GiftsListFragment extends Fragment {
     private int ID_LOADER = 126;
-    private WedsAdapter adapter;
+    private GiftsAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_list_gifts,null);
@@ -33,10 +34,10 @@ public class GiftsListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Activity ac = getActivity();
         ListView list = (ListView)ac.findViewById(R.id.list_gifts);
-        adapter = new WedsAdapter(ac,null);
+        adapter = new GiftsAdapter(ac,null);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new ListViewListener());
-        Button newWed = (Button)ac.findViewById(R.id.new_wed);
+        Button newWed = (Button)ac.findViewById(R.id.new_gift);
         newWed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
