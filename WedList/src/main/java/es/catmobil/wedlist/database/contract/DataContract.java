@@ -76,11 +76,12 @@ public class DataContract {
 
         public static class GiftColumns implements BaseColumns {
             public static final String NAME = "NAME";
+            public static final String DESCRIPTION = "DESCRIPTION";
             public static final String PICTURE_URL = "PICTURE_URL";
             public static final String PRICE = "PRICE";
             public static final String PROJECT = "PROJECT";
             public static final String COMPLEX = "COMPLEX";
-            public static final String BUYED = "BUYED";
+            public static final String BOUGHT = "BOUGHT";
         }
 
         public static String createTable() {
@@ -93,7 +94,8 @@ public class DataContract {
             stringBuffer.append(" " + GiftColumns.PRICE + " TEXT,");
             stringBuffer.append(" " + GiftColumns.PROJECT + " TEXT,");
             stringBuffer.append(" " + GiftColumns.COMPLEX + " TEXT,");
-            stringBuffer.append(" " + GiftColumns.BUYED + " TEXT");
+            stringBuffer.append(" " + GiftColumns.BOUGHT + " TEXT");
+            stringBuffer.append(" " + GiftColumns.DESCRIPTION + " TEXT");
             stringBuffer.append(");");
 
 
