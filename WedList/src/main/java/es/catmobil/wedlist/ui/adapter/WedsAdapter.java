@@ -6,7 +6,6 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -25,7 +24,7 @@ public class WedsAdapter extends CursorAdapter{
     public WedsAdapter(Context context,Cursor c) {
         super(context, c, true);
         vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        aq = new AQuery(context);
+        //aq = new AQuery(context);
     }
 
     @Override
@@ -49,7 +48,7 @@ public class WedsAdapter extends CursorAdapter{
         txtdate.setText(date);
         txtcount.setText(count);
 
-        aq.id(R.id.item_weds_image).image(img);
+        // aq.id(R.id.item_weds_image).image(img);
     }
 
     @Override
