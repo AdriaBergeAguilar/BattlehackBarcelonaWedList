@@ -3,6 +3,7 @@ package es.catmobil.wedlist.ui.activity;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +51,22 @@ public class LoginActivity extends AccountAuthenticatorActivity implements View.
                     Intent res = new Intent();
                     res.putExtra(AccountManager.KEY_ACCOUNT_NAME, acc.name);
                     res.putExtra(AccountManager.KEY_ACCOUNT_TYPE, BuildConfig.ACCOUNT_TYPE);
+
+
+                    ContentResolver.setIsSyncable(acc, BuildConfig.AUTHORITY, 1);
+
+                    Bundle params = new Bundle();
+
+                    params.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, false);
+                    params.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY, false);
+                    params.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, false);
+
+                    ContentResolver.addPeriodicSync(acc, BuildConfig.AUTHORITY, params, BuildConfig.SYNC_FREQ);
+                    ContentResolver.setSyncAutomatically(acc, BuildConfig.AUTHORITY, true);
+
+                    ContentResolver.requestSync(acc, BuildConfig.AUTHORITY, params);
+
+
 
                     setAccountAuthenticatorResult(res.getExtras());
                     setResult(RESULT_OK, res);
