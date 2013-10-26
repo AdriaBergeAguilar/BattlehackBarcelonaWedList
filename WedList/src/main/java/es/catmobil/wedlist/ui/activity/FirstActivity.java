@@ -1,5 +1,8 @@
 package es.catmobil.wedlist.ui.activity;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -7,6 +10,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 
+import es.catmobil.wedlist.BuildConfig;
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.ui.fragment.CasesFragment;
 import es.catmobil.wedlist.ui.fragment.NavigationDrawerFragment;
@@ -14,7 +18,7 @@ import es.catmobil.wedlist.ui.fragment.NavigationDrawerFragment;
 /**
  * Created by Bernat on 22/10/13.
  */
-public class FirstActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks  {
+public class FirstActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
@@ -22,6 +26,19 @@ public class FirstActivity extends ActionBarActivity implements NavigationDrawer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
+
+        AccountManager accountManager = AccountManager.get(this);
+
+        if (accountManager != null) {
+            Account[] accountsByType = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
+
+            if (accountsByType.length > 0) {
+                // TODO Do something nice with account
+            } else {
+                Intent loginIntent = new Intent(this, LoginActivity.class);
+                startActivity(loginIntent);
+            }
+        }
 
         setUpNavigation();
         setUpFragments(0);

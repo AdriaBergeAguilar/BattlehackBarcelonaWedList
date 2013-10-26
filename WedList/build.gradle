@@ -20,9 +20,20 @@ android {
         minSdkVersion 14
         targetSdkVersion 18
     }
+
+    buildTypes {
+        debug {
+            buildConfig "public static final String ACCOUNT_TYPE = \"es.catmobil.wedlist\";" +
+                    "\n" +
+                    "   public static final String ADRI_SANDBOX_ACCOUNT = \"adriaberge-facilitator@gmail.com\";"
+        }
+    }
 }
 
 dependencies {
-	compile 'com.android.support:appcompat-v7:18.0.0'
-	compile 'com.android.support:support-v4:18.0.0'
+    compile 'com.android.support:appcompat-v7:18.0.0'
+    compile 'com.android.support:support-v4:18.0.0'
+
+    compile files("libs/PayPalAndroidSDK.jar");
 }
+
