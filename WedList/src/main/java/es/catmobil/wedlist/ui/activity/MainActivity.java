@@ -31,10 +31,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         ParseAnalytics.trackAppOpened(getIntent());
         setContentView(R.layout.activity_main);
 
-
+/*
         PayPal.startServicePaypal(this);
         PayPal.startActivityPaypal(this);
-
+*/
 
         setUpActionBar();
 

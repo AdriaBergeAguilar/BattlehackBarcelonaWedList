@@ -29,12 +29,12 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_wedlist</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_wedlist</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Wedlist</item>
-        
-        
+        <item name="android:windowBackground">@drawable/wbackground</item>
+
     </style>
 
     <style name="ActionBar.Solid.Wedlist" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
-        <item name="android:background">@drawable/ab_background_textured_wedlist</item>
+        <item name="android:background">@drawable/wbackground</item>
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_wedlist</item>
         <item name="android:backgroundSplit">@drawable/ab_background_textured_wedlist</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Wedlist</item>
