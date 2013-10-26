@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import es.catmobil.wedlist.BuildConfig;
 import es.catmobil.wedlist.R;
+import es.catmobil.wedlist.application.AppConfig;
 
 /**
  * Created by Bernat on 26/10/13.
@@ -46,14 +46,13 @@ public class LoginActivity extends AccountAuthenticatorActivity implements View.
             AccountManager accountManager = AccountManager.get(this);
 
             if (accountManager != null) {
-                Account acc = new Account(mailEdt.getText().toString(), BuildConfig.ACCOUNT_TYPE);
+                Account acc = new Account(mailEdt.getText().toString(), AppConfig.ACCOUNT_TYPE);
                 if (accountManager.addAccountExplicitly(acc, passEdt.getText().toString(), null)) {
                     Intent res = new Intent();
                     res.putExtra(AccountManager.KEY_ACCOUNT_NAME, acc.name);
-                    res.putExtra(AccountManager.KEY_ACCOUNT_TYPE, BuildConfig.ACCOUNT_TYPE);
+                    res.putExtra(AccountManager.KEY_ACCOUNT_TYPE, AppConfig.ACCOUNT_TYPE);
 
-
-                    ContentResolver.setIsSyncable(acc, BuildConfig.AUTHORITY, 1);
+                    ContentResolver.setIsSyncable(acc, AppConfig.AUTHORITY, 1);
 
                     Bundle params = new Bundle();
 
@@ -61,11 +60,10 @@ public class LoginActivity extends AccountAuthenticatorActivity implements View.
                     params.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY, false);
                     params.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, false);
 
-                    ContentResolver.addPeriodicSync(acc, BuildConfig.AUTHORITY, params, BuildConfig.SYNC_FREQ);
-                    ContentResolver.setSyncAutomatically(acc, BuildConfig.AUTHORITY, true);
+                    ContentResolver.addPeriodicSync(acc, AppConfig.AUTHORITY, params, AppConfig.SYNC_FREQ);
+                    ContentResolver.setSyncAutomatically(acc, AppConfig.AUTHORITY, true);
 
-                    ContentResolver.requestSync(acc, BuildConfig.AUTHORITY, params);
-
+                    ContentResolver.requestSync(acc, AppConfig.AUTHORITY, params);
 
 
                     setAccountAuthenticatorResult(res.getExtras());
