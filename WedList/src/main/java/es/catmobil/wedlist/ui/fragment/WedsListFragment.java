@@ -27,6 +27,7 @@ import es.catmobil.wedlist.ui.adapter.WedsAdapter;
 public class WedsListFragment extends Fragment {
     private int ID_LOADER = 125;
     private WedsAdapter adapter;
+    private ComunicationActivityFragmentProjectList listener;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_list_weds,null);
@@ -51,6 +52,7 @@ public class WedsListFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        listener = (ComunicationActivityFragmentProjectList) activity;
         activity.setTitle(R.string.ListOfWeddings);
         this.getLoaderManager().initLoader(ID_LOADER,null, new DatabaseCursorLoaderCallback());
     }
@@ -60,10 +62,7 @@ public class WedsListFragment extends Fragment {
         @Override
         public android.support.v4.content.Loader<Cursor> onCreateLoader(
                 int arg0, Bundle arg1) {
-            //fixme poner la uri
-            return new CursorLoader(WedsListFragment.this.getActivity(), Uri.parse("aki va la uri"),
-                    new String[]{},
-                    null, null, null);
+            return new CursorLoader(WedsListFragment.this.getActivity(), DataContract.ProjectTable.CONTENT_URI,null,null, null, null);
         }
 
         @Override
@@ -79,7 +78,7 @@ public class WedsListFragment extends Fragment {
             newRow.add(1);
             newRow.add("Llibres");
             newRow.add("26/4/1991");
-            newRow.add("http://wvuimc.files.wordpress.com/2011/01/android-iphone.jpg");
+            newRow.add("http://img.talkandroid.com/uploads/2011/05/Apple-Bite-300x300.png");
             newRow.add(300);
 
 
@@ -102,8 +101,14 @@ public class WedsListFragment extends Fragment {
             Cursor cursor = adapter.getCursor();
             cursor.moveToPosition(position);
             int id = cursor.getInt(cursor.getColumnIndex(BaseColumns._ID));
-            Toast.makeText(WedsListFragment.this.getActivity(),"ID = "+id,Toast.LENGTH_LONG).show();
+            listener.clickItemWithId(id);
+            //Toast.makeText(WedsListFragment.this.getActivity(),"ID = "+id,Toast.LENGTH_LONG).show();
         }
 
+    }
+
+
+    public interface ComunicationActivityFragmentProjectList{
+        public void clickItemWithId(int id);
     }
 }

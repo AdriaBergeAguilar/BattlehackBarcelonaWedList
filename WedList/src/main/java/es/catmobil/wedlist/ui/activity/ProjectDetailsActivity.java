@@ -9,14 +9,12 @@ import android.support.v7.app.ActionBarActivity;
 
 import es.catmobil.wedlist.BuildConfig;
 import es.catmobil.wedlist.R;
-import es.catmobil.wedlist.ui.fragment.CasesFragment;
 import es.catmobil.wedlist.ui.fragment.WedsListFragment;
 
 /**
- * Created by Bernat on 22/10/13.
+ * Created by adria on 26/10/13.
  */
-public class FirstActivity extends ActionBarActivity implements WedsListFragment.ComunicationActivityFragmentProjectList{
-
+public class ProjectDetailsActivity extends ActionBarActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,19 +24,7 @@ public class FirstActivity extends ActionBarActivity implements WedsListFragment
     @Override
     protected void onResume() {
         super.onResume();
-
-        AccountManager accountManager = AccountManager.get(this);
-
-        if (accountManager != null) {
-            Account[] accountsByType = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
-
-            if (accountsByType.length > 0) {
-                setUpFragments();
-            } else {
-                Intent loginIntent = new Intent(this, LoginActivity.class);
-                startActivity(loginIntent);
-            }
-        }
+        setUpFragments();
     }
 
     private void setUpFragments() {
@@ -66,8 +52,5 @@ public class FirstActivity extends ActionBarActivity implements WedsListFragment
         startActivity(new Intent(this,null));
     }
 
-    @Override
-    public void clickItemWithId(int id) {
 
-    }
 }

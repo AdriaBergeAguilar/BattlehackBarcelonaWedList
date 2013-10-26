@@ -20,12 +20,11 @@ import es.catmobil.wedlist.database.contract.DataContract;
 public class WedsAdapter extends CursorAdapter{
 
     private LayoutInflater vi;
-    private AQuery aq;
 
     public WedsAdapter(Context context,Cursor c) {
         super(context, c, true);
         vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        aq = new AQuery(context);
+
     }
 
     @Override
@@ -48,8 +47,8 @@ public class WedsAdapter extends CursorAdapter{
         txtname.setText(name);
         txtdate.setText(date);
         txtcount.setText(count);
-
-        aq.id(R.id.item_weds_image).image(img);
+        AQuery aq = new AQuery(arg0);
+        aq.id(R.id.item_weds_image).image(img,true,true);
     }
 
     @Override
