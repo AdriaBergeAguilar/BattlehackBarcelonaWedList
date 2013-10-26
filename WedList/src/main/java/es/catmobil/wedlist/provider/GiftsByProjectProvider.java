@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
 
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.provider.base.MinionContentProvider;
@@ -20,6 +21,8 @@ public class GiftsByProjectProvider implements MinionContentProvider {
 
     @Override
     public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        Log.i("PROVIDER-TAG", "Uri: " + uri);
+
         return db.query(DataContract.GiftTable.TABLE, projection, DataContract.GiftTable.GiftColumns.PROJECT + "=" + uri.getLastPathSegment(), null, null, null, sortOrder);
     }
 

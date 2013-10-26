@@ -82,6 +82,7 @@ public class DataContract {
             public static final String PROJECT = "PROJECT";
             public static final String COMPLEX = "COMPLEX";
             public static final String BOUGHT = "BOUGHT";
+            public static final String SERVER_ID = "SERVER_ID";
         }
 
         public static String createTable() {
@@ -95,6 +96,7 @@ public class DataContract {
             stringBuffer.append(" " + GiftColumns.PROJECT + " TEXT,");
             stringBuffer.append(" " + GiftColumns.COMPLEX + " TEXT,");
             stringBuffer.append(" " + GiftColumns.BOUGHT + " TEXT");
+            stringBuffer.append(" " + GiftColumns.SERVER_ID + " TEXT");
             stringBuffer.append(" " + GiftColumns.DESCRIPTION + " TEXT");
             stringBuffer.append(");");
 
