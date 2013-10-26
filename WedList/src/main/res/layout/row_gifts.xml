@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/item_gift_image_gift"
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/ic_gift_default_min"
         android:layout_weight="4"
         android:layout_gravity="center_vertical"/>
 
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/item_gift_image_user"
-        android:src="@drawable/icon_person"
+        android:src="@drawable/ic_person_default"
         android:layout_weight="4"
         android:layout_gravity="center_vertical"/>
 </LinearLayout>
