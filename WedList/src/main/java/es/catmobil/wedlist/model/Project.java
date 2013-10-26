@@ -11,12 +11,11 @@ import java.util.List;
 public class Project extends  Persistant{
     private String name;
     private String description;
-    private Person groomm;
-    private Person bride;
+    private Person user;
     private String email;
     private String place;
     private Date date;
-    private Location location;
+
     private List<Gift> gifts;
 
 
@@ -36,20 +35,13 @@ public class Project extends  Persistant{
         this.description = description;
     }
 
-    public Person getGroomm() {
-        return groomm;
+
+    public Person getUser() {
+        return user;
     }
 
-    public void setGroomm(Person groomm) {
-        this.groomm = groomm;
-    }
-
-    public Person getBride() {
-        return bride;
-    }
-
-    public void setBride(Person bride) {
-        this.bride = bride;
+    public void setUser(Person user) {
+        this.user = user;
     }
 
     public String getEmail() {
