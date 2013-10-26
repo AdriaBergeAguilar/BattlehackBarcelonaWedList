@@ -47,18 +47,15 @@ public class LoginActivity extends AccountAuthenticatorActivity implements View.
             if (accountManager != null) {
                 Account acc = new Account(mailEdt.getText().toString(), BuildConfig.ACCOUNT_TYPE);
                 if (accountManager.addAccountExplicitly(acc, passEdt.getText().toString(), null)) {
+                    Intent res = new Intent();
+                    res.putExtra(AccountManager.KEY_ACCOUNT_NAME, acc.name);
+                    res.putExtra(AccountManager.KEY_ACCOUNT_TYPE, BuildConfig.ACCOUNT_TYPE);
 
+                    setAccountAuthenticatorResult(res.getExtras());
+                    setResult(RESULT_OK, res);
+                    finish();
                 }
-
-                Intent res = new Intent();
-                res.putExtra(AccountManager.KEY_ACCOUNT_NAME, acc.name);
-                res.putExtra(AccountManager.KEY_ACCOUNT_TYPE, BuildConfig.ACCOUNT_TYPE);
-
-                setAccountAuthenticatorResult(res.getExtras());
-                setResult(RESULT_OK, res);
-                finish();
             }
-
         }
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TornOfici</string>
+    <string name="app_name">WedList</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="account_label">WedList Account</string>
@@ -9,7 +9,6 @@
 
     <string-array name="drawer_sections">
         <item>Cases</item>
-        <item>Contacts</item>
     </string-array>
 
 </resources>
