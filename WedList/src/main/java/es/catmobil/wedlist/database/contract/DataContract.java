@@ -72,7 +72,8 @@ public class DataContract {
         public static final String BASE_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + "vnd." + BASE_PATH;
         public static final Uri CONTENT_ITEM_URI = Uri.withAppendedPath(uri, BASE_ITEM_PATH);
 
-        public static final String BASE_PROJECT_PATH = BASE_PATH + "/" + ProjectTable.BASE_PATH + "/*";
+        public static final String BASE_PROJECT_PATH_BY_ID = BASE_PATH + "/" + ProjectTable.BASE_PATH + "/#";
+        public static final String BASE_PROJECT_PATH_BY_SERVER_ID = BASE_PATH + "/" + ProjectTable.BASE_PATH + "/*";
 
         public static class GiftColumns implements BaseColumns {
             public static final String NAME = "NAME";
@@ -80,6 +81,7 @@ public class DataContract {
             public static final String PICTURE_URL = "PICTURE_URL";
             public static final String PRICE = "PRICE";
             public static final String PROJECT = "PROJECT";
+            public static final String PROJECT_ID = "PROJECT_ID";
             public static final String COMPLEX = "COMPLEX";
             public static final String BOUGHT = "BOUGHT";
             public static final String SERVER_ID = "SERVER_ID";
@@ -91,9 +93,11 @@ public class DataContract {
             stringBuffer.append(TABLE);
             stringBuffer.append(" (" + GiftColumns._ID + " integer primary key autoincrement,");
             stringBuffer.append(" " + GiftColumns.NAME + " TEXT,");
+            stringBuffer.append(" " + GiftColumns.DESCRIPTION + " TEXT,");
             stringBuffer.append(" " + GiftColumns.PICTURE_URL + " TEXT,");
             stringBuffer.append(" " + GiftColumns.PRICE + " TEXT,");
             stringBuffer.append(" " + GiftColumns.PROJECT + " TEXT,");
+            stringBuffer.append(" " + GiftColumns.PROJECT_ID + " TEXT,");
             stringBuffer.append(" " + GiftColumns.COMPLEX + " TEXT,");
             stringBuffer.append(" " + GiftColumns.BOUGHT + " TEXT");
             stringBuffer.append(" " + GiftColumns.SERVER_ID + " TEXT");

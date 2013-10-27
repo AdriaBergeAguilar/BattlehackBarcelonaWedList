@@ -16,6 +16,8 @@ public class Gift extends  Persistant{
     private boolean bought;
     private boolean complex;
     private List<Person> buyers;
+    private String project;
+    private long projectId;
 
     public String getName() {
         return name;
@@ -102,5 +104,21 @@ public class Gift extends  Persistant{
                 ", complex=" + complex +
                 ", buyers=" + buyers +
                 '}';
+    }
+
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
     }
 }

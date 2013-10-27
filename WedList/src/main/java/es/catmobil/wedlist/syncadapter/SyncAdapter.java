@@ -16,8 +16,6 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.paypal.android.sdk.i;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,12 +113,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 String serverId = projectsCursor.getString(projectsCursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.SERVER_ID));
                 Long id = projectsCursor.getLong(projectsCursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns._ID));
 
-                Log.i("PARSE-TAG", "Project server id: " + serverId);
+                Log.i("PARSE-TAG", "Project server projectServerId: " + serverId);
 
                 if (serverId != null) {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Gifts");
                     query.whereEqualTo(MyConstants.PARSE_PROJECT_ID, serverId);
-                    query.findInBackground(new GiftsCallback(serverId));
+                    query.findInBackground(new GiftsCallback(serverId, id));
                 }
             }
         }
@@ -128,11 +126,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     private class GiftsCallback extends FindCallback<ParseObject> {
 
-        private String id;
+        private String projectServerId;
+        private Long projectInternId;
 
-        public GiftsCallback(String id) {
 
-            this.id = id;
+        public GiftsCallback(String projectServerId, Long projectInternId) {
+
+            this.projectServerId = projectServerId;
+            this.projectInternId = projectInternId;
         }
 
         @Override
@@ -162,8 +163,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 ContentValues[] values = new GiftCursor(getContext()).setValuesArray(giftList);
 
                 for (ContentValues v : values) {
-                    v.put(DataContract.GiftTable.GiftColumns.PROJECT, id);
-                    Log.i("PARSE-TAG", "Gift at project: " + v.toString());
+                    v.put(DataContract.GiftTable.GiftColumns.PROJECT, projectServerId);
+                    v.put(DataContract.GiftTable.GiftColumns.PROJECT_ID, projectInternId);
                 }
 
                 cr.bulkInsert(DataContract.GiftTable.CONTENT_URI, values);

@@ -12,18 +12,18 @@ import es.catmobil.wedlist.provider.base.MinionContentProvider;
 /**
  * Created by Bernat on 26/10/13.
  */
-public class GiftsByProjectProvider implements MinionContentProvider {
+public class GiftsByProjectIdProvider implements MinionContentProvider {
 
     @Override
     public String getBasePath() {
-        return DataContract.GiftTable.BASE_PROJECT_PATH;
+        return DataContract.GiftTable.BASE_PROJECT_PATH_BY_ID;
     }
 
     @Override
     public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         Log.i("PROVIDER-TAG", "Uri: " + uri);
 
-        return db.query(DataContract.GiftTable.TABLE, projection, DataContract.GiftTable.GiftColumns.PROJECT + "=" + uri.getLastPathSegment(), null, null, null, sortOrder);
+        return db.query(DataContract.GiftTable.TABLE, projection, DataContract.GiftTable.GiftColumns.PROJECT_ID + "=" + uri.getLastPathSegment(), null, null, null, sortOrder);
     }
 
     @Override
