@@ -48,8 +48,6 @@ public class GiftsAdapter extends CursorAdapter {
 
         aq.id(R.id.item_gift_image_gift).image(gift.getPicturePath(),true,true);
 
-
-
         if(gift.getBuyers().size() > 1){
              aq.id(R.id.item_gift_image_user).image(R.drawable.ic_launcher);
         }else if(gift.getBuyers().size() == 1){

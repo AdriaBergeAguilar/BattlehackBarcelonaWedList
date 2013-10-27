@@ -37,103 +37,93 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
-        downloadProjects(account);
-        // user1@gmail.com
+        try {
+            downloadProjects(account);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void downloadProjects(Account account) {
+    private void downloadProjects(Account account) throws Exception {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Invitations");
         query.whereEqualTo(MyConstants.PARSE_USER, account.name);
-        query.findInBackground(new ProjectsCallback());
+
+        parseInvitations(query.find());
     }
 
-    private class ProjectsCallback extends FindCallback<ParseObject> {
-
-        @Override
-        public void done(List<ParseObject> invitations,
-                         ParseException e) {
-            Log.v("PARSE", "Performing sync done ");
-            if (e == null) {
-                for (ParseObject po : invitations) {
-                    String id = po.getString("project");
-                    Log.d("PARSE", "Invitation projectid:" + id);
-                    try {
-                        getProjectsFromIdentifier(id);
-                    } catch (ParseException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            } else {
-                Log.d("PARSE", "Performing sync Error: " + e.getMessage());
-            }
+    private void parseInvitations(List<ParseObject> invitations) throws Exception {
+        ContentResolver contentResolver = getContext().getContentResolver();
+        contentResolver.delete(DataContract.ProjectTable.CONTENT_URI, null, null);
+        for (ParseObject po : invitations) {
+            String id = po.getString("project");
+            Log.d("PARSE", "Invitation projectid:" + id);
+                getProjectsFromIdentifier(id);
         }
+    }
 
-        private void getProjectsFromIdentifier(String invitationId) throws ParseException {
-            ParseQuery<ParseObject> queryProject = ParseQuery.getQuery("Project");
-            queryProject.whereEqualTo("objectId", invitationId);
-            parseProject(queryProject.getFirst());
-        }
+    private void getProjectsFromIdentifier(String invitationId) throws Exception {
+        ParseQuery<ParseObject> queryProject = ParseQuery.getQuery("Project");
+        queryProject.whereEqualTo("objectId", invitationId);
+        parseProject(queryProject.find());
+    }
 
-        private void parseProject(ParseObject object) {
-            try {
-                if (object == null) {
-                    Log.d("PARSE", "The getFirst request failed.");
-                } else {
-                    ContentResolver contentResolver = getContext().getContentResolver();
-                    contentResolver.delete(DataContract.ProjectTable.CONTENT_URI, null, null);
-                    Project project = new Project();
-                    project.setName(object.getString("name"));
-                    project.setImage(object.getString("image"));
-                    project.setDescription(object.getString("description"));
-                    //project.setDate(object.getDate("date"));
-                    project.setServerId(object.getObjectId());
-                    project.setExtras(object.getString("extras"));
+    private void parseProject(List<ParseObject> objects) throws Exception {
+        ContentResolver contentResolver = getContext().getContentResolver();
+        if (objects == null) {
+            Log.d("PARSE", "The getFirst request failed.");
+        } else {
+            for (ParseObject object : objects) {
+                Project project = new Project();
+                project.setName(object.getString("name"));
+                project.setImage(object.getString("image"));
+                project.setDescription(object.getString("description"));
+                project.setEmail(object.getString("email"));
+                //project.setDate(object.getDate("date"));
+                project.setServerId(object.getObjectId());
+                project.setExtras(object.getString("extras"));
 
-                    ContentValues values = new ProjectCursor(getContext()).setValues(project);
-                    Uri projUri = contentResolver.insert(DataContract.ProjectTable.CONTENT_URI, values);
+                ContentValues values = new ProjectCursor(getContext()).setValues(project);
+                Uri projUri = contentResolver.insert(DataContract.ProjectTable.CONTENT_URI, values);
 
-                    if (projUri != null) {
-                        long id = ContentUris.parseId(projUri);
+                if (projUri != null) {
+                    long id = ContentUris.parseId(projUri);
 
-                        if (id > -1) {
-                            Uri uri = Uri.withAppendedPath(DataContract.GiftTable.CONTENT_BY_PROJECT_URI, "" + id);
-                            String serverId = object.getObjectId();
-                            contentResolver.delete(uri, null, null);
-                            if (serverId != null) {
-                                ParseQuery<ParseObject> query = ParseQuery.getQuery("Gifts");
-                                query.whereEqualTo(MyConstants.PARSE_PROJECT_ID, serverId);
-                                List<ParseObject> parseGifts = query.find();
+                    if (id > -1) {
+                        Uri uri = Uri.withAppendedPath(DataContract.GiftTable.CONTENT_BY_PROJECT_URI, "" + id);
+                        String serverId = object.getObjectId();
+                        contentResolver.delete(uri, null, null);
+                        if (serverId != null) {
+                            ParseQuery<ParseObject> query = ParseQuery.getQuery("Gifts");
+                            query.whereEqualTo(MyConstants.PARSE_PROJECT_ID, serverId);
+                            List<ParseObject> parseGifts = query.find();
 
-                                parseGiftLists(parseGifts, serverId, id);
-                            }
+                            parseGiftLists(parseGifts, serverId, id);
                         }
                     }
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
             }
         }
+    }
 
-        private void parseGiftLists(List<ParseObject> parseGifts, String projectServerId, long projectInternId) {
-            ContentResolver cr = getContext().getContentResolver();
-            for (ParseObject po : parseGifts) {
-                String serverId = po.getObjectId();
+    private void parseGiftLists(List<ParseObject> parseGifts, String projectServerId, long projectInternId) {
+        ContentResolver cr = getContext().getContentResolver();
+        for (ParseObject po : parseGifts) {
+            String serverId = po.getObjectId();
 
-                Gift gift = new Gift();
+            Gift gift = new Gift();
 
-                gift.setServerId(serverId);
-                gift.setName(po.getString("name"));
-                gift.setDescription(po.getString("description"));
-                gift.setPicturePath(po.getString("picture_url"));
-                gift.setPrice(Float.parseFloat(po.getString("price")));
-                gift.setBought(po.getBoolean("bought"));
+            gift.setServerId(serverId);
+            gift.setName(po.getString("name"));
+            gift.setDescription(po.getString("description"));
+            gift.setPicturePath(po.getString("picture_url"));
+            gift.setPrice(Float.parseFloat(po.getString("price")));
+            gift.setBought(po.getBoolean("bought"));
 
-                ContentValues values = new GiftCursor(getContext()).setValues(gift);
-                values.put(DataContract.GiftTable.GiftColumns.PROJECT, projectServerId);
-                values.put(DataContract.GiftTable.GiftColumns.PROJECT_ID, projectInternId);
+            ContentValues values = new GiftCursor(getContext()).setValues(gift);
+            values.put(DataContract.GiftTable.GiftColumns.PROJECT, projectServerId);
+            values.put(DataContract.GiftTable.GiftColumns.PROJECT_ID, projectInternId);
 
-                cr.insert(DataContract.GiftTable.CONTENT_URI, values);
-            }
+            cr.insert(DataContract.GiftTable.CONTENT_URI, values);
         }
     }
 }
