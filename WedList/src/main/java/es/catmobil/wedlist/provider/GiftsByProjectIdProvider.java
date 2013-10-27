@@ -33,7 +33,8 @@ public class GiftsByProjectIdProvider implements MinionContentProvider {
 
     @Override
     public int delete(SQLiteDatabase db, Uri uri, String where, String[] selectionArgs) {
-        throw new UnsupportedOperationException();
+        int delete = db.delete(DataContract.GiftTable.TABLE, DataContract.GiftTable.GiftColumns.PROJECT_ID + "=" + uri.getLastPathSegment(), null);
+        return delete;
     }
 
     @Override

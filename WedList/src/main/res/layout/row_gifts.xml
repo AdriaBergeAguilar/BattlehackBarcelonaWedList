@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
@@ -10,7 +11,7 @@
         android:id="@+id/item_gift_image_gift"
         android:src="@drawable/ic_gift_default_min"
         android:layout_weight="4"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center_vertical" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,7 +26,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/item_gift_name"
-            android:fontFamily="sans-serif-condensed"/>
+            android:fontFamily="sans-serif-condensed" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,7 +34,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/item_gift_price"
-            android:fontFamily="sans-serif-condensed"/>
+            android:fontFamily="sans-serif-condensed" />
     </LinearLayout>
 
     <ImageView
@@ -42,5 +43,5 @@
         android:id="@+id/item_gift_image_user"
         android:src="@drawable/ic_person_default"
         android:layout_weight="4"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center_vertical" />
 </LinearLayout>
