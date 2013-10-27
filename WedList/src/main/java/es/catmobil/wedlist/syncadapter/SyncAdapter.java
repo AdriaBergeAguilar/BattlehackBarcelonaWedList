@@ -143,6 +143,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 // and notify the adapter
                 // result.clear();
                 final List<Gift> giftList = new ArrayList<Gift>(gifts.size());
+                ContentResolver cr = getContext().getContentResolver();
                 for (ParseObject po : gifts) {
                     String serverId = po.getObjectId();
 
@@ -156,19 +157,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                     gift.setBought(po.getBoolean("bought"));
 
                     giftList.add(gift);
+                    ContentValues values = new GiftCursor(getContext()).setValues(gift);
+                    values.put(DataContract.GiftTable.GiftColumns.PROJECT, projectServerId);
+                    values.put(DataContract.GiftTable.GiftColumns.PROJECT_ID, projectInternId);
+
+                    cr.insert(DataContract.GiftTable.CONTENT_URI, values);
+
+                    Log.i("PARSE-TAG", values.toString());
                 }
-
-                ContentResolver cr = getContext().getContentResolver();
-
-                ContentValues[] values = new GiftCursor(getContext()).setValuesArray(giftList);
-
-                for (ContentValues v : values) {
-                    v.put(DataContract.GiftTable.GiftColumns.PROJECT, projectServerId);
-                    v.put(DataContract.GiftTable.GiftColumns.PROJECT_ID, projectInternId);
-                }
-
-                cr.bulkInsert(DataContract.GiftTable.CONTENT_URI, values);
-
             } else {
                 Log.d("PARSE", "Performing sync Error: " + e.getMessage());
             }

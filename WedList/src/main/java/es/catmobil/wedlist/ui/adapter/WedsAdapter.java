@@ -33,11 +33,13 @@ public class WedsAdapter extends CursorAdapter {
         String name = "";
         String date = "";
         int count = 0;
+        String desc = "";
         String img = "";
 
         TextView txtcount = (TextView) arg0.findViewById(R.id.item_weds_count);
         TextView txtname = (TextView) arg0.findViewById(R.id.item_weds_name);
         TextView txtdate = (TextView) arg0.findViewById(R.id.item_weds_date);
+        TextView txtdesc = (TextView) arg0.findViewById(R.id.item_weds_desc);
 
         if (null != arg2) {
 
@@ -47,11 +49,13 @@ public class WedsAdapter extends CursorAdapter {
             date = project.getDate().toString();
             count = project.getGifts().size();
             img = project.getImage();
+            desc = project.getDescription();
         }
 
         txtname.setText(name);
         txtdate.setText(date);
-        txtcount.setText("" + count);
+        txtdesc.setText(desc);
+        txtcount.setText("" + Math.round(Math.random() * 10));
         AQuery aq = new AQuery(arg0);
         aq.id(R.id.item_weds_image).image(img, true, true);
     }
@@ -59,12 +63,7 @@ public class WedsAdapter extends CursorAdapter {
     @Override
     public View newView(Context arg0, Cursor arg1, ViewGroup arg2) {
         int pos = arg1.getPosition();
-        View customListView;
-        if (pos % 2 == 0) {
-            customListView = vi.inflate(R.layout.row_weds_left, null);
-        } else {
-            customListView = vi.inflate(R.layout.row_weds_rigth, null);
-        }
+        View customListView = vi.inflate(R.layout.row_weds, null);
         return customListView;
     }
 }
