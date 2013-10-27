@@ -1,6 +1,9 @@
 package es.catmobil.wedlist.ui.activity;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -20,6 +23,7 @@ import org.json.JSONException;
 
 import es.catmobil.wedlist.PayPal;
 import es.catmobil.wedlist.R;
+import es.catmobil.wedlist.application.AppConfig;
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.database.cursor.GiftCursor;
 import es.catmobil.wedlist.database.cursor.ProjectCursor;
@@ -37,6 +41,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     public static final String Param_ID = "param_id";
     private int id;
     private String email_receptor = "";
+    private String giftServerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +76,8 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
         if (cursor != null && cursor.moveToFirst()) {
             g = new GiftCursor(this).readValues(cursor);
 
+            this.giftServerId = g.getServerId();
+
             Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.ProjectTable.ProjectColumns._ID + "=" + g.getProjectId(), null, null);
             if (cursor2 != null && cursor2.moveToFirst()) {
                 ProjectCursor proc = new ProjectCursor(this);
@@ -97,6 +104,9 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
             if (confirm != null) {
                 try {
                     Log.i("paymentExample", confirm.toJSONObject().toString(4));
+
+                    String serverUserId = getAccountServerId();
+                    String giftServerId = this.giftServerId;
 
                     // TODO: send 'confirm' to your server for verification.
                     ParseObject gameScore = new ParseObject("Payment");
@@ -127,5 +137,28 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     @Override
     public void clickItemWithIdG(int id) {
         Object n = new Object();
+    }
+
+    private String getAccountServerId() {
+        Account acc = getAccount();
+
+        ContentResolver cr = getContentResolver();
+
+        String whereMail = DataContract.PersonTable.PersonColumns.PROFILE_GPLUS + "'%" + acc.name + "%'";
+        Cursor user = cr.query(DataContract.PersonTable.CONTENT_URI, null, whereMail, null, null);
+
+        if (user != null && user.moveToFirst()) {
+            return user.getString(user.getColumnIndex(DataContract.PersonTable.PersonColumns.SERVER_ID));
+        }
+
+        return "";
+    }
+
+    private Account getAccount() {
+        AccountManager accountManager = AccountManager.get(this);
+        if (accountManager != null) {
+            return accountManager.getAccountsByType(AppConfig.ACCOUNT_TYPE)[0];
+        }
+        return null;
     }
 }
