@@ -16,6 +16,8 @@ import com.androidquery.AQuery;
 import es.catmobil.wedlist.PayPal;
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.database.contract.DataContract;
+import es.catmobil.wedlist.database.cursor.GiftCursor;
+import es.catmobil.wedlist.model.Gift;
 import es.catmobil.wedlist.ui.activity.GiftDetailsActivity;
 
 /**
@@ -59,12 +61,10 @@ public abstract class BaseGiftDetailFragment extends Fragment{
         if(cursor.getCount() > 0){
             String desc = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.DESCRIPTION));
             String price = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.PRICE));
-            String image = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.PICTURE_URL));
             Title = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.NAME));
             TxtDescription.setText(desc);
             TxtPrice.setText(price);
 
-            new AQuery(imageView).id(this.imageView).image(image, true, true);
         }
     }
     private class OnClick implements View.OnClickListener{

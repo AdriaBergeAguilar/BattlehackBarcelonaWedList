@@ -26,6 +26,8 @@ public class ProjectDetailsActivity extends ActionBarActivity implements GiftsLi
         id = getIntent().getIntExtra(Param_ID, -1);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setUpFragments();
     }
 
     @Override
@@ -42,8 +44,6 @@ public class ProjectDetailsActivity extends ActionBarActivity implements GiftsLi
     @Override
     protected void onResume() {
         super.onResume();
-        getSupportActionBar().removeAllTabs();
-        setUpFragments();
     }
 
     private void setUpFragments() {
