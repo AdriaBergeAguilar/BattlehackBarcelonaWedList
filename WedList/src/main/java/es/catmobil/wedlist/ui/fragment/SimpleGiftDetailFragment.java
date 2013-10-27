@@ -51,9 +51,12 @@ public class SimpleGiftDetailFragment extends BaseGiftDetailFragment {
 
             AQuery aQuery = new AQuery(avatar);
 
+            getView().findViewById(R.id.detail_gift_pay).setEnabled(false);
+
             if (gift.getBuyers().size() == 0) {
                 aQuery.id(avatar).image(R.drawable.icon_person_undefined);
             } else if (gift.getBuyers().size() == 1) {
+                getView().findViewById(R.id.detail_gift_pay).setEnabled(true);
                 aQuery.id(avatar).image(gift.getBuyers().get(0).getImage(), true, true);
             } else {
                 aQuery.id(avatar).image(R.drawable.icon_persons_undefined);
