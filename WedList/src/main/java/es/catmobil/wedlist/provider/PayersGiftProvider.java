@@ -7,6 +7,9 @@ import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.util.Log;
+
+import com.paypal.android.sdk.u;
 
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.provider.base.MinionContentProvider;
@@ -18,42 +21,49 @@ public class PayersGiftProvider implements MinionContentProvider {
 
     @Override
     public String getBasePath() {
-        return DataContract.PersonsInGiftTable.PERSONS_BY_GIFT;
+        return DataContract.PersonsInGiftTable.PERSONS_BY_GIFT_ITEM;
     }
 
     @Override
     public Cursor query(SQLiteDatabase db, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        String[] columns = new String[]{
-                DataContract.PersonTable.PersonColumns._ID,
-                DataContract.PersonTable.PersonColumns.NAME,
-                DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL,
-                DataContract.PersonTable.PersonColumns.PROFILE_GPLUS,
-                DataContract.PersonsInGiftTable.ComplexGiftColumns.AMOUNT
-        };
+        Cursor giftCursor = db.query(DataContract.GiftTable.TABLE, null, BaseColumns._ID + "=" + uri.getLastPathSegment(), null, null, null, null);
 
-        MatrixCursor c = new MatrixCursor(columns);
+        if (giftCursor != null && giftCursor.moveToFirst()) {
 
-        Cursor personsID = db.query(DataContract.PersonsInGiftTable.TABLE, null, DataContract.PersonsInGiftTable.ComplexGiftColumns.GIFT + "=" + ContentUris.parseId(uri), null, null, null, null);
+            String giftId = giftCursor.getString(giftCursor.getColumnIndex(DataContract.GiftTable.GiftColumns.SERVER_ID));
 
-        if (personsID != null) {
-            int i = 0;
-            while (personsID.moveToNext()) {
-                MatrixCursor.RowBuilder newRow = c.newRow();
+            String[] columns = new String[]{
+                    DataContract.PersonTable.PersonColumns._ID,
+                    DataContract.PersonTable.PersonColumns.NAME,
+                    DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL,
+                    DataContract.PersonTable.PersonColumns.PROFILE_GPLUS,
+                    DataContract.PersonsInGiftTable.ComplexGiftColumns.AMOUNT
+            };
 
-                String where = BaseColumns._ID + "=" + c.getLong(c.getColumnIndex(DataContract.PersonsInGiftTable.ComplexGiftColumns.PAYER));
-                Cursor p = db.query(DataContract.PersonTable.TABLE, null, where, null, null, null, null);
+            MatrixCursor c = new MatrixCursor(columns);
 
-                if (p != null && p.moveToFirst()) {
-                    newRow.add(p.getLong(p.getColumnIndex(DataContract.PersonTable.PersonColumns._ID)));
-                    newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.NAME)));
-                    newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL)));
-                    newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_GPLUS)));
+            Cursor personsPaymentOnGift = db.query(DataContract.PersonsInGiftTable.TABLE, null, DataContract.PersonsInGiftTable.ComplexGiftColumns.GIFT + " LIKE '%" + giftId + "%'", null, null, null, null);
+
+            if (personsPaymentOnGift != null) {
+                while (personsPaymentOnGift.moveToNext()) {
+                    MatrixCursor.RowBuilder newRow = c.newRow();
+
+                    String where = DataContract.PersonTable.PersonColumns.SERVER_ID + " LIKE '%" + personsPaymentOnGift.getString(personsPaymentOnGift.getColumnIndex(DataContract.PersonsInGiftTable.ComplexGiftColumns.PAYER)) + "%'";
+                    Cursor p = db.query(DataContract.PersonTable.TABLE, null, where, null, null, null, null);
+
+                    if (p != null && p.moveToFirst()) {
+                        newRow.add(p.getLong(p.getColumnIndex(DataContract.PersonTable.PersonColumns._ID)));
+                        newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.NAME)));
+                        newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL)));
+                        newRow.add(p.getString(p.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_GPLUS)));
+                    }
+                    newRow.add(personsPaymentOnGift.getInt(personsPaymentOnGift.getColumnIndex(DataContract.PersonsInGiftTable.ComplexGiftColumns.AMOUNT)));
                 }
-                newRow.add(personsID.getInt(personsID.getColumnIndex(DataContract.PersonsInGiftTable.ComplexGiftColumns.AMOUNT)));
             }
-        }
 
-        return c;
+            return c;
+        }
+        return null;
     }
 
     @Override

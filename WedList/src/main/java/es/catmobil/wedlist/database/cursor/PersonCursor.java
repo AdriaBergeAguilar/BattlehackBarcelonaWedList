@@ -19,6 +19,7 @@ public class PersonCursor extends BaseCursor<Person> {
         values.put(DataContract.PersonTable.PersonColumns.NAME, person.getName());
         values.put(DataContract.PersonTable.PersonColumns.PROFILE_GPLUS, person.getEmail());
         values.put(DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL, person.getImage());
+        values.put(DataContract.PersonTable.PersonColumns.SERVER_ID, person.getServerId());
 
 
         return values;
@@ -34,8 +35,9 @@ public class PersonCursor extends BaseCursor<Person> {
             person.setName(cu.getString(DataContract.PersonTable.PersonColumns.NAME));
             person.setEmail(cu.getString(DataContract.PersonTable.PersonColumns.PROFILE_GPLUS));
             person.setImage(cu.getString(DataContract.PersonTable.PersonColumns.PROFILE_IMAGE_URL));
+            person.setServerId(cu.getString(DataContract.PersonTable.PersonColumns.SERVER_ID));
         }
 
-        return null;
+        return person;
     }
 }

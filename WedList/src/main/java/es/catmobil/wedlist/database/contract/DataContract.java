@@ -126,6 +126,7 @@ public class DataContract {
             public static final String NAME = "NAME";
             public static final String PROFILE_IMAGE_URL = "PROFILE_IMAGE_URL";
             public static final String PROFILE_GPLUS = "PROFILE_GPLUS";
+            public static final String SERVER_ID = "SERVER_ID";
         }
 
         public static String createTable() {
@@ -135,6 +136,7 @@ public class DataContract {
             stringBuffer.append(" (" + PersonColumns._ID + " integer primary key autoincrement,");
             stringBuffer.append(" " + PersonColumns.NAME + " TEXT,");
             stringBuffer.append(" " + PersonColumns.PROFILE_IMAGE_URL + " TEXT,");
+            stringBuffer.append(" " + PersonColumns.SERVER_ID + " TEXT,");
             stringBuffer.append(" " + PersonColumns.PROFILE_GPLUS + " TEXT");
             stringBuffer.append(");");
 
@@ -146,8 +148,10 @@ public class DataContract {
 
         public static final String TABLE = "complexGift";
 
-        public static final String PERSONS_BY_GIFT = TABLE + "/#";
+        public static final String PERSONS_BY_GIFT = TABLE;
+        public static final String PERSONS_BY_GIFT_ITEM = PERSONS_BY_GIFT + "/#";
         public static final String BASE_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + "vnd." + PersonTable.BASE_PATH;
+        public static final Uri CONTENT_ITEM_URI = Uri.withAppendedPath(uri, PERSONS_BY_GIFT_ITEM);
         public static final Uri CONTENT_URI = Uri.withAppendedPath(uri, PERSONS_BY_GIFT);
 
         public static class ComplexGiftColumns implements BaseColumns {
