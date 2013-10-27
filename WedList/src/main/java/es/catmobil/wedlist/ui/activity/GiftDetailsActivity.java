@@ -106,12 +106,10 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
                     Log.i("paymentExample", confirm.toJSONObject().toString(4));
 
                     String serverUserId = getAccountServerId();
-                    String giftServerId = this.giftServerId;
 
-                    // TODO: send 'confirm' to your server for verification.
                     ParseObject gameScore = new ParseObject("Payment");
-                    gameScore.put("gift_id", g.getServerId());
-                    gameScore.put("person_id", false);
+                    gameScore.put("gift_Id", g.getServerId());
+                    gameScore.put("person_Id", serverUserId);
                     gameScore.put("quantity", g.getPrice());
                     gameScore.put("token_paypal", confirm.getProofOfPayment().getPaymentIdentifier());
                     gameScore.saveInBackground();
@@ -144,7 +142,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
 
         ContentResolver cr = getContentResolver();
 
-        String whereMail = DataContract.PersonTable.PersonColumns.PROFILE_GPLUS + "'%" + acc.name + "%'";
+        String whereMail = DataContract.PersonTable.PersonColumns.PROFILE_GPLUS + " like '%" + acc.name + "%'";
         Cursor user = cr.query(DataContract.PersonTable.CONTENT_URI, null, whereMail, null, null);
 
         if (user != null && user.moveToFirst()) {
