@@ -18,7 +18,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/btn_pay"
         android:fontFamily="sans-serif-condensed"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"/>
 
@@ -47,7 +47,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/add_name"
         android:fontFamily="sans-serif-condensed"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"/>
 
@@ -72,7 +72,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/textView2"
         android:fontFamily="sans-serif-condensed"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"/>
 
@@ -101,7 +101,7 @@
         android:layout_below="@+id/add_description"
         android:layout_alignParentRight="true"
         android:fontFamily="sans-serif-condensed"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"/>
 
@@ -129,7 +129,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
         android:fontFamily="sans-serif-condensed"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"/>
 </RelativeLayout>

@@ -33,7 +33,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/detail_gift_description"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
         android:fontFamily="sans-serif-condensed"
@@ -71,7 +71,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="Pay"
         android:layout_gravity="center"
         android:id="@+id/detail_gift_pay"
