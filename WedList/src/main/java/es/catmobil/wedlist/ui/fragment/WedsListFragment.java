@@ -101,7 +101,7 @@ public class WedsListFragment extends Fragment {
         public void onItemClick(AdapterView<?> arg0, View arg1, int position,long arg3) {
             Cursor cursor = adapter.getCursor();
             cursor.moveToPosition(position);
-            String id = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.PROJECT));
+            int id = cursor.getInt(cursor.getColumnIndex(BaseColumns._ID));
             listener.clickItemWithId(id);
             //Toast.makeText(WedsListFragment.this.getActivity(),"ID = "+id,Toast.LENGTH_LONG).show();
         }
@@ -110,6 +110,6 @@ public class WedsListFragment extends Fragment {
 
 
     public interface ComunicationActivityFragmentProjectList{
-        public void clickItemWithId(String id);
+        public void clickItemWithId(int id);
     }
 }

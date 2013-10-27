@@ -28,10 +28,10 @@ public class GiftsListFragment extends Fragment {
     private static final String param = "ID_PROJECT";
 
 
-    public static GiftsListFragment getInstance(String id_project){
+    public static GiftsListFragment getInstance(int id_project){
         GiftsListFragment fragment = new GiftsListFragment();
         Bundle arguments = new Bundle();
-        arguments.putString(param,id_project);
+        arguments.putInt(param,id_project);
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -73,7 +73,7 @@ public class GiftsListFragment extends Fragment {
         public android.support.v4.content.Loader<Cursor> onCreateLoader(
                 int arg0, Bundle arg1) {
             //fixme poner la uri
-            String id = getArguments().getString(param);
+            int id = getArguments().getInt(param,-1);
             String where = DataContract.GiftTable.GiftColumns.PROJECT+" = "+id;
             return new CursorLoader(GiftsListFragment.this.getActivity(), DataContract.GiftTable.CONTENT_URI,
                     null, where, null, null);

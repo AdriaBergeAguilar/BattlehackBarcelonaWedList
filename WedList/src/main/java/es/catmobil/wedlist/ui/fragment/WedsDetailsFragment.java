@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 
+import org.apache.http.client.utils.URIUtils;
+
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.database.contract.DataContract;
 
@@ -22,10 +24,10 @@ import es.catmobil.wedlist.database.contract.DataContract;
 public class WedsDetailsFragment extends Fragment {
     private static final String param = "project_id";
 
-    public static WedsDetailsFragment newInstance(String id) {
+    public static WedsDetailsFragment newInstance(int id) {
         WedsDetailsFragment baseFragment = new WedsDetailsFragment();
         Bundle args = new Bundle();
-        args.putString(param, id);
+        args.putInt(param, id);
         baseFragment.setArguments(args);
         return baseFragment;
     }
@@ -45,7 +47,7 @@ public class WedsDetailsFragment extends Fragment {
         TextView text = (TextView)view.findViewById(R.id.wed_detail_descripsion);
 
         if (args != null && args.containsKey(param)) {
-            Uri uri = Uri.parse(DataContract.ProjectTable.CONTENT_URI.getPath()+"/"+args.getString(param));
+            Uri uri = ContentUris.withAppendedId(DataContract.ProjectTable.CONTENT_URI,args.getInt(param));
             Cursor cursor = getActivity().getContentResolver().query(uri,null,null,null,null);
             cursor.moveToFirst();
             String name = cursor.getString(cursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.DESCRIPTION));
