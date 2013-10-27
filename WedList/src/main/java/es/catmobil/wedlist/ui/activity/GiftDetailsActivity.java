@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.parse.ParseObject;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
@@ -59,7 +60,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     public String getEmail() {
         return email_receptor;
     }
-
+    private Gift g;
     @Override
     protected void onResume() {
         super.onResume();
@@ -68,7 +69,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
         Cursor cursor = getContentResolver().query(DataContract.GiftTable.CONTENT_URI, null, where, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
-            Gift g = new GiftCursor(this).readValues(cursor);
+            g = new GiftCursor(this).readValues(cursor);
 
             Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.ProjectTable.ProjectColumns._ID + "=" + g.getProjectId(), null, null);
             if (cursor2 != null && cursor2.moveToFirst()) {
@@ -98,8 +99,13 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
                     Log.i("paymentExample", confirm.toJSONObject().toString(4));
 
                     // TODO: send 'confirm' to your server for verification.
-                    // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
-                    // for more details.
+                    ParseObject gameScore = new ParseObject("Payment");
+                    gameScore.put("gift_id", g.getServerId());
+                    gameScore.put("person_id", false);
+                    gameScore.put("quantity", g.getPrice());
+                    gameScore.put("token_paypal", confirm.getProofOfPayment().getPaymentIdentifier());
+                    gameScore.saveInBackground();
+
 
                 } catch (JSONException e) {
                     Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
