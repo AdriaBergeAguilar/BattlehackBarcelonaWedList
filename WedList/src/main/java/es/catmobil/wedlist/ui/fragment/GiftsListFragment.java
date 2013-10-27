@@ -74,9 +74,12 @@ public class GiftsListFragment extends Fragment {
                 int arg0, Bundle arg1) {
             //fixme poner la uri
             int id = getArguments().getInt(param,-1);
-            String where = DataContract.GiftTable.GiftColumns.PROJECT+" = "+id;
-            return new CursorLoader(GiftsListFragment.this.getActivity(), DataContract.GiftTable.CONTENT_URI,
-                    null, where, null, null);
+
+            Uri uri = Uri.withAppendedPath(DataContract.GiftTable.CONTENT_BY_PROJECT_URI, "" + id);
+
+            //String where = DataContract.GiftTable.GiftColumns.PROJECT+" = "+id;
+            return new CursorLoader(GiftsListFragment.this.getActivity(), uri,
+                    null, null, null, null);
         }
 
         @Override
