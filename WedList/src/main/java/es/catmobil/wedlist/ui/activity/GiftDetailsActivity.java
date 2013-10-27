@@ -29,7 +29,7 @@ public class GiftDetailsActivity extends ActionBarActivity{
     protected void onResume() {
         super.onResume();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content2, SimpleGiftDetailFragment.newInstance(id));
+        ft.replace(R.id.content1, SimpleGiftDetailFragment.newInstance(id));
         ft.commit();
     }
 

@@ -27,6 +27,7 @@ public class ProjectDetailsActivity extends ActionBarActivity implements GiftsLi
     @Override
     protected void onResume() {
         super.onResume();
+        getSupportActionBar().removeAllTabs();
         setUpFragments();
     }
 
@@ -63,8 +64,8 @@ public class ProjectDetailsActivity extends ActionBarActivity implements GiftsLi
 
     @Override
     public void clickItemWithId(int id) {
-        Intent intent = new Intent(this,null);
-        intent.putExtra("",id);
+        Intent intent = new Intent(this,GiftDetailsActivity.class);
+        intent.putExtra(GiftDetailsActivity.Param_ID,id);
         startActivity(intent);
     }
 

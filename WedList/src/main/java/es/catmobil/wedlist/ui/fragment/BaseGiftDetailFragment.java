@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import es.catmobil.wedlist.R;
+import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.ui.adapter.WedsAdapter;
 
 /**
@@ -51,11 +52,13 @@ public abstract class BaseGiftDetailFragment extends Fragment{
     public abstract int getResourcesLayout();
     public void putDateIntoItsContainer(Cursor cursor){
         cursor.moveToFirst();
-        String desc = cursor.getString(cursor.getColumnIndex(""));
-        String price = cursor.getString(cursor.getColumnIndex(""));
-        Title = cursor.getString(cursor.getColumnIndex(""));
-        TxtDescription.setText(desc);
-        TxtPrice.setText(price);
+        if(cursor.getCount() > 0){
+            String desc = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.DESCRIPTION));
+            String price = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.PRICE));
+            Title = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.NAME));
+            TxtDescription.setText(desc);
+            TxtPrice.setText(price);
+        }
     }
     private class OnClick implements View.OnClickListener{
 

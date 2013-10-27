@@ -1,12 +1,14 @@
 package es.catmobil.wedlist.ui.fragment;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Button;
 import android.widget.TextView;
 
 import es.catmobil.wedlist.R;
+import es.catmobil.wedlist.database.contract.DataContract;
 
 /**
  * Created by adria on 26/10/13.
@@ -27,7 +29,10 @@ public class SimpleGiftDetailFragment  extends BaseGiftDetailFragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.putDateIntoItsContainer(null);
+        String where = DataContract.GiftTable.GiftColumns._ID+" = "+getArguments().getInt(param);
+
+        Cursor cursor = getActivity().getContentResolver().query(DataContract.GiftTable.CONTENT_URI,null,where,null,null);
+        this.putDateIntoItsContainer(cursor);
     }
 
 

@@ -78,7 +78,6 @@
         android:layout_width="fill_parent"
         android:id="@+id/participate_seekbar"
         android:max="100"
-        android:min="10"
         android:progress="10"
         android:layout_gravity="center"/>
 

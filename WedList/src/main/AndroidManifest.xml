@@ -49,6 +49,7 @@
             android:name=".ui.activity.LoginActivity"
             android:exported="true" />
         <activity android:name=".ui.activity.ProjectDetailsActivity"/>
+        <activity android:name=".ui.activity.GiftDetailsActivity"/>
 
         <!-- PAYPAL -->
         <service

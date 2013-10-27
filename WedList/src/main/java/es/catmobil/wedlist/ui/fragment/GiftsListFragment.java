@@ -88,9 +88,11 @@ public class GiftsListFragment extends Fragment {
                     ,DataContract.GiftTable.GiftColumns.PICTURE_URL
                     ,DataContract.GiftTable.GiftColumns.DESCRIPTION
                     ,DataContract.GiftTable.GiftColumns.BOUGHT
+                    ,DataContract.GiftTable.GiftColumns.SERVER_ID
+                    ,DataContract.GiftTable.GiftColumns.PROJECT
+                    ,DataContract.GiftTable.GiftColumns.PROJECT_ID
+                    ,DataContract.GiftTable.GiftColumns.COMPLEX
             };
-
-
 
             MatrixCursor c = new MatrixCursor(col);
             MatrixCursor.RowBuilder newRow = c.newRow();
@@ -99,6 +101,10 @@ public class GiftsListFragment extends Fragment {
             newRow.add(150);
             newRow.add("http://battlehack.org/images/posts/axe.jpg");
             newRow.add("pfdkmerfpikn repodkmre erpiomevr poerm poermv poerm poerwmj peormdv poerdmv ");
+            newRow.add("true");
+            newRow.add("gfdfgvd");
+            newRow.add("fdgdre");
+            newRow.add(34);
             newRow.add("true");
 
 
