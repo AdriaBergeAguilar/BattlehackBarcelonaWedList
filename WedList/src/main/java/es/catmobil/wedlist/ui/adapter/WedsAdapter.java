@@ -3,6 +3,7 @@ package es.catmobil.wedlist.ui.adapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,7 @@ public class WedsAdapter extends CursorAdapter {
 
         txtname.setText(name);
         txtdate.setText(date);
-        txtdesc.setText(desc);
+        txtdesc.setText(Html.fromHtml(desc));
         txtcount.setText("" + Math.round(Math.random() * 10));
         AQuery aq = new AQuery(arg0);
         aq.id(R.id.item_weds_image).image(img, true, true);
