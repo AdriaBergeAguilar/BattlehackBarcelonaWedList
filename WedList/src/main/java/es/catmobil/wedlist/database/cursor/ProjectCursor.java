@@ -33,7 +33,7 @@ public class ProjectCursor extends BaseCursor<Project> {
         values.put(DataContract.ProjectTable.ProjectColumns.SERVER_ID, project.getServerId());
         values.put(DataContract.ProjectTable.ProjectColumns.NAME, project.getName());
         if (project.getDate() != null) {
-            values.put(DataContract.ProjectTable.ProjectColumns.DATE, project.getDate().getTime());
+            values.put(DataContract.ProjectTable.ProjectColumns.DATE, project.getDate());
         }
         values.put(DataContract.ProjectTable.ProjectColumns.EMAIL, project.getEmail());
         values.put(DataContract.ProjectTable.ProjectColumns.DESCRIPTION, project.getDescription());
@@ -62,8 +62,7 @@ public class ProjectCursor extends BaseCursor<Project> {
             project.setEmail(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.EMAIL));
             project.setExtras(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.EXTRAS));
             project.setImage(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.IMAGE));
-
-            Date date = new Date(cursorUtils.getLong(DataContract.ProjectTable.ProjectColumns.DATE));
+            project.setDate(cursorUtils.getString(DataContract.ProjectTable.ProjectColumns.DATE));
 
             project.setGifts(new ArrayList<Gift>());
 
@@ -82,7 +81,6 @@ public class ProjectCursor extends BaseCursor<Project> {
                 project.setGifts(gifts);
             }
 
-            project.setDate(date);
         }
         return project;
     }

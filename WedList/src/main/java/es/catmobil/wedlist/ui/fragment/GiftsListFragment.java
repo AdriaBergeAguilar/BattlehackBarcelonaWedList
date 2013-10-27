@@ -27,7 +27,6 @@ import es.catmobil.wedlist.ui.adapter.WedsAdapter;
 public class GiftsListFragment extends Fragment {
     private static final String param = "ID_PROJECT";
 
-
     public static GiftsListFragment getInstance(int id_project){
         GiftsListFragment fragment = new GiftsListFragment();
         Bundle arguments = new Bundle();

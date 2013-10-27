@@ -84,6 +84,7 @@
                 android:text="Large Text"
                 android:id="@+id/item_weds_desc"
                 android:fontFamily="sans-serif-light"
+                android:padding="8dp"
                 android:maxLines="3" />
 
         </LinearLayout>

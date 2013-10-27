@@ -14,7 +14,7 @@ public class Project extends  Persistant{
     private Person user;
     private String email;
     private String extras;
-    private Date date;
+    private String date;
     private String image;
 
     private List<Gift> gifts;
@@ -69,11 +69,11 @@ public class Project extends  Persistant{
         this.gifts = gifts;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -103,7 +103,7 @@ public class Project extends  Persistant{
                 ", email='" + email + '\'' +
                 ", extras='" + extras + '\'' +
                 ", date=" + date +
-                ", image='" + image + '\'' +
+                ", imageView='" + image + '\'' +
                 ", gifts=" + gifts +
                 '}';
     }

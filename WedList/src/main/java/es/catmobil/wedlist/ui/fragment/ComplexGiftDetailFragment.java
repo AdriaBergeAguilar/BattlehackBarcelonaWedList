@@ -35,4 +35,3 @@ public class ComplexGiftDetailFragment extends BaseGiftDetailFragment{
         this.putDateIntoItsContainer(cursor);
     }
 }
-

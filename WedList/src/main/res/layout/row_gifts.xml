@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:id="@+id/item_gift_image_gift"
         android:src="@drawable/ic_gift_default_min"
@@ -38,7 +38,7 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:id="@+id/item_gift_image_user"
         android:src="@drawable/ic_person_default"
