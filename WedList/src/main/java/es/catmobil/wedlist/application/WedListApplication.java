@@ -4,6 +4,10 @@ import android.app.Application;
 import android.util.Log;
 
 import com.parse.Parse;
+import com.parse.ParseInstallation;
+import com.parse.PushService;
+
+import es.catmobil.wedlist.ui.activity.FirstActivity;
 
 /**
  * Created by mferran on 26/10/13.
@@ -19,6 +23,8 @@ public class WedListApplication extends Application {
             testObject.put("foo", "bar");
             testObject.saveInBackground();
             */
+        PushService.setDefaultPushCallback(this, FirstActivity.class);
+        ParseInstallation.getCurrentInstallation().saveInBackground();
     }
 }
 

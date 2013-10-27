@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 
+import com.parse.ParseAnalytics;
+
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.application.AppConfig;
 import es.catmobil.wedlist.ui.fragment.GiftsListFragment;
@@ -21,6 +23,7 @@ public class FirstActivity extends ActionBarActivity implements GiftsListFragmen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ParseAnalytics.trackAppOpened(getIntent());
         setContentView(R.layout.activity_first);
     }
 
