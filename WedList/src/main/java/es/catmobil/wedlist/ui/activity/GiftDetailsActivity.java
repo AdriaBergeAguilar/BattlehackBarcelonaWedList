@@ -1,6 +1,9 @@
 package es.catmobil.wedlist.ui.activity;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -19,6 +22,7 @@ import org.json.JSONException;
 
 import es.catmobil.wedlist.PayPal;
 import es.catmobil.wedlist.R;
+import es.catmobil.wedlist.application.AppConfig;
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.database.cursor.GiftCursor;
 import es.catmobil.wedlist.database.cursor.ProjectCursor;
@@ -97,6 +101,8 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
                 try {
                     Log.i("paymentExample", confirm.toJSONObject().toString(4));
 
+                    String serverUserId = getAccountServerId();
+
                     // TODO: send 'confirm' to your server for verification.
                     // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
                     // for more details.
@@ -121,5 +127,28 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     @Override
     public void clickItemWithIdG(int id) {
         Object n = new Object();
+    }
+
+    private String getAccountServerId() {
+        Account acc = getAccount();
+
+        ContentResolver cr = getContentResolver();
+
+        String whereMail = DataContract.PersonTable.PersonColumns.PROFILE_GPLUS + "'%" + acc.name + "%'";
+        Cursor user = cr.query(DataContract.PersonTable.CONTENT_URI, null, whereMail, null, null);
+
+        if (user != null && user.moveToFirst()) {
+            return user.getString(user.getColumnIndex(DataContract.PersonTable.PersonColumns.SERVER_ID));
+        }
+
+        return "";
+    }
+
+    private Account getAccount() {
+        AccountManager accountManager = AccountManager.get(this);
+        if (accountManager != null) {
+            return accountManager.getAccountsByType(AppConfig.ACCOUNT_TYPE)[0];
+        }
+        return null;
     }
 }
