@@ -41,12 +41,12 @@ public class SelectGuestsActivity extends ActionBarActivity implements View.OnCl
 
     private void setUpList(){
         // Create an empty adapter we will use to display the loaded data.
-        mAdapter = new SimpleCursorAdapter(this,
+        /*mAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2, null,
-                new String[] { ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.CONTENT_URICONTACT_STATUS },
+                new String[] { ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.CONTENT_URI.CONTACT_STATUS },
                 new int[] { android.R.id.text1, android.R.id.text2 }, 0);
         list.setAdapter(mAdapter);
-        getSupportLoaderManager().initLoader(0, null, this);
+        getSupportLoaderManager().initLoader(0, null, this);*/
     }
 
     @Override
