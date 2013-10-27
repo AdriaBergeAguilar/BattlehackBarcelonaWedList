@@ -60,6 +60,7 @@ public class SimpleGiftDetailFragment extends BaseGiftDetailFragment {
                 aQuery.id(avatar).image(gift.getBuyers().get(0).getImage(), true, true);
             } else {
                 getView().findViewById(R.id.detail_gift_pay).setEnabled(true);
+
                 aQuery.id(avatar).image(R.drawable.icon_persons_undefined);
             }
 
