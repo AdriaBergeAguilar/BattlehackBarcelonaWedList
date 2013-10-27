@@ -1,6 +1,9 @@
 package es.catmobil.wedlist.ui.activity;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.parse.ParseObject;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
@@ -19,6 +23,7 @@ import org.json.JSONException;
 
 import es.catmobil.wedlist.PayPal;
 import es.catmobil.wedlist.R;
+import es.catmobil.wedlist.application.AppConfig;
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.database.cursor.GiftCursor;
 import es.catmobil.wedlist.database.cursor.ProjectCursor;
@@ -36,6 +41,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     public static final String Param_ID = "param_id";
     private int id;
     private String email_receptor = "";
+    private String giftServerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +65,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     public String getEmail() {
         return email_receptor;
     }
-
+    private Gift g;
     @Override
     protected void onResume() {
         super.onResume();
@@ -68,7 +74,9 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
         Cursor cursor = getContentResolver().query(DataContract.GiftTable.CONTENT_URI, null, where, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
-            Gift g = new GiftCursor(this).readValues(cursor);
+            g = new GiftCursor(this).readValues(cursor);
+
+            this.giftServerId = g.getServerId();
 
             Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.ProjectTable.ProjectColumns._ID + "=" + g.getProjectId(), null, null);
             if (cursor2 != null && cursor2.moveToFirst()) {
@@ -97,9 +105,15 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
                 try {
                     Log.i("paymentExample", confirm.toJSONObject().toString(4));
 
-                    // TODO: send 'confirm' to your server for verification.
-                    // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
-                    // for more details.
+                    String serverUserId = getAccountServerId();
+
+                    ParseObject gameScore = new ParseObject("Payment");
+                    gameScore.put("gift_Id", g.getServerId());
+                    gameScore.put("person_Id", serverUserId);
+                    gameScore.put("quantity", g.getPrice());
+                    gameScore.put("token_paypal", confirm.getProofOfPayment().getPaymentIdentifier());
+                    gameScore.saveInBackground();
+
 
                 } catch (JSONException e) {
                     Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
@@ -121,5 +135,28 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     @Override
     public void clickItemWithIdG(int id) {
         Object n = new Object();
+    }
+
+    private String getAccountServerId() {
+        Account acc = getAccount();
+
+        ContentResolver cr = getContentResolver();
+
+        String whereMail = DataContract.PersonTable.PersonColumns.PROFILE_GPLUS + " like '%" + acc.name + "%'";
+        Cursor user = cr.query(DataContract.PersonTable.CONTENT_URI, null, whereMail, null, null);
+
+        if (user != null && user.moveToFirst()) {
+            return user.getString(user.getColumnIndex(DataContract.PersonTable.PersonColumns.SERVER_ID));
+        }
+
+        return "";
+    }
+
+    private Account getAccount() {
+        AccountManager accountManager = AccountManager.get(this);
+        if (accountManager != null) {
+            return accountManager.getAccountsByType(AppConfig.ACCOUNT_TYPE)[0];
+        }
+        return null;
     }
 }

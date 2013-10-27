@@ -13,20 +13,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import es.catmobil.wedlist.application.MyConstants;
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.database.cursor.GiftCursor;
+import es.catmobil.wedlist.database.cursor.PersonCursor;
 import es.catmobil.wedlist.database.cursor.ProjectCursor;
 import es.catmobil.wedlist.model.Gift;
+import es.catmobil.wedlist.model.Person;
 import es.catmobil.wedlist.model.Project;
 
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
@@ -55,10 +53,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private void parseInvitations(List<ParseObject> invitations) throws Exception {
         ContentResolver contentResolver = getContext().getContentResolver();
         contentResolver.delete(DataContract.ProjectTable.CONTENT_URI, null, null);
+        contentResolver.delete(DataContract.PersonTable.CONTENT_URI, null, null);
+        contentResolver.delete(DataContract.PersonsInGiftTable.CONTENT_URI, null, null);
         for (ParseObject po : invitations) {
             String id = po.getString("project");
             Log.d("PARSE", "Invitation projectid:" + id);
-                getProjectsFromIdentifier(id);
+            getProjectsFromIdentifier(id);
         }
     }
 
@@ -106,7 +106,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    private void parseGiftLists(List<ParseObject> parseGifts, String projectServerId, long projectInternId) {
+    private void parseGiftLists(List<ParseObject> parseGifts, String projectServerId, long projectInternId) throws Exception {
         ContentResolver cr = getContext().getContentResolver();
         for (ParseObject po : parseGifts) {
             String serverId = po.getObjectId();
@@ -124,6 +124,53 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             values.put(DataContract.GiftTable.GiftColumns.PROJECT_ID, projectInternId);
 
             cr.insert(DataContract.GiftTable.CONTENT_URI, values);
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Payment");
+            query.whereEqualTo("gift_Id", serverId);
+            List<ParseObject> parsePayments = query.find();
+
+            personPayments(parsePayments, serverId);
+        }
+    }
+
+    private void personPayments(List<ParseObject> parsePayments, String giftServerId) throws Exception {
+
+
+        Log.i("PAY-TAG", "Payment found on " + giftServerId + ": " + parsePayments.size());
+
+        PersonCursor personCursor = new PersonCursor();
+        ContentResolver cr = getContext().getContentResolver();
+        for (ParseObject po : parsePayments) {
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Persons");
+            query.whereEqualTo("objectId", po.getString("person_Id"));
+            List<ParseObject> parsePersons = query.find();
+
+            for (ParseObject poPer : parsePersons) {
+                Person person = new Person();
+
+                person.setServerId(poPer.getObjectId());
+                person.setName(poPer.getString("name"));
+                person.setImage(poPer.getString("image"));
+                person.setEmail(poPer.getString("email"));
+                ContentValues values = personCursor.setValues(person);
+
+                cr.insert(DataContract.PersonTable.CONTENT_URI, values);
+
+                ContentValues paymentValues = new ContentValues();
+                paymentValues.put(DataContract.PersonsInGiftTable.ComplexGiftColumns.GIFT, giftServerId);
+                paymentValues.put(DataContract.PersonsInGiftTable.ComplexGiftColumns.PAYER, poPer.getObjectId());
+                paymentValues.put(DataContract.PersonsInGiftTable.ComplexGiftColumns.AMOUNT, po.getDouble("quantity"));
+                paymentValues.put(DataContract.PersonsInGiftTable.ComplexGiftColumns.DATE, po.getString("date"));
+
+                cr.insert(DataContract.PersonsInGiftTable.CONTENT_URI, paymentValues);
+            }
+        }
+
+        Cursor c = cr.query(DataContract.PersonTable.CONTENT_URI, null, null, null, null);
+
+        if (c != null && c.moveToFirst()) {
+            Log.i("PAY-TAG", "Cursor: " + c.getCount());
         }
     }
 }

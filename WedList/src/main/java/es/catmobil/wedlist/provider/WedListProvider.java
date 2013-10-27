@@ -35,6 +35,7 @@ public class WedListProvider extends DespicableContentProvider {
         addMinion(new SimpleItemMinionProvider(DataContract.PersonTable.TABLE, DataContract.PersonTable.BASE_ITEM_PATH, DataContract.PersonTable.BASE_ITEM_TYPE));
 
         // PERSONS IN GIFT
+        addMinion(new SimpleMinionProvider(DataContract.PersonsInGiftTable.TABLE, DataContract.PersonsInGiftTable.PERSONS_BY_GIFT, DataContract.PersonTable.BASE_TYPE));
         addMinion(new PayersGiftProvider());
     }
 

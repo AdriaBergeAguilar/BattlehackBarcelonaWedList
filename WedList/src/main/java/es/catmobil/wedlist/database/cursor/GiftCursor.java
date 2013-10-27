@@ -64,15 +64,38 @@ public class GiftCursor extends BaseCursor<Gift> {
             List<Person> persons = new ArrayList<Person>();
             gift.setBuyers(persons);
 
-
             Uri uri2 = Uri.parse("content://es.catmobil.wedlist.provider/complexGift/" + cursor.getString(cursor.getColumnIndex(BaseColumns._ID)));
 
             Log.i("GIFT-CU", "Uri to request persons: " + uri2.toString());
 
+
+            String where = DataContract.PersonsInGiftTable.ComplexGiftColumns.GIFT + " LIKE '%" + gift.getServerId() + "%'";
+
+            Cursor cx = context.getContentResolver().query(DataContract.PersonsInGiftTable.CONTENT_URI, null, where, null, null);
+
+            if (cx != null) {
+                while (cx.moveToNext()) {
+                    String psId = cx.getString(cx.getColumnIndex(DataContract.PersonsInGiftTable.ComplexGiftColumns.PAYER));
+                    String wherePerson = DataContract.PersonTable.PersonColumns.SERVER_ID + " LIKE '%" + psId + "%'";
+
+                    Cursor personsCursor = context.getContentResolver().query(DataContract.PersonTable.CONTENT_URI, null, wherePerson, null, null);
+
+                    if (personsCursor != null && personsCursor.moveToFirst()) {
+                        Person p = new PersonCursor().readValues(personsCursor);
+                        persons.add(p);
+                        Log.i("PPX-TAG", p.toString());
+                    }
+                }
+            }
+
+            gift.setBuyers(persons);
+
+            /*
             if (uri2 != null) {
                 Cursor personsIdCursor = context.getContentResolver().query(uri2, null, null, null, null);
                 if (personsIdCursor != null) {
                     while (personsIdCursor.moveToNext()) {
+
                         Uri personUri = Uri.withAppendedPath(DataContract.PersonTable.CONTENT_ITEM_URI,
                                 personsIdCursor.getString(
                                         personsIdCursor.getColumnIndex(
@@ -87,6 +110,7 @@ public class GiftCursor extends BaseCursor<Gift> {
                     gift.setBuyers(persons);
                 }
             }
+        */
         }
 
         return gift;

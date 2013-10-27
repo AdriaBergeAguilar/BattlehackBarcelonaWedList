@@ -1,5 +1,6 @@
 package es.catmobil.wedlist.ui.adapter;
 
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -52,12 +53,12 @@ public class GiftsAdapter extends CursorAdapter {
 
         aq.id(imgImage).image(gift.getPicturePath(), true, true);
 
-        if (gift.getBuyers().size() > 1) {
-            aq.id(imgUser).image(R.drawable.ic_launcher);
+        if (gift.getBuyers().size() == 0) {
+            aq.id(imgUser).image(R.drawable.icon_person_undefined);
         } else if (gift.getBuyers().size() == 1) {
             aq.id(imgUser).image(gift.getBuyers().get(0).getImage(), true, true);
         } else {
-            aq.id(imgUser).image(R.drawable.ic_person_default);
+            aq.id(imgUser).image(R.drawable.icon_persons_undefined);
         }
 
     }

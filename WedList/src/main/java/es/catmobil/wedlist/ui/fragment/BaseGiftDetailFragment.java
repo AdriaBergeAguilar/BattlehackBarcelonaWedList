@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.androidquery.AQuery;
 import es.catmobil.wedlist.PayPal;
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.database.contract.DataContract;
+import es.catmobil.wedlist.database.cursor.GiftCursor;
+import es.catmobil.wedlist.model.Gift;
 import es.catmobil.wedlist.ui.activity.GiftDetailsActivity;
 
 /**
@@ -59,12 +62,10 @@ public abstract class BaseGiftDetailFragment extends Fragment{
         if(cursor.getCount() > 0){
             String desc = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.DESCRIPTION));
             String price = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.PRICE));
-            String image = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.PICTURE_URL));
             Title = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.NAME));
-            TxtDescription.setText(desc);
+            TxtDescription.setText(Html.fromHtml(desc));
             TxtPrice.setText(price);
 
-            new AQuery(imageView).id(this.imageView).image(image, true, true);
         }
     }
     private class OnClick implements View.OnClickListener{
@@ -72,7 +73,7 @@ public abstract class BaseGiftDetailFragment extends Fragment{
         @Override
         public void onClick(View v) {
             GiftDetailsActivity act = ((GiftDetailsActivity) getActivity());
-            PayPal.startActivityPaypal(getActivity(),TxtPrice.getText(),TxtDescription.getText(),act.getEmail());
+            PayPal.startActivityPaypal(getActivity(), TxtPrice.getText(), TxtDescription.getText(), act.getEmail());
         }
     }
 }

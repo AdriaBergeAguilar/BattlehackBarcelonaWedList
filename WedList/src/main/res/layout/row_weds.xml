@@ -29,8 +29,8 @@
                 android:layout_width="match_parent"
                 android:background="@drawable/shape_image" />
 
-            <LinearLayout
-                android:orientation="vertical"
+            <RelativeLayout
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:paddingRight="32dp"
@@ -41,12 +41,24 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Large Text"
-                    android:id="@+id/item_weds_count"
-                    android:layout_gravity="right|top"
-                    android:textColor="@color/pressed_wedlist"
-                    android:textStyle="bold" />
+                    android:id="@+id/item_weds_name"
+                    android:fontFamily="sans-serif-condensed"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true" />
 
-            </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:id="@+id/item_weds_count"
+                    android:textColor="@color/pressed_gifties"
+                    android:textStyle="bold"
+                    android:textSize="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignRight="@+id/item_weds_name" />
+
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -68,14 +80,6 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="8dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/item_weds_name"
-                android:fontFamily="sans-serif-condensed"/>
 
             <TextView
                 android:layout_width="match_parent"

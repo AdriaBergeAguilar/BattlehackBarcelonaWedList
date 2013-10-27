@@ -42,9 +42,10 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Large Text"
                     android:id="@+id/item_weds_count"
-                    android:textColor="@color/pressed_wedlist"
+                    android:textColor="@color/pressed_gifties"
                     android:textStyle="bold"
-                    android:layout_marginLeft="16dp" />
+                    android:layout_marginLeft="16dp"
+                    android:textSize="60dp" />
 
             </LinearLayout>
 
@@ -55,7 +56,7 @@
                 android:text="Large Text"
                 android:id="@+id/item_weds_date"
                 android:fontFamily="sans-serif-light"
-                android:textSize="12dp"
+                android:textSize="24dp"
                 android:layout_gravity="bottom|left"
                 android:layout_margin="16dp" />
 
