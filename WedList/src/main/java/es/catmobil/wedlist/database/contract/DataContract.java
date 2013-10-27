@@ -98,6 +98,7 @@ public class DataContract {
             stringBuffer.append(" " + GiftColumns.PRICE + " TEXT,");
             stringBuffer.append(" " + GiftColumns.PROJECT + " TEXT,");
             stringBuffer.append(" " + GiftColumns.PROJECT_ID + " TEXT,");
+            stringBuffer.append(" " + GiftColumns.SERVER_ID + " TEXT,");
             stringBuffer.append(" " + GiftColumns.COMPLEX + " TEXT,");
             stringBuffer.append(" " + GiftColumns.BOUGHT + " TEXT");
             stringBuffer.append(" " + GiftColumns.SERVER_ID + " TEXT");
