@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
@@ -42,6 +43,17 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
         setContentView(R.layout.activity_gift_details);
         id = getIntent().getIntExtra(Param_ID, -1);
         PayPal.startServicePaypal(this);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
     }
 
     public String getEmail() {
@@ -57,11 +69,11 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
 
         if (cursor != null && cursor.moveToFirst()) {
             Gift g = new GiftCursor(this).readValues(cursor);
-            if(email_receptor == null){
-                Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.ProjectTable.ProjectColumns._ID + "=" + g.getProjectId(), null, null);
-                cursor2.moveToFirst();
+
+            Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.ProjectTable.ProjectColumns._ID + "=" + g.getProjectId(), null, null);
+            if (cursor2 != null && cursor2.moveToFirst()) {
                 ProjectCursor proc = new ProjectCursor(this);
-                Project proj =proc.readValues(cursor2);
+                Project proj = proc.readValues(cursor2);
                 email_receptor = proj.getEmail();
             }
             boolean complex = g.isComplex();

@@ -78,7 +78,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 project.setImage(object.getString("image"));
                 project.setDescription(object.getString("description"));
                 project.setEmail(object.getString("email"));
-                //project.setDate(object.getDate("date"));
+                project.setDate(object.getString("date"));
                 project.setServerId(object.getObjectId());
                 project.setExtras(object.getString("extras"));
 
@@ -111,7 +111,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             String serverId = po.getObjectId();
 
             Gift gift = new Gift();
-
             gift.setServerId(serverId);
             gift.setName(po.getString("name"));
             gift.setDescription(po.getString("description"));
