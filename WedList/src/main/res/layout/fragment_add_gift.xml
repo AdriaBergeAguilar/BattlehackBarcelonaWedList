@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,23 +14,27 @@
         android:text="Name your gift:"
         android:id="@+id/textView"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/btn_pay"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="Name"
         android:ems="10"
         android:id="@+id/add_name"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/textView"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,7 +46,10 @@
         android:layout_below="@+id/add_name"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/add_name"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -49,7 +57,9 @@
         android:src="@drawable/ic_launcher"
         android:id="@+id/add_image"
         android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,18 +71,24 @@
         android:layout_below="@+id/add_image"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/textView2"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
+        android:hint="Description"
         android:id="@+id/add_description"
         android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/textView3"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -84,7 +100,10 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/add_description"
         android:layout_alignParentRight="true"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -95,7 +114,10 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView4"
         android:layout_alignRight="@+id/textView4"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:hint="Price (€)"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -106,5 +128,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 </RelativeLayout>

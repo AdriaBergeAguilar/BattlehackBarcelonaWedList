@@ -10,21 +10,33 @@
         android:layout_width="match_parent"
         android:hint="mail"
         android:id="@+id/mailEdt"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />
 
     <EditText
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:hint="pass"
         android:id="@+id/passwEdt"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/btn"
         android:text="Login"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />
 
 
 

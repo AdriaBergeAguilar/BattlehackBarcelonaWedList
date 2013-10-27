@@ -36,7 +36,9 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -74,8 +76,9 @@
         android:layout_gravity="center"
         android:id="@+id/detail_gift_pay"
         android:layout_weight="1"
-        android:layout_marginLeft="-3dp"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
 
 </LinearLayout>

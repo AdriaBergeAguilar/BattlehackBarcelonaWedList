@@ -65,20 +65,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Participate (min. 10% - max 100%):"
+        android:text="Participate"
         android:id="@+id/participate_text"
         android:layout_marginTop="20dp"
         android:layout_gravity="left"
         android:layout_weight="1"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <SeekBar
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:id="@+id/participate_seekbar"
+        android:id="@+id/participate_seekBar"
         android:max="100"
         android:progress="10"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
 
     <Button
@@ -89,8 +93,9 @@
         android:layout_gravity="center"
         android:id="@+id/detail_gift_pay"
         android:layout_weight="1"
-        android:layout_marginLeft="-3dp"
-        android:fontFamily="sans-serif-condensed"/>
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
 
 </LinearLayout>
