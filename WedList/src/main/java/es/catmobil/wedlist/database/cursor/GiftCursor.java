@@ -53,6 +53,8 @@ public class GiftCursor extends BaseCursor<Gift> {
             gift.setDescription(cursorUtils.getString(DataContract.GiftTable.GiftColumns.DESCRIPTION));
             gift.setPicturePath(cursorUtils.getString(DataContract.GiftTable.GiftColumns.PICTURE_URL));
             gift.setServerId(cursorUtils.getString(DataContract.GiftTable.GiftColumns.SERVER_ID));
+            gift.setProject(cursorUtils.getString(DataContract.GiftTable.GiftColumns.PROJECT));
+            gift.setProjectId(cursorUtils.getLong(DataContract.GiftTable.GiftColumns.PROJECT_ID));
             gift.setBought(Boolean.parseBoolean(cursorUtils.getString(DataContract.GiftTable.GiftColumns.BOUGHT)));
             gift.setComplex(Boolean.parseBoolean(cursorUtils.getString(DataContract.GiftTable.GiftColumns.COMPLEX)));
             gift.setPrice(Float.parseFloat(cursorUtils.getString(DataContract.GiftTable.GiftColumns.PRICE)));
