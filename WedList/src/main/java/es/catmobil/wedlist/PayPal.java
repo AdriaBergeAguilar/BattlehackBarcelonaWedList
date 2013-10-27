@@ -20,7 +20,7 @@ public class PayPal {
     // set to PaymentActivity.ENVIRONMENT_PRODUCTION to move real money.
     // set to PaymentActivity.ENVIRONMENT_SANDBOX to use your test credentials from https://developer.paypal.com
     // set to PaymentActivity.ENVIRONMENT_NO_NETWORK to kick the tires without communicating to PayPal's servers.
-    private static final String CONFIG_ENVIRONMENT = PaymentActivity.ENVIRONMENT_NO_NETWORK;
+    private static final String CONFIG_ENVIRONMENT = PaymentActivity.ENVIRONMENT_SANDBOX;
 
     // note that these credentials will differ between live & sandbox environments.
     private static final String CONFIG_CLIENT_ID = AppConfig.CLIENT_ID;
