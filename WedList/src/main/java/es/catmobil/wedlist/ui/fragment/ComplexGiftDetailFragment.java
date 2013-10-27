@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.database.contract.DataContract;
+import es.catmobil.wedlist.model.Person;
 
 /**
  * Created by adria on 27/10/13.
@@ -24,6 +25,10 @@ public class ComplexGiftDetailFragment extends BaseGiftDetailFragment{
         return R.layout.fragment_gift_detail_complex;
     }
 
+    @Override
+    public void setBuyer(Person person) {
+
+    }
 
 
     @Override

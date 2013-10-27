@@ -1,6 +1,7 @@
 package es.catmobil.wedlist.syncadapter;
 
 import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
@@ -13,11 +14,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.List;
 
+import es.catmobil.wedlist.application.AppConfig;
 import es.catmobil.wedlist.application.MyConstants;
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.database.cursor.GiftCursor;
@@ -54,11 +58,40 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         contentResolver.delete(DataContract.ProjectTable.CONTENT_URI, null, null);
         contentResolver.delete(DataContract.PersonTable.CONTENT_URI, null, null);
         contentResolver.delete(DataContract.PersonsInGiftTable.CONTENT_URI, null, null);
+
+
+        setUpUser(AccountManager.get(getContext()).getAccountsByType(AppConfig.ACCOUNT_TYPE)[0]);
+
         for (ParseObject po : invitations) {
             String id = po.getString("project");
             Log.d("PARSE", "Invitation projectid:" + id);
             getProjectsFromIdentifier(id);
         }
+    }
+
+    private void setUpUser(Account acc) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Persons");
+        query.whereEqualTo("email", acc.name);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject parseObject, ParseException e) {
+                Person person = new Person();
+
+                if (parseObject != null) {
+                    try {
+                        person.setServerId(parseObject.getObjectId());
+                        person.setName(parseObject.getString("name"));
+                        person.setImage(parseObject.getString("image"));
+                        person.setEmail(parseObject.getString("email"));
+                        ContentValues values = new PersonCursor().setValues(person);
+
+                        getContext().getContentResolver().insert(DataContract.PersonTable.CONTENT_URI, values);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     private void getProjectsFromIdentifier(String invitationId) throws Exception {
@@ -133,9 +166,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private void personPayments(List<ParseObject> parsePayments, String giftServerId) throws Exception {
-
-
-        Log.i("PAY-TAG", "Payment found on " + giftServerId + ": " + parsePayments.size());
 
         PersonCursor personCursor = new PersonCursor();
         ContentResolver cr = getContext().getContentResolver();
