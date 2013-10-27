@@ -72,8 +72,10 @@ public class DataContract {
         public static final String BASE_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + "vnd." + BASE_PATH;
         public static final Uri CONTENT_ITEM_URI = Uri.withAppendedPath(uri, BASE_ITEM_PATH);
 
-        public static final String BASE_PROJECT_PATH_BY_ID = BASE_PATH + "/" + ProjectTable.BASE_PATH + "/#";
+        public static final String BASE_PROJECT_PATH_BY_ID = BASE_PATH + "Project/#";
         public static final String BASE_PROJECT_PATH_BY_SERVER_ID = BASE_PATH + "/" + ProjectTable.BASE_PATH + "/*";
+        public static final Uri CONTENT_URI_By_PROJECT = Uri.withAppendedPath(uri, BASE_PROJECT_PATH_BY_ID);
+
 
         public static class GiftColumns implements BaseColumns {
             public static final String NAME = "NAME";

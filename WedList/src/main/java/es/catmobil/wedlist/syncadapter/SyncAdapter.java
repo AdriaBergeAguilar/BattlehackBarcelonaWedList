@@ -113,7 +113,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 String serverId = projectsCursor.getString(projectsCursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.SERVER_ID));
                 Long id = projectsCursor.getLong(projectsCursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns._ID));
 
-                Log.i("PARSE-TAG", "Project server projectServerId: " + serverId);
+                Log.i("PARSE-TAG", "Project server projectServerId: " + serverId+" id: "+id);
 
                 if (serverId != null) {
                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Gifts");
@@ -167,7 +167,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                     v.put(DataContract.GiftTable.GiftColumns.PROJECT_ID, projectInternId);
                 }
 
-                cr.bulkInsert(DataContract.GiftTable.CONTENT_URI, values);
+                int i = cr.bulkInsert(DataContract.GiftTable.CONTENT_URI, values);
+                Log.d("PARSE-TAG"," num is:"+i);
+                //cr.insert(DataContract.GiftTable.CONTENT_URI, values);
 
             } else {
                 Log.d("PARSE", "Performing sync Error: " + e.getMessage());
