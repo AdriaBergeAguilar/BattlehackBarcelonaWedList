@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:id="@+id/detail_gift_image"
-            android:src="@drawable/ferrariComplex"
+            android:src="@drawable/ferrari_complex"
             android:layout_gravity="center_horizontal"/>
 
     </FrameLayout>
