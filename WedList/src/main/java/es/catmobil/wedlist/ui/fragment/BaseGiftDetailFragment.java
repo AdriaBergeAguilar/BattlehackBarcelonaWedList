@@ -15,8 +15,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.paypal.android.sdk.aC;
+
+import es.catmobil.wedlist.PayPal;
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.database.contract.DataContract;
+import es.catmobil.wedlist.ui.activity.GiftDetailsActivity;
 import es.catmobil.wedlist.ui.adapter.WedsAdapter;
 
 /**
@@ -27,6 +31,7 @@ public abstract class BaseGiftDetailFragment extends Fragment{
     protected TextView TxtPrice;
     protected Button BtnPay;
     private String Title = "";
+    private String email;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public abstract class BaseGiftDetailFragment extends Fragment{
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        this.email = ((GiftDetailsActivity) activity).getEmail();
         activity.setTitle(Title);
     }
 
@@ -58,13 +64,15 @@ public abstract class BaseGiftDetailFragment extends Fragment{
             Title = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.NAME));
             TxtDescription.setText(desc);
             TxtPrice.setText(price);
+
+
         }
     }
     private class OnClick implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {
-
+            PayPal.startActivityPaypal(getActivity(),TxtPrice.getText(),TxtDescription.getText(),email);
         }
     }
 }

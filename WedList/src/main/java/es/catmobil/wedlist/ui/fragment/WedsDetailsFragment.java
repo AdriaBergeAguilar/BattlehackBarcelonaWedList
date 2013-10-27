@@ -49,12 +49,13 @@ public class WedsDetailsFragment extends Fragment {
         if (args != null && args.containsKey(param)) {
             Uri uri = ContentUris.withAppendedId(DataContract.ProjectTable.CONTENT_URI,args.getInt(param));
             Cursor cursor = getActivity().getContentResolver().query(uri,null,null,null,null);
-            cursor.moveToFirst();
-            String name = cursor.getString(cursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.DESCRIPTION));
-            String img = cursor.getString(cursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.IMAGE));
-            AQuery aq = new AQuery(view);
-            aq.id(R.id.wed_detail_img).image(img,true,true);
-            text.setText(name);
+            if(cursor.moveToFirst()){
+                String name = cursor.getString(cursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.DESCRIPTION));
+                String img = cursor.getString(cursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.IMAGE));
+                AQuery aq = new AQuery(view);
+                aq.id(R.id.wed_detail_img).image(img,true,true);
+                text.setText(name);
+            }
         }
 
     }

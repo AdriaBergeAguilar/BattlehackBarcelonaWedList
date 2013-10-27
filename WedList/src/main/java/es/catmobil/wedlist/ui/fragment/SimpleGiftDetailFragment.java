@@ -26,6 +26,8 @@ public class SimpleGiftDetailFragment  extends BaseGiftDetailFragment{
     public int getResourcesLayout() {
         return R.layout.fragment_gift_detail_simple;
     }
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

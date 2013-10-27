@@ -82,7 +82,7 @@ public class GiftsListFragment extends Fragment {
         @Override
         public void onLoadFinished(
                 android.support.v4.content.Loader<Cursor> arg0, Cursor arg1) {
-            String[] col = new String[]{BaseColumns._ID
+            /**String[] col = new String[]{BaseColumns._ID
                     ,DataContract.GiftTable.GiftColumns.NAME
                     ,DataContract.GiftTable.GiftColumns.PRICE
                     ,DataContract.GiftTable.GiftColumns.PICTURE_URL
@@ -107,9 +107,9 @@ public class GiftsListFragment extends Fragment {
             newRow.add(34);
             newRow.add("true");
 
+***/
 
-
-            adapter.swapCursor(c);
+            adapter.swapCursor(arg1);
         }
 
         @Override

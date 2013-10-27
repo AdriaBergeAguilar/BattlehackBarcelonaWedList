@@ -37,14 +37,14 @@ public class PayPal {
         context.startService(intent);
     }
 
-    public static void startActivityPaypal(Activity context) {
-        PayPalPayment thingToBuy = new PayPalPayment(new BigDecimal("1.75"), "USD", "hipster jeans");
+    public static void startActivityPaypal(Activity context, CharSequence price, CharSequence description,String email_receptor) {
+        PayPalPayment thingToBuy = new PayPalPayment(new BigDecimal(price.toString()), "EUR", description.toString());
 
         Intent intent = new Intent(context, PaymentActivity.class);
 
         intent.putExtra(PaymentActivity.EXTRA_PAYPAL_ENVIRONMENT, CONFIG_ENVIRONMENT);
         intent.putExtra(PaymentActivity.EXTRA_CLIENT_ID, CONFIG_CLIENT_ID);
-        intent.putExtra(PaymentActivity.EXTRA_RECEIVER_EMAIL, CONFIG_RECEIVER_EMAIL);
+        intent.putExtra(PaymentActivity.EXTRA_RECEIVER_EMAIL, email_receptor);
 
         // It's important to repeat the clientId here so that the SDK has it if Android restarts your
         // app midway through the payment UI flow.

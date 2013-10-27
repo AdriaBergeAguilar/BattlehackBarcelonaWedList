@@ -23,6 +23,9 @@ public class ComplexGiftDetailFragment extends BaseGiftDetailFragment{
     public int getResourcesLayout() {
         return R.layout.fragment_gift_detail_complex;
     }
+
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
