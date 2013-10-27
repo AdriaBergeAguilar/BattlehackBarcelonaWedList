@@ -30,7 +30,7 @@ public class SelectGuestsActivity extends ActionBarActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_project);
+        setContentView(R.layout.activity_select_guests);
 
         findViews();
 
@@ -43,7 +43,7 @@ public class SelectGuestsActivity extends ActionBarActivity implements View.OnCl
         // Create an empty adapter we will use to display the loaded data.
         mAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2, null,
-                new String[] { ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.CONTACT_STATUS },
+                new String[] { ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.CONTENT_URICONTACT_STATUS },
                 new int[] { android.R.id.text1, android.R.id.text2 }, 0);
         list.setAdapter(mAdapter);
         getSupportLoaderManager().initLoader(0, null, this);
