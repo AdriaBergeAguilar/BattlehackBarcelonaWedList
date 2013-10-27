@@ -1,5 +1,6 @@
 package es.catmobil.wedlist.ui.activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -63,7 +64,8 @@ public class SelectGuestsActivity extends ActionBarActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         if ( v == btn ) {
-            // Handle clicks for btn
+          Intent intent=new Intent(this,FirstActivity.class);
+          startActivity(intent);
         }
     }
 
