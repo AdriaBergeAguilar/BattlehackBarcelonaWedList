@@ -71,7 +71,7 @@ public class SelectGuestsActivity extends ActionBarActivity implements View.OnCl
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         Uri baseUri;
 
-            baseUri = ContactsContract.Contacts.CONTENT_URI;
+            baseUri = ContactsContract.CommonDataKinds.Email.CONTENT_URI ;
 
 
         // Now create and return a CursorLoader that will take care of
