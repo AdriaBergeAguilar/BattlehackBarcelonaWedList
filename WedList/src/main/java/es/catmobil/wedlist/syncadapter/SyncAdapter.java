@@ -45,6 +45,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private void downloadProjects(Account account) throws Exception {
+        Log.d("PARSE", "load projects for user:"+account.name);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Invitations");
         query.whereEqualTo(MyConstants.PARSE_USER, account.name);
 
