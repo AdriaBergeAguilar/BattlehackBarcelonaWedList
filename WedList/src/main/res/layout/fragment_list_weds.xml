@@ -9,7 +9,7 @@
         android:id="@+id/list_weds"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/new_wed" />
+        android:layout_above="@+id/new_wed"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -18,5 +18,8 @@
         android:id="@+id/new_wed"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 </RelativeLayout>

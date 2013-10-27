@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    tools:context=".ui.activity.FirstActivity">
+    tools:context=".ui.activity.FirstActivity"
+    android:fontFamily="sans-serif-condensed">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +30,8 @@
         android:id="@+id/detail_gift_description"
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-condensed"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -45,7 +47,8 @@
             android:text="Total Price:"
             android:id="@+id/textView2"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,26 +57,32 @@
             android:text="Large Text"
             android:id="@+id/detail_gift_price"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Participate (min. 10% - max 100%):"
+        android:text="Participate"
         android:id="@+id/participate_text"
         android:layout_marginTop="20dp"
         android:layout_gravity="left"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <SeekBar
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:id="@+id/participate_seekbar"
+        android:id="@+id/participate_seekBar"
         android:max="100"
         android:progress="10"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
 
     <Button
@@ -84,7 +93,9 @@
         android:layout_gravity="center"
         android:id="@+id/detail_gift_pay"
         android:layout_weight="1"
-        android:layout_marginLeft="-3dp" />
+        android:fontFamily="sans-serif-condensed"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
 
 </LinearLayout>
