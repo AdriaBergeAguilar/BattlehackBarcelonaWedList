@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foreground="@drawable/list_selector_holo_light"
+    android:paddingBottom="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_height="150dp"
+            android:layout_width="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@android:drawable/ic_menu_crop"
+                android:id="@+id/item_weds_image"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerCrop" />
+
+            <View
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:background="@drawable/shape_image" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingRight="32dp"
+                android:paddingTop="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:id="@+id/item_weds_count"
+                    android:textColor="@color/pressed_wedlist"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="16dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/item_weds_date"
+                android:fontFamily="sans-serif-light"
+                android:textSize="12dp"
+                android:layout_gravity="bottom|left"
+                android:layout_margin="16dp" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/item_weds_name"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="right" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Large Text"
+                android:id="@+id/item_weds_desc"
+                android:fontFamily="sans-serif-light"
+                android:maxLines="3" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

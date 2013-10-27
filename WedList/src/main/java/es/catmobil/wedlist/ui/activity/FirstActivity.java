@@ -16,7 +16,7 @@ import es.catmobil.wedlist.ui.fragment.WedsListFragment;
 /**
  * Created by Bernat on 22/10/13.
  */
-public class FirstActivity extends ActionBarActivity implements WedsListFragment.ComunicationActivityFragmentProjectList{
+public class FirstActivity extends ActionBarActivity implements GiftsListFragment.ComunicationActivityFragmentGiftsList, WedsListFragment.ComunicationActivityFragmentProjectList{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +56,6 @@ public class FirstActivity extends ActionBarActivity implements WedsListFragment
         ft.replace(R.id.content2, WedsDetailsFragment.newInstance(id));
         ft.replace(R.id.content3, GiftsListFragment.getInstance(id));
         ft.commit();
-
-
     }
 
     private void setUpMobile(int id){

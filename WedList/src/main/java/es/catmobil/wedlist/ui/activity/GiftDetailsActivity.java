@@ -29,38 +29,40 @@ import es.catmobil.wedlist.ui.fragment.WedsDetailsFragment;
 /**
  * Created by adria on 27/10/13.
  */
-public class GiftDetailsActivity extends ActionBarActivity{
+public class GiftDetailsActivity extends ActionBarActivity implements GiftsListFragment.ComunicationActivityFragmentGiftsList {
     public static final String Param_ID = "param_id";
     private int id;
     private String email_receptor = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gift_details);
-        id = getIntent().getIntExtra(Param_ID,-1);
+        id = getIntent().getIntExtra(Param_ID, -1);
         PayPal.startServicePaypal(this);
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return email_receptor;
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         Fragment f = null;
-        String where = DataContract.GiftTable.GiftColumns._ID+" = "+id;
-        Cursor cursor = getContentResolver().query(DataContract.GiftTable.CONTENT_URI,null,where,null,null);
+        String where = DataContract.GiftTable.GiftColumns._ID + " = " + id;
+        Cursor cursor = getContentResolver().query(DataContract.GiftTable.CONTENT_URI, null, where, null, null);
 
-
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             Gift g = new GiftCursor(this).readValues(cursor);
-            Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI,null,DataContract.PersonTable.PersonColumns._ID+"="+g.getProject(),null,null,null);
-            if(cursor2.moveToFirst()){
+            Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.PersonTable.PersonColumns._ID + "=" + g.getProject(), null, null);
+            if (cursor2.moveToFirst()) {
                 email_receptor = cursor2.getString(cursor2.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_GPLUS));
             }
-            boolean complex =g.isComplex();
-            if(complex){
+            boolean complex = g.isComplex();
+            if (complex) {
                 f = ComplexGiftDetailFragment.newInstance(id);
-            }else{
+            } else {
                 f = SimpleGiftDetailFragment.newInstance(id);
             }
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -70,9 +72,8 @@ public class GiftDetailsActivity extends ActionBarActivity{
     }
 
 
-
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
             if (confirm != null) {
@@ -87,11 +88,9 @@ public class GiftDetailsActivity extends ActionBarActivity{
                     Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
                 }
             }
-        }
-        else if (resultCode == Activity.RESULT_CANCELED) {
+        } else if (resultCode == Activity.RESULT_CANCELED) {
             Log.i("paymentExample", "The user canceled.");
-        }
-        else if (resultCode == PaymentActivity.RESULT_PAYMENT_INVALID) {
+        } else if (resultCode == PaymentActivity.RESULT_PAYMENT_INVALID) {
             Log.i("paymentExample", "An invalid payment was submitted. Please see the docs.");
         }
     }
@@ -102,4 +101,8 @@ public class GiftDetailsActivity extends ActionBarActivity{
         super.onDestroy();
     }
 
+    @Override
+    public void clickItemWithId(int id) {
+
+    }
 }

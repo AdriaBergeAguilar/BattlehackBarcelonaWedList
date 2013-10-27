@@ -44,16 +44,18 @@ public class WedsDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Bundle args = getArguments();
 
-        TextView text = (TextView)view.findViewById(R.id.wed_detail_descripsion);
+        TextView text = (TextView) view.findViewById(R.id.wed_detail_descripsion);
 
         if (args != null && args.containsKey(param)) {
-            Uri uri = ContentUris.withAppendedId(DataContract.ProjectTable.CONTENT_URI,args.getInt(param));
-            Cursor cursor = getActivity().getContentResolver().query(uri,null,null,null,null);
-            if(cursor.moveToFirst()){
+            Uri uri = ContentUris.withAppendedId(DataContract.ProjectTable.CONTENT_URI, args.getInt(param));
+            Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+            if (cursor.moveToFirst()) {
                 String name = cursor.getString(cursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.DESCRIPTION));
                 String img = cursor.getString(cursor.getColumnIndex(DataContract.ProjectTable.ProjectColumns.IMAGE));
                 AQuery aq = new AQuery(view);
-                aq.id(R.id.wed_detail_img).image(img,true,true);
+                if (view.findViewById(R.id.wed_detail_img) != null) {
+                    aq.id(R.id.wed_detail_img).image(img, true, true);
+                }
                 text.setText(name);
             }
         }
