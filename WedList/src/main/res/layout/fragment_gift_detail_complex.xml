@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    tools:context=".ui.activity.FirstActivity">
+    tools:context=".ui.activity.FirstActivity"
+    android:fontFamily="sans-serif-condensed">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +30,8 @@
         android:id="@+id/detail_gift_description"
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-condensed"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -45,7 +47,8 @@
             android:text="Total Price:"
             android:id="@+id/textView2"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +57,8 @@
             android:text="Large Text"
             android:id="@+id/detail_gift_price"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed"/>
     </LinearLayout>
 
     <TextView
@@ -65,7 +69,8 @@
         android:id="@+id/participate_text"
         android:layout_marginTop="20dp"
         android:layout_gravity="left"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-condensed"/>
 
     <SeekBar
         android:layout_height="wrap_content"
@@ -84,7 +89,8 @@
         android:layout_gravity="center"
         android:id="@+id/detail_gift_pay"
         android:layout_weight="1"
-        android:layout_marginLeft="-3dp" />
+        android:layout_marginLeft="-3dp"
+        android:fontFamily="sans-serif-condensed"/>
 
 
 </LinearLayout>

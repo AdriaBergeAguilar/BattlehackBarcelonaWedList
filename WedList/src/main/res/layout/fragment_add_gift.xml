@@ -16,7 +16,8 @@
         android:layout_marginLeft="0dp"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/btn_pay" />
+        android:layout_alignRight="@+id/btn_pay"
+        android:fontFamily="sans-serif-condensed"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
         android:id="@+id/add_name"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/textView" />
+        android:layout_alignRight="@+id/textView"
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,7 +40,8 @@
         android:id="@+id/textView2"
         android:layout_below="@+id/add_name"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/add_name" />
+        android:layout_alignRight="@+id/add_name"
+        android:fontFamily="sans-serif-condensed"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -57,7 +60,8 @@
         android:id="@+id/textView3"
         android:layout_below="@+id/add_image"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/textView2" />
+        android:layout_alignRight="@+id/textView2"
+        android:fontFamily="sans-serif-condensed"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -67,7 +71,8 @@
         android:id="@+id/add_description"
         android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/textView3" />
+        android:layout_alignRight="@+id/textView3"
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,7 +83,8 @@
         android:textStyle="bold"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/add_description"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:fontFamily="sans-serif-condensed"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -88,7 +94,8 @@
         android:id="@+id/add_price"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView4"
-        android:layout_alignRight="@+id/textView4" />
+        android:layout_alignRight="@+id/textView4"
+        android:fontFamily="sans-serif-condensed"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -98,5 +105,6 @@
         android:id="@+id/btn_pay"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:fontFamily="sans-serif-condensed"/>
 </RelativeLayout>

@@ -9,19 +9,22 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:hint="mail"
-        android:id="@+id/mailEdt"/>
+        android:id="@+id/mailEdt"
+        android:fontFamily="sans-serif-condensed"/>
 
     <EditText
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:hint="pass"
-        android:id="@+id/passwEdt"/>
+        android:id="@+id/passwEdt"
+        android:fontFamily="sans-serif-condensed"/>
 
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/btn"
-        android:text="Login"/>
+        android:text="Login"
+        android:fontFamily="sans-serif-condensed"/>
 
 
 

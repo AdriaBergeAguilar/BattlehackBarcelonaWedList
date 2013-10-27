@@ -19,5 +19,6 @@
         android:text="Large Text"
         android:layout_weight="1"
         android:layout_gravity="center"
-        android:id="@+id/wed_detail_descripsion" />
+        android:id="@+id/wed_detail_descripsion"
+        android:fontFamily="sans-serif-condensed"/>
 </LinearLayout>
