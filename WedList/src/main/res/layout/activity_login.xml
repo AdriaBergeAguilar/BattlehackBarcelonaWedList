@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:hint="pass"
+            android:password="true"
             android:id="@+id/passwEdt"
             android:fontFamily="sans-serif-condensed"
             android:layout_marginTop="16dp"
