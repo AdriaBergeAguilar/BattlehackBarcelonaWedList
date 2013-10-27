@@ -84,7 +84,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
             if (confirm != null) {
                 try {
                     Log.i("paymentExample", confirm.toJSONObject().toString(4));
-                    //fixme paypal aki se deve confirmar al server
+
                     // TODO: send 'confirm' to your server for verification.
                     // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
                     // for more details.
