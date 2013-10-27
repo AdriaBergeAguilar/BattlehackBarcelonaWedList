@@ -4,13 +4,25 @@ import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
+
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.application.AppConfig;
+import es.catmobil.wedlist.database.contract.DataContract;
+import es.catmobil.wedlist.database.cursor.PersonCursor;
+import es.catmobil.wedlist.model.Person;
 
 /**
  * Created by Bernat on 26/10/13.
@@ -68,9 +80,37 @@ public class LoginActivity extends AccountAuthenticatorActivity implements View.
 
                     setAccountAuthenticatorResult(res.getExtras());
                     setResult(RESULT_OK, res);
+
+                    setUpUser(acc);
+
                     finish();
                 }
             }
         }
+    }
+
+    private void setUpUser(Account acc) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Persons");
+        query.whereEqualTo("email", acc.name);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject parseObject, ParseException e) {
+                Person person = new Person();
+
+                if (parseObject != null) {
+                    try {
+                        person.setServerId(parseObject.getObjectId());
+                        person.setName(parseObject.getString("name"));
+                        person.setImage(parseObject.getString("image"));
+                        person.setEmail(parseObject.getString("email"));
+                        ContentValues values = new PersonCursor().setValues(person);
+
+                        getContentResolver().insert(DataContract.PersonTable.CONTENT_URI, values);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 }

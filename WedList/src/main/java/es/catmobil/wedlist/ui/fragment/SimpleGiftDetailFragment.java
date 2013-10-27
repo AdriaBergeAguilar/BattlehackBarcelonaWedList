@@ -14,12 +14,14 @@ import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.database.cursor.GiftCursor;
 import es.catmobil.wedlist.model.Gift;
+import es.catmobil.wedlist.model.Person;
 
 /**
  * Created by adria on 26/10/13.
  */
 public class SimpleGiftDetailFragment extends BaseGiftDetailFragment {
     private static final String param = "id";
+    private ImageView avatar;
 
     public static SimpleGiftDetailFragment newInstance(int id) {
         SimpleGiftDetailFragment fragment = new SimpleGiftDetailFragment();
@@ -34,6 +36,15 @@ public class SimpleGiftDetailFragment extends BaseGiftDetailFragment {
         return R.layout.fragment_gift_detail_simple;
     }
 
+    @Override
+    public void setBuyer(Person person) {
+        if (avatar != null) {
+            AQuery aQuery = new AQuery(avatar);
+            aQuery.id(avatar).image(person.getImage(), true, true);
+            getView().findViewById(R.id.detail_gift_pay).setEnabled(false);
+        }
+    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -44,7 +55,7 @@ public class SimpleGiftDetailFragment extends BaseGiftDetailFragment {
 
         if (cursor != null && cursor.moveToFirst()) {
             String image = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.PICTURE_URL));
-            ImageView avatar = (ImageView) getView().findViewById(R.id.detail_icon_person);
+            avatar = (ImageView) getView().findViewById(R.id.detail_icon_person);
 
             Gift gift = new GiftCursor(getActivity()).readValues(cursor);
             new AQuery(imageView).id(this.imageView).image(image, true, true);

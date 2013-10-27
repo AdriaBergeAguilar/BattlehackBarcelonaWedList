@@ -19,6 +19,7 @@ import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.database.cursor.GiftCursor;
 import es.catmobil.wedlist.model.Gift;
+import es.catmobil.wedlist.model.Person;
 import es.catmobil.wedlist.ui.activity.GiftDetailsActivity;
 
 /**
@@ -68,6 +69,9 @@ public abstract class BaseGiftDetailFragment extends Fragment{
 
         }
     }
+
+    public abstract void setBuyer(Person person);
+
     private class OnClick implements View.OnClickListener{
 
         @Override

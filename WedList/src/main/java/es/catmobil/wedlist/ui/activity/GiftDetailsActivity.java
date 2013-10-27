@@ -4,6 +4,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -21,14 +22,19 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import org.json.JSONException;
 
+import java.math.BigDecimal;
+
 import es.catmobil.wedlist.PayPal;
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.application.AppConfig;
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.database.cursor.GiftCursor;
+import es.catmobil.wedlist.database.cursor.PersonCursor;
 import es.catmobil.wedlist.database.cursor.ProjectCursor;
 import es.catmobil.wedlist.model.Gift;
+import es.catmobil.wedlist.model.Person;
 import es.catmobil.wedlist.model.Project;
+import es.catmobil.wedlist.ui.fragment.BaseGiftDetailFragment;
 import es.catmobil.wedlist.ui.fragment.ComplexGiftDetailFragment;
 import es.catmobil.wedlist.ui.fragment.GiftsListFragment;
 import es.catmobil.wedlist.ui.fragment.SimpleGiftDetailFragment;
@@ -42,6 +48,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     private int id;
     private String email_receptor = "";
     private String giftServerId;
+    private BaseGiftDetailFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +72,12 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     public String getEmail() {
         return email_receptor;
     }
+
     private Gift g;
+
     @Override
     protected void onResume() {
         super.onResume();
-        Fragment f = null;
         String where = DataContract.GiftTable.GiftColumns._ID + " = " + id;
         Cursor cursor = getContentResolver().query(DataContract.GiftTable.CONTENT_URI, null, where, null, null);
 
@@ -86,12 +94,12 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
             }
             boolean complex = g.isComplex();
             if (complex) {
-                f = ComplexGiftDetailFragment.newInstance(id);
+                fragment = ComplexGiftDetailFragment.newInstance(id);
             } else {
-                f = SimpleGiftDetailFragment.newInstance(id);
+                fragment = SimpleGiftDetailFragment.newInstance(id);
             }
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content1, f);
+            ft.replace(R.id.content1, fragment);
             ft.commit();
         }
     }
@@ -115,6 +123,9 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
                     gameScore.saveInBackground();
 
 
+                    setUpUiBuyed(confirm.getPayment().getAmount());
+
+
                 } catch (JSONException e) {
                     Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
                 }
@@ -123,6 +134,29 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
             Log.i("paymentExample", "The user canceled.");
         } else if (resultCode == PaymentActivity.RESULT_PAYMENT_INVALID) {
             Log.i("paymentExample", "An invalid payment was submitted. Please see the docs.");
+        }
+    }
+
+    private void setUpUiBuyed(BigDecimal amount) {
+        String str = getAccountServerId();
+
+        String where = DataContract.PersonTable.PersonColumns.SERVER_ID + " like '%" + str + "%'";
+        Cursor cursor = getContentResolver().query(DataContract.PersonTable.CONTENT_URI, null, where, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            PersonCursor personCursor = new PersonCursor();
+            Person person = personCursor.readValues(cursor);
+
+            if (fragment != null) {
+                fragment.setBuyer(person);
+            }
+
+            ContentValues values = new ContentValues();
+            values.put(DataContract.PersonsInGiftTable.ComplexGiftColumns.PAYER, person.getServerId());
+            values.put(DataContract.PersonsInGiftTable.ComplexGiftColumns.GIFT, person.getServerId());
+            values.put(DataContract.PersonsInGiftTable.ComplexGiftColumns.AMOUNT, amount.doubleValue());
+
+            getContentResolver().insert(DataContract.PersonsInGiftTable.CONTENT_URI, values);
         }
     }
 
