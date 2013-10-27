@@ -72,4 +72,11 @@ public class FirstActivity extends ActionBarActivity implements GiftsListFragmen
             setUpMobile(id);
         }
     }
+
+    @Override
+    public void clickItemWithIdG(int id) {
+        Intent intent = new Intent(this, GiftDetailsActivity.class);
+        intent.putExtra(GiftDetailsActivity.Param_ID, id);
+        startActivity(intent);
+    }
 }

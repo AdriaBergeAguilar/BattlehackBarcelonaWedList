@@ -76,11 +76,12 @@ public class ProjectDetailsActivity extends ActionBarActivity implements GiftsLi
     }
 
     @Override
-    public void clickItemWithId(int id) {
+    public void clickItemWithIdG(int id) {
         Intent intent = new Intent(this, GiftDetailsActivity.class);
         intent.putExtra(GiftDetailsActivity.Param_ID, id);
         startActivity(intent);
     }
+
 
     private class listenerTabs implements ActionBar.TabListener {
 

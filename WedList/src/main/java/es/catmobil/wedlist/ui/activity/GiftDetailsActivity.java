@@ -107,7 +107,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     }
 
     @Override
-    public void clickItemWithId(int id) {
+    public void clickItemWithIdG(int id) {
         Object n = new Object();
     }
 }

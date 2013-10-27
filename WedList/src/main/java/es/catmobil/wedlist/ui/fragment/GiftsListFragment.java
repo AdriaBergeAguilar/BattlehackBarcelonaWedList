@@ -130,11 +130,11 @@ public class GiftsListFragment extends Fragment {
         public void onItemClick(AdapterView<?> arg0, View arg1, int position,long arg3) {
             Cursor cursor = adapter.getCursor();
             cursor.moveToPosition(position);
-            listener.clickItemWithId(cursor.getInt(cursor.getColumnIndex(BaseColumns._ID)));
+            listener.clickItemWithIdG(cursor.getInt(cursor.getColumnIndex(BaseColumns._ID)));
         }
 
     }
     public interface ComunicationActivityFragmentGiftsList{
-        public void clickItemWithId(int id);
+        public void clickItemWithIdG(int id);
     }
 }
