@@ -51,7 +51,7 @@ public abstract class BaseGiftDetailFragment extends Fragment{
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.email = ((GiftDetailsActivity) activity).getEmail();
+
         activity.setTitle(Title);
     }
 
@@ -72,7 +72,8 @@ public abstract class BaseGiftDetailFragment extends Fragment{
 
         @Override
         public void onClick(View v) {
-            PayPal.startActivityPaypal(getActivity(),TxtPrice.getText(),TxtDescription.getText(),email);
+            GiftDetailsActivity act = ((GiftDetailsActivity) getActivity());
+            PayPal.startActivityPaypal(getActivity(),TxtPrice.getText(),TxtDescription.getText(),act.getEmail());
         }
     }
 }

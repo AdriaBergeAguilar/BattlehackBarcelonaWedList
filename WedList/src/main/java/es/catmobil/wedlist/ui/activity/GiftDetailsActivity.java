@@ -20,7 +20,9 @@ import es.catmobil.wedlist.PayPal;
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.database.contract.DataContract;
 import es.catmobil.wedlist.database.cursor.GiftCursor;
+import es.catmobil.wedlist.database.cursor.ProjectCursor;
 import es.catmobil.wedlist.model.Gift;
+import es.catmobil.wedlist.model.Project;
 import es.catmobil.wedlist.ui.fragment.ComplexGiftDetailFragment;
 import es.catmobil.wedlist.ui.fragment.GiftsListFragment;
 import es.catmobil.wedlist.ui.fragment.SimpleGiftDetailFragment;
@@ -55,10 +57,12 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
 
         if (cursor.moveToFirst()) {
             Gift g = new GiftCursor(this).readValues(cursor);
-            Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.PersonTable.PersonColumns._ID + "=" + g.getProject(), null, null);
-            if (cursor2.moveToFirst()) {
-                email_receptor = cursor2.getString(cursor2.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_GPLUS));
-            }
+            Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.ProjectTable.ProjectColumns._ID + "=" + g.getProjectId(), null, null);
+            cursor2.moveToFirst();
+            ProjectCursor proc = new ProjectCursor(this);
+            Project proj =proc.readValues(cursor2);
+            email_receptor = proj.getEmail();
+
             boolean complex = g.isComplex();
             if (complex) {
                 f = ComplexGiftDetailFragment.newInstance(id);
@@ -103,6 +107,6 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
 
     @Override
     public void clickItemWithId(int id) {
-
+        Object n = new Object();
     }
 }
