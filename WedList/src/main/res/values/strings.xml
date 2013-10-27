@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Gifties</string>
-    <string name="ListOfWeddings">Gifties</string>
+    <string name="ListOfWeddings">List of Gifties</string>
     <string name="AddGift">Add Gift</string>
     <string name="ListOfGifts">List Of Gifts</string>
     <string name="action_settings">Settings</string>
