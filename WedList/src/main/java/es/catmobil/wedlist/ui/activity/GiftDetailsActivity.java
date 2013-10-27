@@ -53,11 +53,11 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
         String where = DataContract.GiftTable.GiftColumns._ID + " = " + id;
         Cursor cursor = getContentResolver().query(DataContract.GiftTable.CONTENT_URI, null, where, null, null);
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             Gift g = new GiftCursor(this).readValues(cursor);
             Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.PersonTable.PersonColumns._ID + "=" + g.getProjectId(), null, null);
-            if (cursor2.moveToFirst()) {
-                email_receptor = cursor2.getString(cursor2.getColumnIndex(DataContract.PersonTable.PersonColumns.PROFILE_GPLUS));
+            if (cursor2 != null && cursor2.moveToFirst()) {
+                email_receptor = cursor2.getString(cursor2.getColumnIndex(DataContract.ProjectTable.ProjectColumns.EMAIL));
             }
             boolean complex = g.isComplex();
             if (complex) {
