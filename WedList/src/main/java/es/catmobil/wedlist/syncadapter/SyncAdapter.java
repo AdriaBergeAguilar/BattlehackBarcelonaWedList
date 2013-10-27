@@ -115,7 +115,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }
 
         private void parseGiftLists(List<ParseObject> parseGifts, String projectServerId, long projectInternId) {
-            final List<Gift> giftList = new ArrayList<Gift>(parseGifts.size());
             ContentResolver cr = getContext().getContentResolver();
             for (ParseObject po : parseGifts) {
                 String serverId = po.getObjectId();
@@ -129,14 +128,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 gift.setPrice(Float.parseFloat(po.getString("price")));
                 gift.setBought(po.getBoolean("bought"));
 
-                giftList.add(gift);
                 ContentValues values = new GiftCursor(getContext()).setValues(gift);
                 values.put(DataContract.GiftTable.GiftColumns.PROJECT, projectServerId);
                 values.put(DataContract.GiftTable.GiftColumns.PROJECT_ID, projectInternId);
 
                 cr.insert(DataContract.GiftTable.CONTENT_URI, values);
-
-                Log.i("PROVIDER-TAG", values.toString());
             }
         }
     }
