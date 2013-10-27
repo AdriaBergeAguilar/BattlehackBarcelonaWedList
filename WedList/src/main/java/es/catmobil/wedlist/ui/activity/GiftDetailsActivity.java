@@ -40,6 +40,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
     public static final String Param_ID = "param_id";
     private int id;
     private String email_receptor = "";
+    private String giftServerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,8 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
         if (cursor != null && cursor.moveToFirst()) {
             Gift g = new GiftCursor(this).readValues(cursor);
 
+            this.giftServerId = g.getServerId();
+
             Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.ProjectTable.ProjectColumns._ID + "=" + g.getProjectId(), null, null);
             if (cursor2 != null && cursor2.moveToFirst()) {
                 ProjectCursor proc = new ProjectCursor(this);
@@ -102,6 +105,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
                     Log.i("paymentExample", confirm.toJSONObject().toString(4));
 
                     String serverUserId = getAccountServerId();
+                    String giftServerId = this.giftServerId;
 
                     // TODO: send 'confirm' to your server for verification.
                     // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
