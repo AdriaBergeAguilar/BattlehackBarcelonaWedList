@@ -42,9 +42,9 @@ public class SelectGuestsActivity extends ActionBarActivity implements View.OnCl
     private void setUpList(){
         // Create an empty adapter we will use to display the loaded data.
         mAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_2, null,
-                new String[] { ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.CONTENT_URICONTACT_STATUS },
-                new int[] { android.R.id.text1, android.R.id.text2 }, 0);
+                R.layout.item_contact, null,
+                new String[] { ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.CommonDataKinds.Email.DATA},
+                new int[] { R.id.contact_name,R.id.contact_mail }, 0);
         list.setAdapter(mAdapter);
         getSupportLoaderManager().initLoader(0, null, this);
     }
@@ -71,14 +71,14 @@ public class SelectGuestsActivity extends ActionBarActivity implements View.OnCl
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         Uri baseUri;
 
-            baseUri = ContactsContract.Contacts.CONTENT_URI;
-
+           // baseUri = ContactsContract.Contacts.CONTENT_URI;
+        baseUri = ContactsContract.CommonDataKinds.Email.CONTENT_URI;
 
         // Now create and return a CursorLoader that will take care of
         // creating a Cursor for the data being displayed.
         String select = "((" + ContactsContract.Contacts.DISPLAY_NAME + " NOTNULL) AND ("
                 + ContactsContract.Contacts.HAS_PHONE_NUMBER + "=1) AND ("
-                + ContactsContract.Contacts.DISPLAY_NAME + " != '' ))";
+                + ContactsContract.Contacts.DISPLAY_NAME + " != '' ) AND ( "+ ContactsContract.CommonDataKinds.Email.DATA + " NOT LIKE '')) ";
         return new CursorLoader(this, baseUri,
                 null, select, null,
                 ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");

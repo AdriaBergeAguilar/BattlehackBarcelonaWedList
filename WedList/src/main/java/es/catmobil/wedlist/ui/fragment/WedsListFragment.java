@@ -1,6 +1,7 @@
 package es.catmobil.wedlist.ui.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.database.contract.DataContract;
+import es.catmobil.wedlist.ui.activity.NewProjectActivity;
 import es.catmobil.wedlist.ui.adapter.WedsAdapter;
 
 /**
@@ -45,7 +47,9 @@ public class WedsListFragment extends Fragment {
         newWed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //fixme k ago?
+                Intent intent=new Intent(getActivity(),NewProjectActivity.class);
+                startActivity(intent);
+
             }
         });
     }
