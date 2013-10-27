@@ -57,19 +57,13 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
 
         if (cursor != null && cursor.moveToFirst()) {
             Gift g = new GiftCursor(this).readValues(cursor);
-<<<<<<< HEAD
-            Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.ProjectTable.ProjectColumns._ID + "=" + g.getProjectId(), null, null);
-            cursor2.moveToFirst();
-            ProjectCursor proc = new ProjectCursor(this);
-            Project proj =proc.readValues(cursor2);
-            email_receptor = proj.getEmail();
-
-=======
-            Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.PersonTable.PersonColumns._ID + "=" + g.getProjectId(), null, null);
-            if (cursor2 != null && cursor2.moveToFirst()) {
-                email_receptor = cursor2.getString(cursor2.getColumnIndex(DataContract.ProjectTable.ProjectColumns.EMAIL));
+            if(email_receptor == null){
+                Cursor cursor2 = getContentResolver().query(DataContract.ProjectTable.CONTENT_URI, null, DataContract.ProjectTable.ProjectColumns._ID + "=" + g.getProjectId(), null, null);
+                cursor2.moveToFirst();
+                ProjectCursor proc = new ProjectCursor(this);
+                Project proj =proc.readValues(cursor2);
+                email_receptor = proj.getEmail();
             }
->>>>>>> 2ddbf4deeb4d1945d8e9760a1820c1f9c58e8afe
             boolean complex = g.isComplex();
             if (complex) {
                 f = ComplexGiftDetailFragment.newInstance(id);
@@ -90,7 +84,7 @@ public class GiftDetailsActivity extends ActionBarActivity implements GiftsListF
             if (confirm != null) {
                 try {
                     Log.i("paymentExample", confirm.toJSONObject().toString(4));
-
+                    //fixme paypal aki se deve confirmar al server
                     // TODO: send 'confirm' to your server for verification.
                     // see https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
                     // for more details.
