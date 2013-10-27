@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 import es.catmobil.wedlist.R;
 import es.catmobil.wedlist.ui.fragment.GiftsListFragment;
@@ -17,11 +18,25 @@ import es.catmobil.wedlist.ui.fragment.WedsDetailsFragment;
 public class ProjectDetailsActivity extends ActionBarActivity implements GiftsListFragment.ComunicationActivityFragmentGiftsList {
     public static final String Param_ID = "param_id";
     private int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_details);
-        id = getIntent().getIntExtra(Param_ID,-1);
+        id = getIntent().getIntExtra(Param_ID, -1);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return true;
     }
 
     @Override
@@ -42,12 +57,10 @@ public class ProjectDetailsActivity extends ActionBarActivity implements GiftsLi
         }
 
 
-
     }
 
 
-
-    private void setUpMobile(){
+    private void setUpMobile() {
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         listenerTabs lis = new listenerTabs();
         ActionBar.Tab tab1 = getSupportActionBar().newTab();
@@ -64,19 +77,19 @@ public class ProjectDetailsActivity extends ActionBarActivity implements GiftsLi
 
     @Override
     public void clickItemWithId(int id) {
-        Intent intent = new Intent(this,GiftDetailsActivity.class);
-        intent.putExtra(GiftDetailsActivity.Param_ID,id);
+        Intent intent = new Intent(this, GiftDetailsActivity.class);
+        intent.putExtra(GiftDetailsActivity.Param_ID, id);
         startActivity(intent);
     }
 
-    private class listenerTabs implements ActionBar.TabListener{
+    private class listenerTabs implements ActionBar.TabListener {
 
         @Override
         public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
             Fragment baseFragment = null;
-            if(tab.getPosition() == 0){
+            if (tab.getPosition() == 0) {
                 baseFragment = WedsDetailsFragment.newInstance(id);
-            }else{
+            } else {
                 baseFragment = GiftsListFragment.getInstance(id);
             }
 

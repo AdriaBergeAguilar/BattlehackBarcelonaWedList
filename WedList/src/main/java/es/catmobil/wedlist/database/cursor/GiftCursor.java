@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,8 @@ public class GiftCursor extends BaseCursor<Gift> {
         values.put(DataContract.GiftTable.GiftColumns.PRICE, gift.getPrice());
         values.put(DataContract.GiftTable.GiftColumns.DESCRIPTION, gift.getDescription());
         values.put(DataContract.GiftTable.GiftColumns.SERVER_ID, gift.getServerId());
+        values.put(DataContract.GiftTable.GiftColumns.PROJECT, gift.getProject());
+        values.put(DataContract.GiftTable.GiftColumns.PROJECT_ID, gift.getProjectId());
         values.put(DataContract.GiftTable.GiftColumns.BOUGHT, gift.isBought() ? "true" : "false");
         values.put(DataContract.GiftTable.GiftColumns.COMPLEX, gift.isComplex() ? "true" : "false");
 
@@ -61,20 +64,28 @@ public class GiftCursor extends BaseCursor<Gift> {
             List<Person> persons = new ArrayList<Person>();
             gift.setBuyers(persons);
 
-            Uri uri = ContentUris.withAppendedId(DataContract.GiftTable.CONTENT_URI,
-                    cursor.getLong(cursor.getColumnIndex(BaseColumns._ID)));
 
-            Cursor personsCursor = context.getContentResolver().query(uri, null, null, null, null);
-            if (personsCursor != null) {
-                while (personsCursor.moveToNext()) {
-                    Uri personUri = ContentUris.withAppendedId(DataContract.PersonTable.CONTENT_ITEM_URI, personsCursor.getLong(personsCursor.getColumnIndex(DataContract.PersonsInGiftTable.ComplexGiftColumns.PAYER)));
-                    Cursor person = context.getContentResolver().query(personUri, null, null, null, null);
-                    if (person != null && person.moveToFirst()) {
-                        Person p = new PersonCursor().readValues(cursor);
-                        persons.add(p);
+            Uri uri2 = Uri.parse("content://es.catmobil.wedlist.provider/complexGift/" + cursor.getString(cursor.getColumnIndex(BaseColumns._ID)));
+
+            Log.i("GIFT-CU", "Uri to request persons: " + uri2.toString());
+
+            if (uri2 != null) {
+                Cursor personsIdCursor = context.getContentResolver().query(uri2, null, null, null, null);
+                if (personsIdCursor != null) {
+                    while (personsIdCursor.moveToNext()) {
+                        Uri personUri = Uri.withAppendedPath(DataContract.PersonTable.CONTENT_ITEM_URI,
+                                personsIdCursor.getString(
+                                        personsIdCursor.getColumnIndex(
+                                                DataContract.PersonsInGiftTable.ComplexGiftColumns.PAYER)));
+
+                        Cursor person = context.getContentResolver().query(personUri, null, null, null, null);
+                        if (person != null && person.moveToFirst()) {
+                            Person p = new PersonCursor().readValues(cursor);
+                            persons.add(p);
+                        }
                     }
+                    gift.setBuyers(persons);
                 }
-                gift.setBuyers(persons);
             }
         }
 

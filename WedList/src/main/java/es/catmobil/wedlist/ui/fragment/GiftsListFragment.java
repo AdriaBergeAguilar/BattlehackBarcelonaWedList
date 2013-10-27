@@ -1,7 +1,6 @@
 package es.catmobil.wedlist.ui.fragment;
 
 import android.app.Activity;
-import android.content.ContentUris;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
@@ -32,7 +31,7 @@ public class GiftsListFragment extends Fragment {
     public static GiftsListFragment getInstance(int id_project){
         GiftsListFragment fragment = new GiftsListFragment();
         Bundle arguments = new Bundle();
-        arguments.putInt(param, id_project);
+        arguments.putInt(param,id_project);
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -74,16 +73,19 @@ public class GiftsListFragment extends Fragment {
         public android.support.v4.content.Loader<Cursor> onCreateLoader(
                 int arg0, Bundle arg1) {
             //fixme poner la uri
-            int id = getArguments().getInt(param, -1);
-            Uri uri = ContentUris.withAppendedId(DataContract.GiftTable.CONTENT_URI_By_PROJECT, id);
-            return new CursorLoader(GiftsListFragment.this.getActivity(),uri ,
+            int id = getArguments().getInt(param,-1);
+
+            Uri uri = Uri.withAppendedPath(DataContract.GiftTable.CONTENT_BY_PROJECT_URI, "" + id);
+
+            //String where = DataContract.GiftTable.GiftColumns.PROJECT+" = "+id;
+            return new CursorLoader(GiftsListFragment.this.getActivity(), uri,
                     null, null, null, null);
         }
 
         @Override
         public void onLoadFinished(
                 android.support.v4.content.Loader<Cursor> arg0, Cursor arg1) {
-            String[] col = new String[]{BaseColumns._ID
+            /**String[] col = new String[]{BaseColumns._ID
                     ,DataContract.GiftTable.GiftColumns.NAME
                     ,DataContract.GiftTable.GiftColumns.PRICE
                     ,DataContract.GiftTable.GiftColumns.PICTURE_URL
@@ -108,7 +110,7 @@ public class GiftsListFragment extends Fragment {
             newRow.add(34);
             newRow.add("true");
 
-
+***/
 
             adapter.swapCursor(arg1);
         }

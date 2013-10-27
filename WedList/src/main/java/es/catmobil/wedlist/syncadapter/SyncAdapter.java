@@ -166,11 +166,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                     v.put(DataContract.GiftTable.GiftColumns.PROJECT, projectServerId);
                     v.put(DataContract.GiftTable.GiftColumns.PROJECT_ID, projectInternId);
                 }
-
-                int i = cr.bulkInsert(DataContract.GiftTable.CONTENT_URI, values);
-                Log.d("PARSE-TAG"," num is:"+i);
-                //cr.insert(DataContract.GiftTable.CONTENT_URI, values);
-
             } else {
                 Log.d("PARSE", "Performing sync Error: " + e.getMessage());
             }

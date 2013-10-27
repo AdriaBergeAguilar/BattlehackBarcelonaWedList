@@ -16,7 +16,7 @@ public class GiftsByProjectIdProvider implements MinionContentProvider {
 
     @Override
     public String getBasePath() {
-        return DataContract.GiftTable.BASE_PROJECT_PATH_BY_ID;
+        return DataContract.ProjectTable.BASE_PATH + "/" + DataContract.GiftTable.BASE_ITEM_PATH;
     }
 
     @Override
