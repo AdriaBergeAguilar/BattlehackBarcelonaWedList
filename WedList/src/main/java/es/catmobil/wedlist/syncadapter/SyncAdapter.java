@@ -77,6 +77,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 project.setName(object.getString("name"));
                 project.setImage(object.getString("image"));
                 project.setDescription(object.getString("description"));
+                project.setEmail(object.getString("email"));
                 //project.setDate(object.getDate("date"));
                 project.setServerId(object.getObjectId());
                 project.setExtras(object.getString("extras"));
