@@ -71,14 +71,14 @@ public class SelectGuestsActivity extends ActionBarActivity implements View.OnCl
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         Uri baseUri;
 
-           // baseUri = ContactsContract.Contacts.CONTENT_URI;
-        baseUri = ContactsContract.CommonDataKinds.Email.CONTENT_URI;
+            baseUri = ContactsContract.Contacts.CONTENT_URI;
+
 
         // Now create and return a CursorLoader that will take care of
         // creating a Cursor for the data being displayed.
         String select = "((" + ContactsContract.Contacts.DISPLAY_NAME + " NOTNULL) AND ("
                 + ContactsContract.Contacts.HAS_PHONE_NUMBER + "=1) AND ("
-                + ContactsContract.Contacts.DISPLAY_NAME + " != '' ) AND ( "+ ContactsContract.CommonDataKinds.Email.DATA + " NOT LIKE '')) ";
+                + ContactsContract.Contacts.DISPLAY_NAME + " != '' ))";
         return new CursorLoader(this, baseUri,
                 null, select, null,
                 ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
