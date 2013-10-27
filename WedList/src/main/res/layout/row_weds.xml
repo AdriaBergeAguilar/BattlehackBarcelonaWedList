@@ -43,7 +43,7 @@
                     android:text="Large Text"
                     android:id="@+id/item_weds_count"
                     android:layout_gravity="right|top"
-                    android:textColor="@color/pressed_wedlist"
+                    android:textColor="@color/pressed_gifties"
                     android:textStyle="bold" />
 
             </LinearLayout>
