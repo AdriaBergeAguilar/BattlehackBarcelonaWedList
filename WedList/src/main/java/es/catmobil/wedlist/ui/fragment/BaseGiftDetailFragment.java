@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ public abstract class BaseGiftDetailFragment extends Fragment{
             String desc = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.DESCRIPTION));
             String price = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.PRICE));
             Title = cursor.getString(cursor.getColumnIndex(DataContract.GiftTable.GiftColumns.NAME));
-            TxtDescription.setText(desc);
+            TxtDescription.setText(Html.fromHtml(desc));
             TxtPrice.setText(price);
 
         }
@@ -72,7 +73,7 @@ public abstract class BaseGiftDetailFragment extends Fragment{
         @Override
         public void onClick(View v) {
             GiftDetailsActivity act = ((GiftDetailsActivity) getActivity());
-            PayPal.startActivityPaypal(getActivity(),TxtPrice.getText(),TxtDescription.getText(),act.getEmail());
+            PayPal.startActivityPaypal(getActivity(), TxtPrice.getText(), TxtDescription.getText(), act.getEmail());
         }
     }
 }
